@@ -54,14 +54,38 @@
 		28F6DCC12310D44A00C4A6AC /* RecipeApp */ = {
 			isa = PBXGroup;
 			children = (
+				28F6DCD62310D47A00C4A6AC /* Controller */,
+				28F6DCD52310D45A00C4A6AC /* View */,
+				28F6DCD42310D45200C4A6AC /* Model */,
 				28F6DCC22310D44A00C4A6AC /* AppDelegate.swift */,
-				28F6DCC42310D44A00C4A6AC /* ViewController.swift */,
-				28F6DCC62310D44A00C4A6AC /* Main.storyboard */,
 				28F6DCC92310D44C00C4A6AC /* Assets.xcassets */,
 				28F6DCCB2310D44C00C4A6AC /* LaunchScreen.storyboard */,
 				28F6DCCE2310D44C00C4A6AC /* Info.plist */,
 			);
 			path = RecipeApp;
+			sourceTree = "<group>";
+		};
+		28F6DCD42310D45200C4A6AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		28F6DCD52310D45A00C4A6AC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28F6DCC62310D44A00C4A6AC /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		28F6DCD62310D47A00C4A6AC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28F6DCC42310D44A00C4A6AC /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
