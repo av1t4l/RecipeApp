@@ -25,17 +25,25 @@ struct RecipeManager{
         let Ings = [Ing]
         let Step = "Mix the flour with 1 cup of the water."
         let Method = [Step]
-        var defRecipe1 = Recipe(title:"Pancakes", mealTypes: [MealType.breakfast], dietaryReqs:[DietaryReq.vegan], time:Time(time:10, unit:"m"), diff: Diff.Beginner, serves:5, ingredients: Ings, method:Method, image: "myPancakes")
+        let defRecipe1 = Recipe(title:"Pancakes", mealTypes: [MealType.breakfast], dietaryReqs:[DietaryReq.vegan], time:Time(time:10, unit:"m"), diff: Diff.Beginner, serves:5, ingredients: Ings, method:Method, image: "pancakes")
         
         
         let Ing2 = Ingredient(qty:1, unit:Unit.cups, name:"Plain Flour")
         let Ings2 = [Ing2]
         let Step2 = "Mix the flour with 1 cup of the water."
         let Method2 = [Step2]
-        var defRecipe2 = Recipe(title:"Peach Musli", mealTypes: [MealType.breakfast], dietaryReqs:[DietaryReq.vegan], time:Time(time:10, unit:"m"), diff: Diff.Beginner, serves:5, ingredients: Ings2, method:Method2, image: "myPancakes")
+        let defRecipe2 = Recipe(title:"Peach Muesli", mealTypes: [MealType.breakfast], dietaryReqs:[DietaryReq.vegan], time:Time(time:10, unit:"m"), diff: Diff.Beginner, serves:5, ingredients: Ings2, method:Method2, image: "muesli")
+        
+        
+        let Ing3 = Ingredient(qty:1, unit:Unit.cups, name:"Sugar")
+        let Ings3 = [Ing3]
+        let Step3 = "Beat the butter and sugar."
+        let Method3 = [Step3]
+        let defRecipe3 = Recipe(title:"Rock Cakes", mealTypes: [MealType.breakfast], dietaryReqs:[DietaryReq.vegan], time:Time(time:10, unit:"m"), diff: Diff.Beginner, serves:5, ingredients: Ings3, method:Method3, image: "rock-cakes")
         
         recipes.append(defRecipe1)
         recipes.append(defRecipe2)
+        recipes.append(defRecipe3)
         
         print(recipes)
     }

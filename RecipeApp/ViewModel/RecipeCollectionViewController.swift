@@ -13,15 +13,16 @@ private let reuseIdentifier = "RecipeCell"
 
 class RecipeCollectionViewController: UICollectionViewController {
     private let viewModel = RecipeCollectionViewModel()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//        // Register cell classes
+//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+       
 
         // Do any additional setup after loading the view.
     }
@@ -46,6 +47,7 @@ class RecipeCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        print(viewModel.count())
         return viewModel.count()
     }
 
@@ -55,10 +57,10 @@ class RecipeCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         let imageView = cell.viewWithTag(1000) as? UIImageView
         let title = cell.viewWithTag(1001) as? UILabel
-        
-        if let imageView = imageView, let title = title{
+        print("in load collect")
+    
+        if let imageView = imageView, let title = title {
             //safely access these variables here
-            print("callign get recipes")
             let currentRecipe = viewModel.getRecipe(byIndex: indexPath.item)
             imageView.image = currentRecipe.image
             title.text = currentRecipe.title
