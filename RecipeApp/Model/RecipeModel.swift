@@ -14,7 +14,7 @@ enum MealType:String{
     case lunch = "Lunch"
     case dinner = "Dinner"
     case dessert = "Dessert"
-    case Ssack = "Snack"
+    case Snack = "Snack"
     case crowd = "Crowd Pleaser"
 }
 
@@ -36,11 +36,15 @@ struct Time{
         self.cookingTime = time
         self.cookTimeUnit = unit
     }
+    
+    func timeString() -> String{
+        return "\(self.cookingTime)\(self.cookTimeUnit)"
+    }
     //add metod here to create the time object
 }
 
 /** Enum outlining the difficulty levels **/
-enum Diff{
+enum Diff:String{
     case Complex, Moderate, Beginner
 }
 
@@ -54,6 +58,14 @@ struct Ingredient{
         self.qty = qty
         self.unit = unit
         self.name = name
+    }
+    
+    func ingString() -> String{
+        let qty = String(self.qty)
+        
+        let ingString = "\(qty) \(self.unit.rawValue) \(self.name)"
+        print("The String is \(ingString)")
+        return ingString
     }
 }
 

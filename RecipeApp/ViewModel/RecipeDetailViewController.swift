@@ -9,10 +9,37 @@
 import UIKit
 
 class RecipeDetailViewController: UIViewController {
+    //will have to add serves in later
+    var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, ingredients:[String], method:[String], image:UIImage?)?
 
+    @IBOutlet weak var headerImage: UIImageView!
+    @IBOutlet weak var recipeNameLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var diffLabel: UILabel!
+    @IBOutlet weak var servesLabel: UILabel!
+    @IBOutlet weak var nutSumCollection: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        if let recipe = recipe{
+            // Do any additional setup after loading the view.
+            headerImage.image = recipe.image
+            recipeNameLabel.text = recipe.title
+            timeLabel.text = recipe.time
+            diffLabel.text = recipe.diff
+            servesLabel.text = "Easy"
+        }
+       
+        
+        
+        //FIGURE OUT WHY THIS DOESNT WORK
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        
         
     }
 

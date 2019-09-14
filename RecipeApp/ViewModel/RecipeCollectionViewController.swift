@@ -67,7 +67,18 @@ class RecipeCollectionViewController: UICollectionViewController {
         }
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let cell  = sender as? UICollectionViewCell,
+            let indexPath = self.collectionView?.indexPath(for: cell)
+            else{return}
+        if let destination = segue.destination as?
+            RecipeDetailViewController{
+            let recipe = viewModel.getRecipe(byIndex: indexPath.row)
+            destination.recipe = recipe
+        }
 
+    }
     // MARK: UICollectionViewDelegate
 
     /*
