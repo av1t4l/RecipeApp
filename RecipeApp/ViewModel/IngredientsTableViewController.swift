@@ -28,8 +28,7 @@ class IngredientsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return cell
+        return 0
     }
 
     /*
