@@ -183,11 +183,11 @@
             </objects>
             <point key="canvasLocation" x="2251.875" y="-188.02816901408451"/>
         </scene>
-        <!--Item-->
+        <!--Add Recipe-->
         <scene sceneID="v5i-pQ-EAa">
             <objects>
-                <navigationController id="EKy-1f-3nz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="5PV-C5-WNw"/>
+                <navigationController id="EKy-1f-3nz" userLabel="Add Recipe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Add Recipes" id="5PV-C5-WNw" userLabel="Add Recipe"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lfb-Th-zZL">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
