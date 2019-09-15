@@ -35,7 +35,7 @@ struct RecipeCollectionViewModel{
         for type in recipe.dietaryReqs{
             dietReqs.append(type.rawValue)
         }
-        var time = recipe.time.timeString()
+        let time = recipe.time.timeString()
         
 //title:"Rock Cakes", mealTypes: [MealType.breakfast], dietaryReqs:[DietaryReq.vegan], time:Time(time:10, unit:"m"), diff: Diff.Beginner, serves:5, ingredients: Ings3, method:Method3, image: "rock-cakes"
         

@@ -46,14 +46,11 @@ class RecipeCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        print(viewModel.count())
         return viewModel.count()
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        //THE ISSUE IS HERE, NEED TO CHECK WHY ITS NOT RUNNING, MAYBE CONTRAINTS 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         let imageView = cell.viewWithTag(1000) as? UIImageView
         let title = cell.viewWithTag(1001) as? UILabel

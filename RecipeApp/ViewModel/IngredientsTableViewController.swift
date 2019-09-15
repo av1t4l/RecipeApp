@@ -1,14 +1,14 @@
 //
-//  ExploreTableViewController.swift
+//  IngredientsTableViewController.swift
 //  RecipeApp
 //
-//  Created by Avital Miskella on 29/8/19.
+//  Created by Avital Miskella on 15/9/19.
 //  Copyright © 2019 Avital Miskella. All rights reserved.
 //
 
 import UIKit
 
-class ExploreTableViewController: UITableViewController {
+class IngredientsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,16 +23,16 @@ class ExploreTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-       
+        // #warning Incomplete implementation, return the number of sections
         return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        return cell
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
@@ -40,7 +40,7 @@ class ExploreTableViewController: UITableViewController {
 
         return cell
     }
- 
+    */
 
     /*
     // Override to support conditional editing of the table view.
