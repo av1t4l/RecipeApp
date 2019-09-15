@@ -45,7 +45,7 @@ struct Time{
 
 /** Enum outlining the difficulty levels **/
 enum Diff:String{
-    case Complex, Moderate, Beginner
+    case Hard, Medium, Easy
 }
 
 /** Struct for describe parts of an ingredient **/

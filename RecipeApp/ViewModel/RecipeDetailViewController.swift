@@ -12,8 +12,9 @@ class RecipeDetailViewController: UIViewController {
    
 
     //will have to add serves in later
-    var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, ingredients:[String], method:[String], image:UIImage?)?
-
+    var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?)?
+    var recipeIndex:Int = 0
+    
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -32,9 +33,22 @@ class RecipeDetailViewController: UIViewController {
             recipeNameLabel.text = recipe.title
             timeLabel.text = recipe.time
             diffLabel.text = recipe.diff
-            servesLabel.text = "Easy"
+            servesLabel.text = recipe.serves
         
         }
+        
+        //round the edges of the labels
+        recipeNameLabel.layer.masksToBounds = true
+        recipeNameLabel.layer.cornerRadius = 7
+        recipeNameLabel.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+        timeLabel.layer.masksToBounds = true
+        timeLabel.layer.cornerRadius = 7
+        timeLabel.layer.maskedCorners = [.layerMinXMaxYCorner,.layerMinXMinYCorner]
+        
+        servesLabel.layer.masksToBounds = true
+        servesLabel.layer.cornerRadius = 7
+        servesLabel.layer.maskedCorners = [.layerMaxXMinYCorner,.layerMaxXMaxYCorner]
        
         //FIGURE OUT WHY THIS DOESNT WORK
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -43,30 +57,15 @@ class RecipeDetailViewController: UIViewController {
         self.navigationController?.view.backgroundColor = .clear
         
     }
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("running number or rows")
-//        if let num = recipe?.ingredients.count{
-//            return num
-//        }
-//        return 0
-//        
-//    }
-//    
-//    
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 2
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        print("creating collection")
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "swipeCell", for: indexPath) as! IngredientsCellCollectionViewCell
-//        if let recipe = recipe{
-//            cell.configure(with: recipe.ingredients, table: tableView)
-//        }
-//        return cell
-//    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if (segue.identifier == "swipeContainSegue") {
+            let childViewController = segue.destination as! SwipeController
+            childViewController.recipeIndex = recipeIndex
+    
+        }
+    }
     
 
 }
