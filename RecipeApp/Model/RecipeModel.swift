@@ -91,8 +91,9 @@ struct Recipe {
      var ingredients = [Ingredient]()
      var method = [String]() //dunno if we need this, maybe just an array of strings
      var image:String
+     var nutrients = [Nutrient]()
     
-    init(title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[String], image:String){
+    init(title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[String], image:String, nutrients:[Nutrient]){
         self.title = title
         self.mealTypes = mealTypes
         self.dietaryReqs = dietaryReqs
@@ -102,6 +103,8 @@ struct Recipe {
         self.ingredients = ingredients
         self.method = method
         self.image = image
+        self.nutrients = nutrients
+        
     }
 
 }

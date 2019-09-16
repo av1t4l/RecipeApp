@@ -33,4 +33,10 @@ class Nutrient{
         self.unitName = unitName
     }
     
+    func presentationForm() -> (name:String, unit:String) {
+        let name = self.name
+        let unit = "\(self.amount)\(self.unitName)"
+        return (name:name , unit:unit)
+    }
+
 }

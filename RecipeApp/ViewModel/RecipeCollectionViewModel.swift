@@ -18,7 +18,7 @@ struct RecipeCollectionViewModel{
         return temp
     }
     //FIX THIS TO RETURN ALL THHE DATA IN A RECIPE
-    func getRecipe(byIndex index: Int) -> (title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?){
+    func getRecipe(byIndex index: Int) -> (title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[(name:String, unit:String)]){
         let recipe = manager.recipes[index]
         let image = UIImage(named: recipe.image)
         var ingredients = [String]()
@@ -37,8 +37,21 @@ struct RecipeCollectionViewModel{
         }
         let time = recipe.time.timeString()
         let serves = "\(recipe.serves)"
-
-        return(title: recipe.title, mealTypes:types, dietaryReqs: dietReqs, time:time , diff: recipe.difficulty.rawValue, serves:serves ,ingredients:ingredients, method: recipe.method, image: image)
+        
+        let nutrients = self.getNutrientsForRecipe(byIndex: index)
+        
+        return(title: recipe.title, mealTypes:types, dietaryReqs: dietReqs, time:time , diff: recipe.difficulty.rawValue, serves:serves ,ingredients:ingredients, method: recipe.method, image: image, nutrients:nutrients)
+    }
+    
+    //convert [Nutrient] to array of tupe of strings to use in the view controller
+    func getNutrientsForRecipe(byIndex index:Int) -> [(name:String, unit:String)]{
+        let recipe = manager.recipes[index]
+        var nutrients = [(name:String, unit:String)]()
+        
+        for nut in recipe.nutrients{
+            nutrients.append(nut.presentationForm())
+        }
+        return nutrients
     }
     
 }

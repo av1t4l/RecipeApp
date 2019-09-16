@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol SwipeViewController {
-    var recipeIndex: Int { get }
-    
-}
 class SwipeIngViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
    
     @IBOutlet weak var tableView: UITableView!
