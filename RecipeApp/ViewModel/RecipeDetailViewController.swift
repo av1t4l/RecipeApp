@@ -11,9 +11,9 @@ import UIKit
 class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
   
     //will have to add serves in later
-    var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[(name:String, unit:String)])?
+    var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient])?
     var recipeIndex:Int = 0
-    var nutrients = [(name:String, unit:String)]()
+    var nutrients = [Nutrient]()
    
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var recipeNameLabel: UILabel!
@@ -26,6 +26,8 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        self.navigationController?.navigationBar.isOpaque = false
+        self.navigationController?.navigationBar.alpha = 1.0
         
         if let recipe = recipe{
             // Do any additional setup after loading the view.
@@ -80,7 +82,9 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         servesLabel.layer.cornerRadius = 7
         servesLabel.layer.maskedCorners = [.layerMaxXMinYCorner,.layerMaxXMaxYCorner]
         
+        
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nutrients.count
     }
@@ -93,10 +97,18 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         
         if let name = name, let amount = amount {
             //safely access these variables here
-            let currentNut = nutrients[indexPath.row]
-            name.text = currentNut.name
+            let currentNut = nutrients[indexPath.row].presentationForm()
+           
+            if currentNut.nickname != "" {
+                 name.text =  currentNut.nickname
+            }
+            else{
+                 name.text =  currentNut.name
+            }
             amount.text = currentNut.unit
         }
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 7
         return cell
     }
 

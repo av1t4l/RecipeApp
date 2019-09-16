@@ -22,7 +22,10 @@ struct RecipeManager{
     //title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[Method], image:String
     private mutating func makeDefaults(){
         //test nutrient value
-        let Nut = [Nutrient(name:"Carbohydrates", amount:30, unitName:Unit.g), Nutrient(name:"Protien", amount:4, unitName:Unit.g) ]
+        let carbs = Nutrient(name:"Carbohydrates", amount:30, unitName:Unit.g)
+        carbs.addNickname(name: "Carbs")
+        carbs.addSubNutrient(name: "Sugar", amount: 100, unitName: Unit.g)
+        let Nut = [Nutrient(name:"Energy", amount:30, unitName:Unit.g), carbs , Nutrient(name:"Protien", amount:4, unitName:Unit.g), Nutrient(name:"Fat", amount:3, unitName:Unit.g), Nutrient(name:"Fibre", amount:20, unitName:Unit.g), Nutrient(name:"Sodium", amount:300, unitName:Unit.mg) ]
         
         let Ing = Ingredient(qty:1, unit:Unit.cups, name:"Plain Flour")
         let Ings = [Ing]

@@ -8,13 +8,14 @@
 
 import UIKit
 
-class NutritionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NutritionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+   
    
     
     
     private let viewModel = RecipeCollectionViewModel()
     var recipeIndex:Int = 0
-    var nutrients = [(name:String, unit:String)]()
+    var nutrients = [Nutrient]()
     
     @IBOutlet weak var difficultyLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -22,6 +23,31 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var servesButton: UIButton!
+    
+    var toolBar = UIToolbar()
+    var picker  = UIPickerView()
+    let pickerData = ["1","2","3","4","5","6","7","8","9","10"]
+    
+    @IBAction func ServesButtonClick(_ sender: Any) {
+        picker = UIPickerView.init()
+        picker.delegate = self
+        picker.backgroundColor = UIColor.white
+        picker.setValue(UIColor.black, forKey: "textColor")
+        picker.autoresizingMask = .flexibleWidth
+        picker.contentMode = .center
+        picker.frame = CGRect.init(x: 0.0, y: UIScreen.main.bounds.size.height - 300, width: UIScreen.main.bounds.size.width, height: 300)
+        self.view.addSubview(picker)
+
+        toolBar = UIToolbar.init(frame: CGRect.init(x: 0.0, y: UIScreen.main.bounds.size.height - 300, width: UIScreen.main.bounds.size.width, height: 50))
+        toolBar.barStyle = .default
+        toolBar.items = [UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(onDoneButtonTapped))]
+        self.view.addSubview(toolBar)
+        
+    }
+    @objc func onDoneButtonTapped() {
+        toolBar.removeFromSuperview()
+        picker.removeFromSuperview()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +59,12 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         titleLabel.text = recipe.title
         timeLabel.text = recipe.time
         difficultyLabel.text = recipe.diff
-        servesButton.titleLabel?.text = recipe.serves
+        servesButton.setTitle(recipe.serves, for: .normal)
         
         //get nutrients string array from view model for this recipe
         nutrients = viewModel.getNutrientsForRecipe(byIndex: recipeIndex)
+        
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -65,15 +93,39 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientCell", for: indexPath)
+        let cell:UITableViewCell
+        if nutrients[indexPath.row].isSubNutrient() {
+            cell = tableView.dequeueReusableCell(withIdentifier: "subNutrientCell", for: indexPath)
+        }
+        else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "nutrientCell", for: indexPath)
+        }
         let title = cell.viewWithTag(3000) as? UILabel
         let amount = cell.viewWithTag(3001) as? UILabel
         
         if let title = title, let amount = amount{
-            title.text = nutrients[indexPath.row].name
-            amount.text = nutrients[indexPath.row].unit
+            title.text = nutrients[indexPath.row].presentationForm().name
+            amount.text = nutrients[indexPath.row].presentationForm().unit
+            
         }
         return cell
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //get the value that was selected
+        servesButton.setTitle(pickerData[row], for: .normal)
+        print(pickerData[row])
     }
     
 
