@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		287833A5232DD1D700D7975C /* IngredientsCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833A4232DD1D700D7975C /* IngredientsCellCollectionViewCell.swift */; };
+		2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99B232F4F680092C324 /* BaseViewController.swift */; };
 		287833A7232E05DD00D7975C /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833A6232E05DD00D7975C /* SwipeController.swift */; };
 		287833AF232E6DD500D7975C /* SwipeIngViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833AE232E6DD500D7975C /* SwipeIngViewController.swift */; };
 		287833B1232E6E0B00D7975C /* SwipeMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833B0232E6E0B00D7975C /* SwipeMethodViewController.swift */; };
@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		287833A4232DD1D700D7975C /* IngredientsCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		2846E99B232F4F680092C324 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		287833A6232E05DD00D7975C /* SwipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
 		287833AE232E6DD500D7975C /* SwipeIngViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeIngViewController.swift; sourceTree = "<group>"; };
 		287833B0232E6E0B00D7975C /* SwipeMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeMethodViewController.swift; sourceTree = "<group>"; };
@@ -110,10 +110,10 @@
 				28E4B0D22318C1B900459557 /* RecipeCollectionViewController.swift */,
 				28E4B0D42318C31700459557 /* RecipeCollectionViewModel.swift */,
 				28AC2CB2232C509C00CE2DD6 /* NutritionViewController.swift */,
-				287833A4232DD1D700D7975C /* IngredientsCellCollectionViewCell.swift */,
 				287833A6232E05DD00D7975C /* SwipeController.swift */,
 				287833AE232E6DD500D7975C /* SwipeIngViewController.swift */,
 				287833B0232E6E0B00D7975C /* SwipeMethodViewController.swift */,
+				2846E99B232F4F680092C324 /* BaseViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -189,8 +189,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */,
 				287833A7232E05DD00D7975C /* SwipeController.swift in Sources */,
-				287833A5232DD1D700D7975C /* IngredientsCellCollectionViewCell.swift in Sources */,
 				28E4B0CF2318999F00459557 /* NutrientModel.swift in Sources */,
 				28E4B0D72318C4D200459557 /* RecipeManager.swift in Sources */,
 				28AC2CB3232C509C00CE2DD6 /* NutritionViewController.swift in Sources */,

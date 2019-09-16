@@ -8,12 +8,11 @@
 
 import UIKit
 
-class SwipeMethodViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SwipeMethodViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
    
     @IBOutlet weak var tableView: UITableView!
     
     private let viewModel = RecipeCollectionViewModel()
-    var recipeIndex: Int = 0
     var method:[String] = [""]
     
     override func viewDidLoad() {
@@ -40,5 +39,9 @@ class SwipeMethodViewController: UIViewController, UITableViewDelegate, UITableV
             title.text = method[indexPath.row]
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

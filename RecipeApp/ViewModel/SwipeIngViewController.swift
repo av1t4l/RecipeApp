@@ -7,16 +7,17 @@
 //
 
 import UIKit
-protocol SwipeViewController{
-    var recipeIndex:Int {get}
+
+protocol SwipeViewController {
+    var recipeIndex: Int { get }
     
 }
-class SwipeIngViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SwipeIngViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
    
     @IBOutlet weak var tableView: UITableView!
     private let viewModel = RecipeCollectionViewModel()
     var ingredients:[String] = [""]
-    var recipeIndex: Int = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,5 +42,9 @@ class SwipeIngViewController: UIViewController, UITableViewDelegate, UITableView
             title.text = ingredients[indexPath.row]
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
