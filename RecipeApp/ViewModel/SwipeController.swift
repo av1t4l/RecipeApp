@@ -9,82 +9,83 @@
 import UIKit
 
 class SwipeController: UIPageViewController,UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-
-    func newVc(viewController: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewController)
+    
+    var recipeIndex:Int = 0 //current recipe
+    
+    /** To create new ViewController and register with the View **/
+    //using a super class "BaseViewController" so that data can be passed into the UIViewControllers
+    func newVC(viewController: String) -> UIViewController {
+        if let vc: BaseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewController) as? BaseViewController {
+            vc.recipeIndex = recipeIndex
+            return vc
+        }
+        return UIViewController()
     }
     
-    lazy var orderedViewControllers: [UIViewController] = {
-        return [self.newVc(viewController: "IngredientsTable"),
-                self.newVc(viewController: "MethodTable")]
-    }()
-    
+    // create array for the two views the ppageViewController swipes between
+    lazy var VCTablesArray: [UIViewController] = {
+        return [self.newVC(viewController: "IngredientsTable"),
+                self.newVC(viewController: "MethodTable")]
+        }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hello")
+        
+        //set delegate for PageViewController
         self.delegate = self
         self.dataSource = self
         
-        if let firstViewController = orderedViewControllers.first {
+        //set the first view
+        if let firstViewController = VCTablesArray.first {
             setViewControllers([firstViewController],
                                direction: .forward,
                                animated: true,
                                completion: nil)
         }
-    
     }
-        
+    /** Built In Function:
+        Get view for swipe left **/
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {
+        guard let VCIndex = VCTablesArray.firstIndex(of: viewController ) else {
             return nil
         }
-        let previousIndex = viewControllerIndex - 1
+        let previousIndex = VCIndex - 1
         
-        // User is on the first view controller and swiped left to loop to
-        // the last view controller.
+        //perform checks
+        //to stop loop
         guard previousIndex >= 0 else {
-            return orderedViewControllers.last
-            // Uncommment the line below, remove the line above if you don't want the page control to loop.
-            // return nil
-        }
-        
-        guard orderedViewControllers.count > previousIndex else {
             return nil
         }
-        
-        return orderedViewControllers[previousIndex]
+
+        guard VCTablesArray.count > previousIndex else {
+            return nil
+        }
+        //return View to display
+        return VCTablesArray[previousIndex]
     }
     
+    /** Built In Function:
+        Get view for swipe right **/
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = orderedViewControllers.firstIndex(of: viewController) else {
+        guard let viewControllerIndex = VCTablesArray.firstIndex(of: viewController) else {
             return nil
         }
-        
+
         let nextIndex = viewControllerIndex + 1
-        let orderedViewControllersCount = orderedViewControllers.count
         
-        // User is on the last view controller and swiped right to loop to
-        // the first view controller.
-        guard orderedViewControllersCount != nextIndex else {
-            return orderedViewControllers.first
-            // Uncommment the line below, remove the line above if you don't want the page control to loop.
-            // return nil
-        }
-        
-        guard orderedViewControllersCount > nextIndex else {
+        //perform checks
+        guard VCTablesArray.count != nextIndex else {
             return nil
         }
-        
-        return orderedViewControllers[nextIndex]
+        guard VCTablesArray.count > nextIndex else {
+            return nil
+        }
+        //return View to display
+        return VCTablesArray[nextIndex]
+    }
+    /** Built In Function **/
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

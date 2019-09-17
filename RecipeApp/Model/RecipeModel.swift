@@ -40,12 +40,11 @@ struct Time{
     func timeString() -> String{
         return "\(self.cookingTime)\(self.cookTimeUnit)"
     }
-    //add metod here to create the time object
 }
 
 /** Enum outlining the difficulty levels **/
 enum Diff:String{
-    case Complex, Moderate, Beginner
+    case Hard, Medium, Easy
 }
 
 /** Struct for describe parts of an ingredient **/
@@ -69,17 +68,6 @@ struct Ingredient{
     }
 }
 
-/** This may not be needed **/
-struct Method{
-    var index:Int
-    var instruction:String
-    
-    init(index:Int, instruction:String){
-        self.index = index
-        self.instruction = instruction
-    }
-}
-
 /** Struct to describe parts of a recipe **/
 struct Recipe {
      var title:String
@@ -89,10 +77,11 @@ struct Recipe {
      var difficulty:Diff
      var serves:Int
      var ingredients = [Ingredient]()
-     var method = [String]() //dunno if we need this, maybe just an array of strings
+     var method = [String]()
      var image:String
+     var nutrients = [Nutrient]()
     
-    init(title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[String], image:String){
+    init(title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[String], image:String, nutrients:[Nutrient]){
         self.title = title
         self.mealTypes = mealTypes
         self.dietaryReqs = dietaryReqs
@@ -102,6 +91,8 @@ struct Recipe {
         self.ingredients = ingredients
         self.method = method
         self.image = image
+        self.nutrients = nutrients
+        
     }
 
 }
