@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99B232F4F680092C324 /* BaseViewController.swift */; };
+		2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99F233075700092C324 /* ServesPopContentController.swift */; };
 		287833A7232E05DD00D7975C /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833A6232E05DD00D7975C /* SwipeController.swift */; };
-		287833AF232E6DD500D7975C /* SwipeIngViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833AE232E6DD500D7975C /* SwipeIngViewController.swift */; };
-		287833B1232E6E0B00D7975C /* SwipeMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833B0232E6E0B00D7975C /* SwipeMethodViewController.swift */; };
+		287833AF232E6DD500D7975C /* IngredientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833AE232E6DD500D7975C /* IngredientsTableViewController.swift */; };
+		287833B1232E6E0B00D7975C /* MethodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833B0232E6E0B00D7975C /* MethodTableViewController.swift */; };
 		28AC2CB3232C509C00CE2DD6 /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AC2CB2232C509C00CE2DD6 /* NutritionViewController.swift */; };
 		28E4B0CF2318999F00459557 /* NutrientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E4B0CE2318999F00459557 /* NutrientModel.swift */; };
 		28E4B0D123189B7900459557 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E4B0D023189B7900459557 /* RecipeModel.swift */; };
@@ -26,9 +27,10 @@
 
 /* Begin PBXFileReference section */
 		2846E99B232F4F680092C324 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		2846E99F233075700092C324 /* ServesPopContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesPopContentController.swift; sourceTree = "<group>"; };
 		287833A6232E05DD00D7975C /* SwipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
-		287833AE232E6DD500D7975C /* SwipeIngViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeIngViewController.swift; sourceTree = "<group>"; };
-		287833B0232E6E0B00D7975C /* SwipeMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeMethodViewController.swift; sourceTree = "<group>"; };
+		287833AE232E6DD500D7975C /* IngredientsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTableViewController.swift; sourceTree = "<group>"; };
+		287833B0232E6E0B00D7975C /* MethodTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MethodTableViewController.swift; sourceTree = "<group>"; };
 		28AC2CB2232C509C00CE2DD6 /* NutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		28E4B0CE2318999F00459557 /* NutrientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientModel.swift; sourceTree = "<group>"; };
 		28E4B0D023189B7900459557 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
@@ -111,9 +113,10 @@
 				28E4B0D42318C31700459557 /* RecipeCollectionViewModel.swift */,
 				28AC2CB2232C509C00CE2DD6 /* NutritionViewController.swift */,
 				287833A6232E05DD00D7975C /* SwipeController.swift */,
-				287833AE232E6DD500D7975C /* SwipeIngViewController.swift */,
-				287833B0232E6E0B00D7975C /* SwipeMethodViewController.swift */,
+				287833AE232E6DD500D7975C /* IngredientsTableViewController.swift */,
+				287833B0232E6E0B00D7975C /* MethodTableViewController.swift */,
 				2846E99B232F4F680092C324 /* BaseViewController.swift */,
+				2846E99F233075700092C324 /* ServesPopContentController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -197,10 +200,11 @@
 				28E4B0D32318C1B900459557 /* RecipeCollectionViewController.swift in Sources */,
 				28E4B0D123189B7900459557 /* RecipeModel.swift in Sources */,
 				28F6DCC52310D44A00C4A6AC /* RecipeDetailViewController.swift in Sources */,
-				287833AF232E6DD500D7975C /* SwipeIngViewController.swift in Sources */,
+				287833AF232E6DD500D7975C /* IngredientsTableViewController.swift in Sources */,
 				28E4B0D52318C31700459557 /* RecipeCollectionViewModel.swift in Sources */,
 				28F6DCC32310D44A00C4A6AC /* AppDelegate.swift in Sources */,
-				287833B1232E6E0B00D7975C /* SwipeMethodViewController.swift in Sources */,
+				287833B1232E6E0B00D7975C /* MethodTableViewController.swift in Sources */,
+				2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,28 +8,32 @@
 
 import UIKit
 
-class SwipeMethodViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MethodTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
    
-    @IBOutlet weak var tableView: UITableView!
-    
-    private let viewModel = RecipeCollectionViewModel()
-    var method:[String] = [""]
+    @IBOutlet weak var tableView: UITableView! //connection to view
+    private let viewModel = RecipeCollectionViewModel() //connection to model
+    var method:[String] = [""] //default method array
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //set delegate and datasource for table on view
         tableView.delegate = self
         tableView.dataSource = self
         
+        //get the current recipe and its method array
         let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
         method = currentRecipe.method
         
     }
-    
+    /** Built In Function:
+        number of rows in table, based on amount of steps **/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return method.count
     }
     
+    /** Built In Function:
+        Format the method cells **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         print("setting Cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "swipeCell", for: indexPath)

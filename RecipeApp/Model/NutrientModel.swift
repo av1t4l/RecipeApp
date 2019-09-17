@@ -26,6 +26,7 @@ class Nutrient{
     private var name:String
     private var nickname:String = ""
     private var amount:Float
+    private var staticAmount:Float
     private var unitName:Unit
     private var subNutrients = [Nutrient]()
     private var subNutrient:Bool = false
@@ -33,6 +34,7 @@ class Nutrient{
     init(name:String, amount:Float, unitName:Unit){
         self.name = name
         self.amount = amount
+        self.staticAmount = amount
         self.unitName = unitName
     }
     
@@ -43,7 +45,7 @@ class Nutrient{
     }
 
     func addSubNutrient(name:String, amount:Float, unitName:Unit){
-        var temp = Nutrient(name:name, amount:amount, unitName:unitName)
+        let temp = Nutrient(name:name, amount:amount, unitName:unitName)
         temp.subNutrient = true
         subNutrients.append(temp)
     }
@@ -67,6 +69,14 @@ class Nutrient{
     
     func isSubNutrient() -> Bool{
         return subNutrient
+    }
+    
+    func updateAmount(factor: Int, recipeServeSize: Int){
+        //divide by usual servingsize and amount to get the usual amount per one serve
+        amount = staticAmount / Float(recipeServeSize)
+        
+        //multipy one serving's amount by the factor from user
+        amount = amount * Float(factor)
     }
 }
 

@@ -8,15 +8,13 @@
 
 import UIKit
 
-class NutritionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
-   
-   
+class NutritionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     
+    private let viewModel = RecipeCollectionViewModel() //refernece to the model
+    var recipeIndex:Int = 0 //indicating the ccurrent recipe
+    var nutrients = [Nutrient]() //the nutrients array for that recipe
     
-    private let viewModel = RecipeCollectionViewModel()
-    var recipeIndex:Int = 0
-    var nutrients = [Nutrient]()
-    
+    //declaring the UI Elements
     @IBOutlet weak var difficultyLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,37 +22,52 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var servesButton: UIButton!
     
-    var toolBar = UIToolbar()
-    var picker  = UIPickerView()
-    let pickerData = ["1","2","3","4","5","6","7","8","9","10"]
-    
-    @IBAction func ServesButtonClick(_ sender: Any) {
-        picker = UIPickerView.init()
-        picker.delegate = self
-        picker.backgroundColor = UIColor.white
-        picker.setValue(UIColor.black, forKey: "textColor")
-        picker.autoresizingMask = .flexibleWidth
-        picker.contentMode = .center
-        picker.frame = CGRect.init(x: 0.0, y: UIScreen.main.bounds.size.height - 300, width: UIScreen.main.bounds.size.width, height: 300)
-        self.view.addSubview(picker)
-
-        toolBar = UIToolbar.init(frame: CGRect.init(x: 0.0, y: UIScreen.main.bounds.size.height - 300, width: UIScreen.main.bounds.size.width, height: 50))
-        toolBar.barStyle = .default
-        toolBar.items = [UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(onDoneButtonTapped))]
-        self.view.addSubview(toolBar)
+    /** Action for click on ServesButton**/
+    @IBAction func adjustServesButtonHandler(_ sender: Any) {
+        //get buttons frame
+        let button = sender as? UIButton
+        let buttonFrame = button?.frame ?? CGRect.zero
+        
+        //Configure the presentation controller
+        let popController = self.storyboard?.instantiateViewController(withIdentifier: "PopOverContentController") as? ServesPopContentController
+        popController?.modalPresentationStyle = .popover
+        
+        popController?.delegate = self //set delegate
+       
+        //configure the popover and size it
+        if let popoverPresentationController = popController?.popoverPresentationController {
+            popoverPresentationController.permittedArrowDirections = .up
+            popoverPresentationController.sourceView = button//self.view
+            popoverPresentationController.sourceRect = buttonFrame
+            popoverPresentationController.delegate = self
+            popoverPresentationController.sourceRect = CGRect(x: self.servesButton.bounds.midX, y: self.servesButton.bounds.minY, width: 0, height: 0)
+            popController?.preferredContentSize = CGSize(width: 150, height: 200)
+            
+            //present the popOver on screen
+            if let popoverController = popController {
+                present(popoverController, animated: true, completion: nil)
+            }
+        }
+    }
+    //built in function
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    //built in function
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         
     }
-    @objc func onDoneButtonTapped() {
-        toolBar.removeFromSuperview()
-        picker.removeFromSuperview()
+    //built in function 
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let recipe = viewModel.getRecipe(byIndex: recipeIndex)
+        let recipe = viewModel.getRecipe(byIndex: recipeIndex) //get the current recipe
         
        
-        // Do any additional setup after loading the view.
+        //Set the values in the UI from the values in the model
         imageView.image = recipe.image
         titleLabel.text = recipe.title
         timeLabel.text = recipe.time
@@ -64,15 +77,17 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         //get nutrients string array from view model for this recipe
         nutrients = viewModel.getNutrientsForRecipe(byIndex: recipeIndex)
         
-        
+        //set table delegate and datasource
         tableView.delegate = self
         tableView.dataSource = self
         
+        //round corners of all UI Elements
         roundCorners()
         
     }
+    
+    /** Round the corners for all the UI Elements **/
     func roundCorners(){
-        //round the edges of the labels
         titleLabel.layer.masksToBounds = true
         titleLabel.layer.cornerRadius = 7
         titleLabel.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -83,16 +98,19 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         
         servesButton.layer.masksToBounds = true
         servesButton.layer.cornerRadius = 7
-        servesButton.layer.maskedCorners = [.layerMaxXMinYCorner,.layerMaxXMaxYCorner]
         
     }
     
+    /** Inbuilt TableView Method.
+        Decided how many rows to create in table **/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nutrients.count
     }
     
+    /** Inbuilt TableView Method.
+        Format cells in table **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        //decide if cell should be Nutrient or SubNutrient type
         let cell:UITableViewCell
         if nutrients[indexPath.row].isSubNutrient() {
             cell = tableView.dequeueReusableCell(withIdentifier: "subNutrientCell", for: indexPath)
@@ -110,33 +128,17 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         return cell
     }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //get the value that was selected
-        servesButton.setTitle(pickerData[row], for: .normal)
-        print(pickerData[row])
-    }
-    
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+//Allows this class to get data from the popup 
+extension NutritionViewController:ServesPopDelegate {
+   func servesContent(controller: ServesPopContentController, didselectItem val: String) {
+      servesButton.setTitle(val, for: .normal)
+        //update the amount here
+        nutrients = viewModel.getUpdatedNutrientsForRecipe(index: recipeIndex, factor: Int(val) ?? 0)
+        tableView.reloadData()
+    
     }
-    */
-
 }

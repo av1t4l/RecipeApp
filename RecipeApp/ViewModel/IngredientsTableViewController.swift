@@ -8,32 +8,38 @@
 
 import UIKit
 
-class SwipeIngViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class IngredientsTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
    
-    @IBOutlet weak var tableView: UITableView!
-    private let viewModel = RecipeCollectionViewModel()
-    var ingredients:[String] = [""]
+    @IBOutlet weak var tableView: UITableView! //connection to UI table
+    private let viewModel = RecipeCollectionViewModel() //connection to model
+    var ingredients:[String] = [""] //default array of ingredients
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //det delegate and datasource for the Table
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //set the current recipe and get the ingredients array for it
         let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
         ingredients = currentRecipe.ingredients
         
     }
-    
+    /** Built In Function:
+        number of rows in table, based on amount of ingredients**/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ingredients.count
     }
     
+    /** Built In Function:
+        Format the ingredients cells **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        print("setting Cell")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "swipeCell", for: indexPath)
-        let title = cell.viewWithTag(2001) as? UILabel
+        let cell = tableView.dequeueReusableCell(withIdentifier: "swipeCell", for: indexPath) //get cell
+        let title = cell.viewWithTag(2001) as? UILabel //get label
         
+        //set label based on model data
         if let title = title{
             title.text = ingredients[indexPath.row]
         }

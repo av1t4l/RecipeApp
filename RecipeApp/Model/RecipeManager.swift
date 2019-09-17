@@ -19,7 +19,6 @@ struct RecipeManager{
         
     }
     
-    //title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[Method], image:String
     private mutating func makeDefaults(){
         //test nutrient value
         let carbs = Nutrient(name:"Carbohydrates", amount:30, unitName:Unit.g)
@@ -50,7 +49,6 @@ struct RecipeManager{
         recipes.append(defRecipe1)
         recipes.append(defRecipe2)
         recipes.append(defRecipe3)
-        
-        print(recipes)
+
     }
 }
