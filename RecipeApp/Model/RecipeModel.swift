@@ -43,7 +43,7 @@ struct Time{
 }
 
 /** Enum outlining the difficulty levels **/
-enum Diff:String{
+enum Diff:String,  CaseIterable{
     case Hard, Medium, Easy
 }
 
