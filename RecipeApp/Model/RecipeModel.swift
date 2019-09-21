@@ -9,12 +9,12 @@
 import Foundation
 
 /** Enum outlining the meal type catagories **/
-enum MealType:String{
+enum MealType:String, CaseIterable{
     case breakfast = "Breakfast"
     case lunch = "Lunch"
     case dinner = "Dinner"
     case dessert = "Dessert"
-    case Snack = "Snack"
+    case snack = "Snack"
     case crowd = "Crowd Pleaser"
 }
 
@@ -43,7 +43,7 @@ struct Time{
 }
 
 /** Enum outlining the difficulty levels **/
-enum Diff:String{
+enum Diff:String,  CaseIterable{
     case Hard, Medium, Easy
 }
 
