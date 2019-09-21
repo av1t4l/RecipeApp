@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1E232AA8232E6916007BBEBE /* AddRecipePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */; };
 		1E753D9A232F6820006B4481 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E753D99232F6820006B4481 /* AddRecipeViewController.swift */; };
-		287833A5232DD1D700D7975C /* IngredientsCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833A4232DD1D700D7975C /* IngredientsCellCollectionViewCell.swift */; };
 		2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99B232F4F680092C324 /* BaseViewController.swift */; };
 		2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99F233075700092C324 /* ServesPopContentController.swift */; };
 		287833A7232E05DD00D7975C /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833A6232E05DD00D7975C /* SwipeController.swift */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddRecipePage.storyboard; sourceTree = "<group>"; };
 		1E753D99232F6820006B4481 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddRecipeViewController.swift; path = ../View/AddRecipeViewController.swift; sourceTree = "<group>"; };
-		287833A4232DD1D700D7975C /* IngredientsCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		2846E99B232F4F680092C324 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2846E99F233075700092C324 /* ServesPopContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesPopContentController.swift; sourceTree = "<group>"; };
 		287833A6232E05DD00D7975C /* SwipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
