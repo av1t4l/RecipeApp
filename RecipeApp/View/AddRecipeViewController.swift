@@ -104,9 +104,35 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         pickerView2.tag = 1
         pickerView3.tag = 2
         pickerView4.tag = 3
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.donePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        tvTag.inputAccessoryView = toolBar
+        tvDifficulty.inputAccessoryView = toolBar
+        tvUnit.inputAccessoryView = toolBar
+        tvIngUnit.inputAccessoryView = toolBar
+    }
+    
+    @objc func donePicker() {
+        view.endEditing(true)
     }
     
     var viewModel = RecipeCollectionViewModel()
+    
+    var pickerView1: UIPickerView!
+    var pickerView2: UIPickerView!
+    var pickerView3: UIPickerView!
+    var pickerView4: UIPickerView!
     
     var selectedMealType: String?
     var selectedDiff: String?
@@ -146,7 +172,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
             
             viewModel.addRecipe(recipe: recipe)
             print("Got here")
-            print(viewModel.getRecipeCount())
+            print(viewModel.count())
         }
         
     }
