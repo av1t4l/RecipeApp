@@ -73,7 +73,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     /** Inbuilt TextField Method
         Restrict input to numbers **/
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == tvTime || textField == tvQuantity {
+        if textField == tvTime || textField == tvQuantity || textField == tvServes{
             let allowedCharacters = CharacterSet(charactersIn:"0123456789")
             let characterSet = CharacterSet(charactersIn: string)
             return allowedCharacters.isSuperset(of: characterSet)
@@ -106,6 +106,8 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         pickerView4.tag = 3
     }
     
+    var viewModel = RecipeCollectionViewModel()
+    
     var selectedMealType: String?
     var selectedDiff: String?
     var selectedUnit: String?
@@ -134,22 +136,17 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     @IBAction func btnAdd(_ sender: UIButton) {
         
-        if(tvTitle.hasText && tvTag.hasText && tvTime.hasText && tvUnit.hasText && tvDifficulty.hasText && tvServes.hasText && tvIngredient.hasText && tvQuantity.hasText && tvIngUnit.hasText && tvMethods.hasText){
+        if let tvTitle = tvTitle.text, let _ = tvTag.text, let tvTime = Int(tvTime.text!), let _ = tvUnit.text, let _ = tvDifficulty.text, let tvServes = Int(tvServes.text!), let tvIngredient = tvIngredient.text, let tvQuantity = Float(tvQuantity.text!), let _ = tvIngUnit.text, let tvMethods = tvMethods.text{
             
-            let title = tvTitle.text!
-            let time = Int(tvTime.text!)
-            let serves = Int(tvServes.text!)
-            let ingredients = tvIngredient.text!
-            let methods = tvMethods.text!
-            let quantity = Float(tvQuantity.text!)
+            let createTime = Time(time: tvTime, unit: unit[selectedUnitRow])
             
-            let createTime = Time(time: time!, unit: unit[selectedUnitRow])
+            let createIngredient = Ingredient(qty: tvQuantity, unit: Unit.allCases[selectedIngUnitRow], name: tvIngredient)
             
-            let createIngredient = Ingredient(qty: quantity!, unit: Unit.allCases[selectedIngUnitRow], name: ingredients)
+            let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: [createIngredient], method: [tvMethods], image: "", nutrients: Nut)
             
-            let recipe = Recipe(title: title, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: serves!, ingredients: [createIngredient], method: [methods], image: "", nutrients: Nut)
-            
-            
+            viewModel.addRecipe(recipe: recipe)
+            print("Got here")
+            print(viewModel.getRecipeCount())
         }
         
     }
@@ -160,19 +157,39 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         createPickerView()
         tvTime.delegate = self
         tvQuantity.delegate = self
+        tvServes.delegate = self
+        
+        let tabbar = tabBarController as! TabBarViewController
+        viewModel = tabbar.viewModel
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.clearAllTexts()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        let tabbar = tabBarController as! TabBarViewController
+        tabbar.viewModel = viewModel
     }
     
     let Nut = [Nutrient(name:"Energy", amount:30, unitName:Unit.g), Nutrient(name:"Protien", amount:4, unitName:Unit.g), Nutrient(name:"Fat", amount:3, unitName:Unit.g), Nutrient(name:"Fibre", amount:20, unitName:Unit.g), Nutrient(name:"Sodium", amount:300, unitName:Unit.mg) ]
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    public func clearAllTexts(){
+        for view in self.view.subviews{
+            if view is UITextField{
+                let field: UITextField = view as! UITextField
+                field.text = ""
+            }
+        }
     }
-    */
+    
+
+     //MARK: - Navigation
+
+     //In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         //Get the new view controller using segue.destination.
+         //Pass the selected object to the new view controller.
+    }
 
 }

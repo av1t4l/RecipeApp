@@ -22,6 +22,11 @@ struct RecipeCollectionViewModel{
     
     /** Returns recipe formatted fro View **/
     func getRecipe(byIndex index: Int) -> (title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient]){
+        print("ini di getrecipe")
+        print(index)
+        print(manager.recipes.count)
+        print(self.getRecipeCount())
+        print("selesai")
         let recipe = manager.recipes[index]
         let image = UIImage(named: recipe.image)
         var ingredients = [String]()
@@ -91,6 +96,10 @@ struct RecipeCollectionViewModel{
     
     mutating func addRecipe(recipe: Recipe) {
         manager.addRecipe(recipe: recipe)
+    }
+    
+    func getRecipeCount() -> Int{
+        return manager.recipes.count
     }
 }
 

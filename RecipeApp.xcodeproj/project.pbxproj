@@ -10,6 +10,7 @@
 		1E232AA8232E6916007BBEBE /* AddRecipePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */; };
 		1E753D9A232F6820006B4481 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E753D99232F6820006B4481 /* AddRecipeViewController.swift */; };
 		281BED3F23374A71005E71F3 /* RecipeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BED3E23374A71005E71F3 /* RecipeAppUITests.swift */; };
+		1EEB5B6B23375BE700C8F326 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */; };
 		2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99B232F4F680092C324 /* BaseViewController.swift */; };
 		2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99F233075700092C324 /* ServesPopContentController.swift */; };
 		287833A7232E05DD00D7975C /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833A6232E05DD00D7975C /* SwipeController.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddRecipePage.storyboard; sourceTree = "<group>"; };
 		1E753D99232F6820006B4481 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddRecipeViewController.swift; path = ../View/AddRecipeViewController.swift; sourceTree = "<group>"; };
+		1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		281BED3C23374A71005E71F3 /* RecipeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		281BED3E23374A71005E71F3 /* RecipeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAppUITests.swift; sourceTree = "<group>"; };
 		281BED4023374A71005E71F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				287833B0232E6E0B00D7975C /* MethodTableViewController.swift */,
 				2846E99B232F4F680092C324 /* BaseViewController.swift */,
 				2846E99F233075700092C324 /* ServesPopContentController.swift */,
+				1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				28E4B0D52318C31700459557 /* RecipeCollectionViewModel.swift in Sources */,
 				28F6DCC32310D44A00C4A6AC /* AppDelegate.swift in Sources */,
 				287833B1232E6E0B00D7975C /* MethodTableViewController.swift in Sources */,
+				1EEB5B6B23375BE700C8F326 /* TabBarViewController.swift in Sources */,
 				2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
