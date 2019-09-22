@@ -10,10 +10,10 @@ import UIKit
 
 class MethodTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
    
+   
     @IBOutlet weak var tableView: UITableView! //connection to view
-    private let viewModel = RecipeCollectionViewModel() //connection to model
+    //private var viewModel: RecipeCollectionViewModel! //connection to model
     var method:[String] = [""] //default method array
- 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,19 +23,27 @@ class MethodTableViewController: BaseViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
         
         //get the current recipe and its method array
-        let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
-        method = currentRecipe.method
-        tableView.tableFooterView = UIView()
+        //let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
+        method = [""]
         
     }
+    
+    override func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
+        method = currentRecipe.method
+        
+        self.tableView.reloadData()
+    }
+    
+    
     /** Built In Function:
-        number of rows in table, based on amount of steps **/
+     number of rows in table, based on amount of steps **/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return method.count
     }
     
     /** Built In Function:
-        Format the method cells **/
+     Format the method cells **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         print("setting Cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "swipeCell", for: indexPath)

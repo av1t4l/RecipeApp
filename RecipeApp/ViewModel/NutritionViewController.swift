@@ -10,7 +10,7 @@ import UIKit
 
 class NutritionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     
-    private let viewModel = RecipeCollectionViewModel() //refernece to the model
+    private var viewModel: RecipeCollectionViewModel! //refernece to the model
     var recipeIndex:Int = 0 //indicating the ccurrent recipe
     var nutrients = [Nutrient]() //the nutrients array for that recipe
     
@@ -48,6 +48,9 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
                 present(popoverController, animated: true, completion: nil)
             }
         }
+    }
+    func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        self.viewModel = viewModel
     }
     //built in function
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {

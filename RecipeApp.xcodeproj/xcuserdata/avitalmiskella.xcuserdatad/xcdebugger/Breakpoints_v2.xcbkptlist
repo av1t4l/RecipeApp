@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RecipeApp/ViewModel/RecipeDetailViewController.swift"
-            timestampString = "590812443.686873"
+            timestampString = "590849787.795452"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "prepare(for:sender:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "bindViewModel(viewModel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RecipeApp/ViewModel/NutritionViewController.swift"
-            timestampString = "590388201.889158"
+            timestampString = "590849787.797063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "servesContent(controller:didselectItem:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RecipeApp/ViewModel/NutritionViewController.swift"
-            timestampString = "590388201.889264"
+            timestampString = "590849787.797821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "servesContent(controller:didselectItem:)"
             landmarkType = "7">
          </BreakpointContent>

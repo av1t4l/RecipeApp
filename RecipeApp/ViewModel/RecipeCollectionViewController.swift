@@ -12,8 +12,11 @@ private let reuseIdentifier = "RecipeCell"
 
 
 class RecipeCollectionViewController: UICollectionViewController {
-    private var viewModel: RecipeCollectionViewModel!
+    var viewModel: RecipeCollectionViewModel!
     
+    func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        self.viewModel = viewModel
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,6 +70,7 @@ class RecipeCollectionViewController: UICollectionViewController {
             let recipe = viewModel.getRecipe(byIndex: indexPath.row)
             destination.recipe = recipe
             destination.recipeIndex = indexPath.row
+            destination.bindViewModel(viewModel: viewModel)
         }
 
     }

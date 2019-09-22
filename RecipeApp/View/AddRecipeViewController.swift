@@ -127,7 +127,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         view.endEditing(true)
     }
     
-    var viewModel = RecipeCollectionViewModel()
+    var viewModel: RecipeCollectionViewModel!
     
     var pickerView1: UIPickerView!
     var pickerView2: UIPickerView!
@@ -159,6 +159,8 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var tvMethods: UITextField!
     @IBOutlet weak var tvQuantity: UITextField!
     @IBOutlet weak var tvIngUnit: UITextField!
+    
+    var tabbar: TabBarViewController!
     
     @IBAction func btnAdd(_ sender: UIButton) {
         

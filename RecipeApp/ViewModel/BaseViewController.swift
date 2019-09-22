@@ -14,9 +14,15 @@ import UIKit
 class BaseViewController: UIViewController {
     
     var recipeIndex: Int! //refers to the current recipe
-
+    var viewModel: RecipeCollectionViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        self.viewModel = viewModel
     }
   
 }

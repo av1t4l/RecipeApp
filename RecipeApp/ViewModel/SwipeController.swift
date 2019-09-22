@@ -11,16 +11,21 @@ import UIKit
 class SwipeController: UIPageViewController,UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     var recipeIndex:Int = 0 //current recipe
-    
+    var viewModel: RecipeCollectionViewModel!
 
     /** To create new ViewController and register with the View **/
     //using a super class "BaseViewController" so that data can be passed into the UIViewControllers
     func newVC(viewController: String) -> UIViewController {
         if let vc: BaseViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewController) as? BaseViewController {
             vc.recipeIndex = recipeIndex
+            let _ = vc.view
+            vc.bindViewModel(viewModel: viewModel)
             return vc
         }
         return UIViewController()
+    }
+    func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        self.viewModel = viewModel
     }
     
     // create array for the two views the ppageViewController swipes between
