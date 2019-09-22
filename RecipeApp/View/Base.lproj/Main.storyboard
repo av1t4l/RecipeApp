@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -178,8 +177,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Tj-Ep-1xa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-
-=======
             <point key="canvasLocation" x="3832.5" y="-606.33802816901414"/>
         </scene>
         <!--Serves Pop Content Controller-->
@@ -231,10 +228,10 @@
             </objects>
             <point key="canvasLocation" x="4640.625" y="-745.77464788732391"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="3mV-XE-paU">
             <objects>
-                <tabBarController id="Qz4-vM-Niy" sceneMemberID="viewController">
+                <tabBarController id="Qz4-vM-Niy" customClass="TabBarViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TX3-sG-fDq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

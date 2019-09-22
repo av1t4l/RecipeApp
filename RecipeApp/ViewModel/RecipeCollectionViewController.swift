@@ -12,11 +12,13 @@ private let reuseIdentifier = "RecipeCell"
 
 
 class RecipeCollectionViewController: UICollectionViewController {
-    private let viewModel = RecipeCollectionViewModel()
+    private var viewModel = RecipeCollectionViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let tabbar = tabBarController as! TabBarViewController
+        viewModel = tabbar.viewModel
     }
     
     /** Inbuilt CollectionView Method.
@@ -66,5 +68,14 @@ class RecipeCollectionViewController: UICollectionViewController {
         }
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let tabbar = tabBarController as! TabBarViewController
+        viewModel = tabbar.viewModel
+        collectionView.reloadData()
+        print(viewModel.getRecipeCount())
+    }
+    
+    
 
 }

@@ -92,5 +92,9 @@ struct RecipeCollectionViewModel{
     mutating func addRecipe(recipe: Recipe) {
         manager.addRecipe(recipe: recipe)
     }
+    
+    func getRecipeCount() -> Int{
+        return manager.recipes.count
+    }
 }
 
