@@ -62,6 +62,8 @@ class RecipeCollectionViewController: UICollectionViewController {
         
         if let destination = segue.destination as?
             RecipeDetailViewController{
+            
+            print(indexPath)
             let recipe = viewModel.getRecipe(byIndex: indexPath.row)
             destination.recipe = recipe
             destination.recipeIndex = indexPath.row
