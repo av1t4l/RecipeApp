@@ -9,7 +9,7 @@
 import Foundation
 
 //Types of units of food
-enum Unit:String {
+enum Unit:String, CaseIterable {
     case g = "Grams"
     case mg = "Miligrams"
     case L = "Litres"

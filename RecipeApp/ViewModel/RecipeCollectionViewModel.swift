@@ -12,7 +12,7 @@ import UIKit
 
 struct RecipeCollectionViewModel{
     //reference to the Recipe Manager (Data Source)
-    private let manager = RecipeManager()
+    private var manager = RecipeManager()
     
     /** Count: returns the amount of recipes **/
     func count() -> Int{
@@ -87,6 +87,10 @@ struct RecipeCollectionViewModel{
     func getServingsArray() -> [String]{
         let pickerData = ["1","2","3","4","5","6","7","8","9","10"]
         return pickerData
+    }
+    
+    mutating func addRecipe(recipe: Recipe) {
+        manager.addRecipe(recipe: recipe)
     }
 }
 
