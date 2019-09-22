@@ -42,6 +42,7 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
             popoverPresentationController.delegate = self
             popoverPresentationController.sourceRect = CGRect(x: self.servesButton.bounds.midX, y: self.servesButton.bounds.minY, width: 0, height: 0)
             popController?.preferredContentSize = CGSize(width: 150, height: 200)
+            popController?.bindViewModel(viewModel: viewModel)
             
             //present the popOver on screen
             if let popoverController = popController {
