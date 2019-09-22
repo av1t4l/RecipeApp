@@ -63,7 +63,6 @@ struct Ingredient{
         let qty = String(self.qty)
         
         let ingString = "\(qty) \(self.unit.rawValue) \(self.name)"
-        print("The String is \(ingString)")
         return ingString
     }
 }

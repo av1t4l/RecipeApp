@@ -45,7 +45,6 @@ class MethodTableViewController: BaseViewController, UITableViewDelegate, UITabl
     /** Built In Function:
      Format the method cells **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        print("setting Cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "swipeCell", for: indexPath)
         let title = cell.viewWithTag(2001) as? UILabel
         

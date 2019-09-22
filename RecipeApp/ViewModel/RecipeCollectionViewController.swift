@@ -43,7 +43,6 @@ class RecipeCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         let imageView = cell.viewWithTag(1000) as? UIImageView
         let title = cell.viewWithTag(1001) as? UILabel
-        print("in load collect")
     
         if let imageView = imageView, let title = title {
             //safely access these variables here
@@ -79,7 +78,6 @@ class RecipeCollectionViewController: UICollectionViewController {
         let tabbar = tabBarController as! TabBarViewController
         viewModel = tabbar.viewModel
         collectionView.reloadData()
-        print(viewModel.count())
     }
     
     
