@@ -170,7 +170,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
             
             let createIngredient = Ingredient(qty: tvQuantity, unit: Unit.allCases[selectedIngUnitRow], name: tvIngredient)
             
-            let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: [createIngredient], method: [tvMethods], image: "", nutrients: Nut)
+            let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: [createIngredient], method: [tvMethods], image: "imagePlaceholder", nutrients: Nut)
             
             viewModel.addRecipe(recipe: recipe)
             let alertController = UIAlertController(title: "Add Recipe", message: "Successfully added \(tvTitle)", preferredStyle: .alert)
