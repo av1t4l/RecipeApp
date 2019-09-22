@@ -15,7 +15,7 @@ protocol ServesPopDelegate:class {
 class ServesPopContentController: UIViewController, UITableViewDelegate, UITableViewDataSource {
  
     @IBOutlet weak var tableView: UITableView!//connection to the table in view
-    private let viewModel = RecipeCollectionViewModel() //connection to model
+    private var viewModel: RecipeCollectionViewModel! //connection to model
     var delegate:ServesPopDelegate? //set the serves delegate to get info back from the popOver
     var pickerData = [String]()
     
@@ -38,6 +38,9 @@ class ServesPopContentController: UIViewController, UITableViewDelegate, UITable
         return pickerData.count
     }
     
+    func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        self.viewModel = viewModel
+    }
     /** Build In Function:
         Formats cells **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

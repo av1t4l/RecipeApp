@@ -14,7 +14,9 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
     var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient])?
     var recipeIndex:Int = 0 //the current recipe being displayed
     var nutrients = [Nutrient]() //the nutrients array from that recipe
-   
+    
+    var viewModel: RecipeCollectionViewModel!
+    
     //Linking all the UIElements on the screen
     @IBOutlet weak var collectionLabel: UILabel!
     @IBOutlet weak var headerImage: UIImageView!
@@ -54,6 +56,9 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         nutSumCollection.contentInset =  UIEdgeInsets(top: 30, left: 5, bottom: 30, right: 5)
         
     }
+    func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        self.viewModel = viewModel
+    }
     
     /** Prepares For Segue, passes the data to NutritionViewController and Swipe Controller **/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -62,19 +67,21 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         if (segue.identifier == "swipeContainSegue") {
             let childViewController = segue.destination as! SwipeController
             childViewController.recipeIndex = recipeIndex
+            childViewController.bindViewModel(viewModel: viewModel)
         }
         //send index to nutrition view controller
         if (segue.identifier == "nutritionDetailSegue") {
             //pass data through the navController by getting the nav controller first then passing through
             let childViewController = segue.destination as! NutritionViewController
             childViewController.recipeIndex = recipeIndex
+            childViewController.bindViewModel(viewModel: viewModel)
             
         }
     }
     
     /** Round the corners for all the UI Elements **/
     func roundCorners(){
-        //round the edges of the labels
+        //round the edges of the labels 
         recipeNameLabel.layer.masksToBounds = true
         recipeNameLabel.layer.cornerRadius = 7
         recipeNameLabel.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
