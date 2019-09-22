@@ -25,7 +25,7 @@ struct RecipeCollectionViewModel{
         print("ini di getrecipe")
         print(index)
         print(manager.recipes.count)
-        print(self.getRecipeCount())
+        print(self.count())
         print("selesai")
         let recipe = manager.recipes[index]
         let image = UIImage(named: recipe.image)
@@ -96,10 +96,6 @@ struct RecipeCollectionViewModel{
     
     mutating func addRecipe(recipe: Recipe) {
         manager.addRecipe(recipe: recipe)
-    }
-    
-    func getRecipeCount() -> Int{
-        return manager.recipes.count
     }
 }
 

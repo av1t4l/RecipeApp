@@ -12,7 +12,7 @@ private let reuseIdentifier = "RecipeCell"
 
 
 class RecipeCollectionViewController: UICollectionViewController {
-    private var viewModel = RecipeCollectionViewModel()
+    private var viewModel: RecipeCollectionViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class RecipeCollectionViewController: UICollectionViewController {
         let tabbar = tabBarController as! TabBarViewController
         viewModel = tabbar.viewModel
         collectionView.reloadData()
-        print(viewModel.getRecipeCount())
+        print(viewModel.count())
     }
     
     
