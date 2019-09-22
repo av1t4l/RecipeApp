@@ -171,6 +171,12 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
             let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: [createIngredient], method: [tvMethods], image: "", nutrients: Nut)
             
             viewModel.addRecipe(recipe: recipe)
+            let alertController = UIAlertController(title: "Add Recipe", message: "Successfully added \(tvTitle)", preferredStyle: .alert)
+            let doneButton = UIAlertAction(title: "Done", style: .default, handler: {(action) -> Void in print("Done")})
+            
+            alertController.addAction(doneButton)
+            
+            self.navigationController!.present(alertController, animated: true, completion: nil)
             print("Got here")
             print(viewModel.count())
         }
