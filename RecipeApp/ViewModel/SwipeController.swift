@@ -12,6 +12,7 @@ class SwipeController: UIPageViewController,UIPageViewControllerDelegate, UIPage
     
     var recipeIndex:Int = 0 //current recipe
     
+
     /** To create new ViewController and register with the View **/
     //using a super class "BaseViewController" so that data can be passed into the UIViewControllers
     func newVC(viewController: String) -> UIViewController {
@@ -42,6 +43,7 @@ class SwipeController: UIPageViewController,UIPageViewControllerDelegate, UIPage
                                animated: true,
                                completion: nil)
         }
+
     }
     /** Built In Function:
         Get view for swipe left **/

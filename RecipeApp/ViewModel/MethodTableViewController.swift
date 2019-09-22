@@ -13,6 +13,7 @@ class MethodTableViewController: BaseViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView! //connection to view
     private let viewModel = RecipeCollectionViewModel() //connection to model
     var method:[String] = [""] //default method array
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class MethodTableViewController: BaseViewController, UITableViewDelegate, UITabl
         //get the current recipe and its method array
         let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
         method = currentRecipe.method
+        tableView.tableFooterView = UIView()
         
     }
     /** Built In Function:

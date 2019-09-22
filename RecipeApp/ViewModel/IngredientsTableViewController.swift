@@ -13,7 +13,7 @@ class IngredientsTableViewController: BaseViewController, UITableViewDelegate, U
     @IBOutlet weak var tableView: UITableView! //connection to UI table
     private let viewModel = RecipeCollectionViewModel() //connection to model
     var ingredients:[String] = [""] //default array of ingredients
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,11 @@ class IngredientsTableViewController: BaseViewController, UITableViewDelegate, U
         //set the current recipe and get the ingredients array for it
         let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
         ingredients = currentRecipe.ingredients
+        
+        tableView.tableFooterView = UIView()
+        
+        
+    
         
     }
     /** Built In Function:
@@ -49,4 +54,5 @@ class IngredientsTableViewController: BaseViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+
 }
