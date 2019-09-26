@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     var viewModel = RecipeCollectionViewModel()
     var ingredientList: [Ingredient] = []

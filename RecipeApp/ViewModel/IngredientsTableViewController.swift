@@ -9,10 +9,11 @@
 import UIKit
 
 class IngredientsTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
-   
+    
     @IBOutlet weak var tableView: UITableView! //connection to UI table
-    private let viewModel = RecipeCollectionViewModel() //connection to model
+    // private let viewModel = RecipeCollectionViewModel() //connection to model
     var ingredients:[String] = [""] //default array of ingredients
+    
     
     
     override func viewDidLoad() {
@@ -23,18 +24,27 @@ class IngredientsTableViewController: BaseViewController, UITableViewDelegate, U
         tableView.dataSource = self
         
         //set the current recipe and get the ingredients array for it
+        //let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
+        ingredients = [""]
+        
+    }
+    
+    override func bindViewModel(viewModel: RecipeCollectionViewModel) {
         let currentRecipe = viewModel.getRecipe(byIndex: recipeIndex)
         ingredients = currentRecipe.ingredients
         
+        self.tableView.reloadData()
     }
+    
     /** Built In Function:
-        number of rows in table, based on amount of ingredients**/
+     number of rows in table, based on amount of ingredients**/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ingredients.count
     }
     
+    
     /** Built In Function:
-        Format the ingredients cells **/
+     Format the ingredients cells **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "swipeCell", for: indexPath) //get cell
         let title = cell.viewWithTag(2001) as? UILabel //get label

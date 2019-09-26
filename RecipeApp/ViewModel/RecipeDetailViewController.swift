@@ -9,12 +9,14 @@
 import UIKit
 
 class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-  
+    
     //Recipe object the view needs from the previous view
     var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient])?
     var recipeIndex:Int = 0 //the current recipe being displayed
     var nutrients = [Nutrient]() //the nutrients array from that recipe
-   
+    
+    var viewModel: RecipeCollectionViewModel!
+    
     //Linking all the UIElements on the screen
     @IBOutlet weak var collectionLabel: UILabel!
     @IBOutlet weak var headerImage: UIImageView!
@@ -23,7 +25,7 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var diffLabel: UILabel!
     @IBOutlet weak var servesLabel: UILabel!
     @IBOutlet weak var nutSumCollection: UICollectionView!
- 
+    
     //Runs on load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +56,9 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         nutSumCollection.contentInset =  UIEdgeInsets(top: 30, left: 5, bottom: 30, right: 5)
         
     }
+    func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        self.viewModel = viewModel
+    }
     
     /** Prepares For Segue, passes the data to NutritionViewController and Swipe Controller **/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -62,12 +67,14 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         if (segue.identifier == "swipeContainSegue") {
             let childViewController = segue.destination as! SwipeController
             childViewController.recipeIndex = recipeIndex
+            childViewController.bindViewModel(viewModel: viewModel)
         }
         //send index to nutrition view controller
         if (segue.identifier == "nutritionDetailSegue") {
             //pass data through the navController by getting the nav controller first then passing through
             let childViewController = segue.destination as! NutritionViewController
             childViewController.recipeIndex = recipeIndex
+            childViewController.bindViewModel(viewModel: viewModel)
             
         }
     }
@@ -97,13 +104,13 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     /** Inbuilt CollectionView Method.
-        Decided how many cells to create in collection **/
+     Decided how many cells to create in collection **/
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nutrients.count
     }
     
     /** Inbuilt CollectionView Method.
-        Format cells in collection **/
+     Format cells in collection **/
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nutrientSummaryCell", for: indexPath)
@@ -114,10 +121,10 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
             let currentNut = nutrients[indexPath.row].presentationForm()
             //if has nickname, set nickname
             if currentNut.nickname != "" {
-                 name.text =  currentNut.nickname
+                name.text =  currentNut.nickname
             }
             else{
-                 name.text =  currentNut.name
+                name.text =  currentNut.name
             }
             amount.text = currentNut.unit
         }
@@ -126,6 +133,6 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         cell.layer.cornerRadius = 7
         return cell
     }
-
+    
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class NutritionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     
-    private let viewModel = RecipeCollectionViewModel() //refernece to the model
+    private var viewModel: RecipeCollectionViewModel! //refernece to the model
     var recipeIndex:Int = 0 //indicating the ccurrent recipe
     var nutrients = [Nutrient]() //the nutrients array for that recipe
     
@@ -33,7 +33,7 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         popController?.modalPresentationStyle = .popover
         
         popController?.delegate = self //set delegate
-       
+        
         //configure the popover and size it
         if let popoverPresentationController = popController?.popoverPresentationController {
             popoverPresentationController.permittedArrowDirections = .up
@@ -42,12 +42,16 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
             popoverPresentationController.delegate = self
             popoverPresentationController.sourceRect = CGRect(x: self.servesButton.bounds.midX, y: self.servesButton.bounds.minY, width: 0, height: 0)
             popController?.preferredContentSize = CGSize(width: 150, height: 200)
+            popController?.bindViewModel(viewModel: viewModel)
             
             //present the popOver on screen
             if let popoverController = popController {
                 present(popoverController, animated: true, completion: nil)
             }
         }
+    }
+    func bindViewModel(viewModel: RecipeCollectionViewModel) {
+        self.viewModel = viewModel
     }
     //built in function
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -57,7 +61,7 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         
     }
-    //built in function 
+    //built in function
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return true
     }
@@ -66,7 +70,7 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         let recipe = viewModel.getRecipe(byIndex: recipeIndex) //get the current recipe
         
-       
+        
         //Set the values in the UI from the values in the model
         imageView.image = recipe.image
         titleLabel.text = recipe.title
@@ -102,13 +106,13 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     /** Inbuilt TableView Method.
-        Decided how many rows to create in table **/
+     Decided how many rows to create in table **/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nutrients.count
     }
     
     /** Inbuilt TableView Method.
-        Format cells in table **/
+     Format cells in table **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //decide if cell should be Nutrient or SubNutrient type
         let cell:UITableViewCell
@@ -128,17 +132,17 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         return cell
     }
-
-
+    
+    
 }
 
-//Allows this class to get data from the popup 
+//Allows this class to get data from the popup
 extension NutritionViewController:ServesPopDelegate {
-   func servesContent(controller: ServesPopContentController, didselectItem val: String) {
-      servesButton.setTitle(val, for: .normal)
+    func servesContent(controller: ServesPopContentController, didselectItem val: String) {
+        servesButton.setTitle(val, for: .normal)
         //update the amount here
         nutrients = viewModel.getUpdatedNutrientsForRecipe(index: recipeIndex, factor: Int(val) ?? 0)
         tableView.reloadData()
-    
+        
     }
 }
