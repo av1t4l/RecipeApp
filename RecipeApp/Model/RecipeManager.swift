@@ -52,5 +52,8 @@ struct RecipeManager{
     
     mutating func addRecipe(recipe: Recipe) {
         recipes.append(recipe)
+        let req = REST_Request()
+        req.getNutrient(ingrStr: "100ml milk")
     }
+
 }
