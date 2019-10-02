@@ -50,19 +50,19 @@ struct REST_Request{
                     
                     var newNutrients = [Nutrient]()
                     
-                    for nutrient in nutrientsKey{
-                        //cast the array item of type ANY to the defined struct to access the values
-                        let jsonDecoder = JSONDecoder()
-                        let selected = try jsonDecoder.decode(APIObject.self, from: allNutrients[nutrient.key]!)
-                        
-                       // let selected = allNutrients[nutrient.key] as! APIObject
-                        //create new nutrient object based on the API response
-                        let newNutrient = Nutrient(name: nutrient.value, amount: selected.quantity, unitName: Unit(rawValue: selected.unit)!)
-                        print(newNutrient)
-                        newNutrients.append(newNutrient)
+                    for n in nutrientsKey {
+                        var nutr = allNutrients[n.key] as! [String:Any]
+                        let name = nutr["label"] as! String
+                        let rawUnit = nutr["unit"] as! String
+                      
+                  
+                        if let amt = nutr["quantity"] as? NSNumber {
+                            let amount = amt.floatValue
+                            let newNutrient = Nutrient(name: name, amount: amount, unitName: Unit(rawValue: rawUnit)!)
+                            newNutrients.append(newNutrient)
+                            print(newNutrient.presentationForm())
+                        }
                     }
-                    
-                    
                 }
         })
         task.resume()
