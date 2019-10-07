@@ -47,7 +47,7 @@ struct RecipeManager{
         recipes.append(defRecipe1)
         recipes.append(defRecipe2)
         recipes.append(defRecipe3)
-
+        
     }
     
     mutating func addRecipe(recipe: Recipe) {

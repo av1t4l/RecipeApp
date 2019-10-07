@@ -9,7 +9,7 @@
 import UIKit
 
 class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-  
+    
     //Recipe object the view needs from the previous view
     var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient])?
     var recipeIndex:Int = 0 //the current recipe being displayed
@@ -25,7 +25,7 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var diffLabel: UILabel!
     @IBOutlet weak var servesLabel: UILabel!
     @IBOutlet weak var nutSumCollection: UICollectionView!
- 
+    
     //Runs on load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,13 +104,13 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
     }
     
     /** Inbuilt CollectionView Method.
-        Decided how many cells to create in collection **/
+     Decided how many cells to create in collection **/
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nutrients.count
     }
     
     /** Inbuilt CollectionView Method.
-        Format cells in collection **/
+     Format cells in collection **/
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nutrientSummaryCell", for: indexPath)
@@ -121,10 +121,10 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
             let currentNut = nutrients[indexPath.row].presentationForm()
             //if has nickname, set nickname
             if currentNut.nickname != "" {
-                 name.text =  currentNut.nickname
+                name.text =  currentNut.nickname
             }
             else{
-                 name.text =  currentNut.name
+                name.text =  currentNut.name
             }
             amount.text = currentNut.unit
         }
@@ -133,6 +133,6 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         cell.layer.cornerRadius = 7
         return cell
     }
-
+    
 }
 

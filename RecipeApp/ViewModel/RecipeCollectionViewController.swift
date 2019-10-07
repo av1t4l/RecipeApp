@@ -25,11 +25,11 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     
     /** Inbuilt CollectionView Method.
-        How many sections in collection **/
+     How many sections in collection **/
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     /** Inbuilt CollectionView Method.
      How many rows in collection **/
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -37,14 +37,13 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     
     /** Inbuilt CollectionView Method.
-        format each cell in the collection **/
+     format each cell in the collection **/
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         let imageView = cell.viewWithTag(1000) as? UIImageView
         let title = cell.viewWithTag(1001) as? UILabel
-        print("in load collect")
-    
+        
         if let imageView = imageView, let title = title {
             //safely access these variables here
             let currentRecipe = viewModel.getRecipe(byIndex: indexPath.item)
@@ -57,7 +56,7 @@ class RecipeCollectionViewController: UICollectionViewController {
         return cell
     }
     
-     /** Prepares For Segue, send RecipeIndex to RecipeDetailViewcontroller **/
+    /** Prepares For Segue, send RecipeIndex to RecipeDetailViewcontroller **/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let cell  = sender as? UICollectionViewCell,
             let indexPath = self.collectionView?.indexPath(for: cell)
@@ -72,16 +71,15 @@ class RecipeCollectionViewController: UICollectionViewController {
             destination.recipeIndex = indexPath.row
             destination.bindViewModel(viewModel: viewModel)
         }
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         let tabbar = tabBarController as! TabBarViewController
         viewModel = tabbar.viewModel
         collectionView.reloadData()
-        print(viewModel.count())
     }
     
     
-
+    
 }

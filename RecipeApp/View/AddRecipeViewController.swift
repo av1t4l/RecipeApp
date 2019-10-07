@@ -8,7 +8,71 @@
 
 import UIKit
 
-class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UITextFieldDelegate {
+class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    var viewModel = RecipeCollectionViewModel()
+    var ingredientList: [Ingredient] = []
+    var methodList: [String] = []
+    
+    var pickerView1: UIPickerView!
+    var pickerView2: UIPickerView!
+    var pickerView3: UIPickerView!
+    var pickerView4: UIPickerView!
+    
+    @IBOutlet var ingredientTable: UITableView!
+    @IBOutlet var methodTable: UITableView!
+    
+    var selectedMealType: String?
+    var selectedDiff: String?
+    var selectedUnit: String?
+    var selectedIngUnit: String?
+    
+    var mealType: [String] = MealType.allCases.map{$0.rawValue}
+    var diff: [String] = Diff.allCases.map{$0.rawValue}
+    var ingUnit: [String] = Unit.allCases.map{$0.rawValue}
+    var unit:[Character] = ["m", "h"]
+    
+    var selectedMealTypeRow: Int = 0
+    var selectedDiffRow: Int = 0
+    var selectedUnitRow: Int = 0
+    var selectedIngUnitRow: Int = 0
+    
+    @IBOutlet weak var tvTitle: UITextField!
+    @IBOutlet weak var tvTag: UITextField!
+    @IBOutlet weak var tvTime: UITextField!
+    @IBOutlet weak var tvDifficulty: UITextField!
+    @IBOutlet weak var tvServes: UITextField!
+    @IBOutlet weak var tvUnit: UITextField!
+    @IBOutlet weak var tvIngredient: UITextField!
+    @IBOutlet weak var tvMethods: UITextField!
+    @IBOutlet weak var tvQuantity: UITextField!
+    @IBOutlet weak var tvIngUnit: UITextField!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if tableView == ingredientTable {
+            return ingredientList.count
+        } else {
+            return methodList.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if tableView == ingredientTable {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
+            
+            cell.textLabel?.text = ingredientList[indexPath.row].ingString()
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "methodCell", for: indexPath)
+            
+            cell.textLabel?.text = methodList[indexPath.row]
+            
+            return cell
+        }
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -126,7 +190,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @objc func donePicker() {
         view.endEditing(true)
     }
-    
+  
     var viewModel: RecipeCollectionViewModel!
     
     var pickerView1: UIPickerView!
@@ -139,37 +203,33 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     var selectedUnit: String?
     var selectedIngUnit: String?
     
-    var mealType: [String] = MealType.allCases.map{$0.rawValue}
-    var diff: [String] = Diff.allCases.map{$0.rawValue}
-    var ingUnit: [String] = Unit.allCases.map{$0.rawValue}
-    var unit:[Character] = ["m", "h"]
+    @IBAction func addIngButton(_ sender: Any) {
+        
+        if let name = tvIngredient.text, let quantity = Float(tvQuantity.text!) {
+            
+            let ingredient = Ingredient(qty: quantity, unit: Unit.allCases[selectedIngUnitRow], name: name)
+            
+            ingredientList.append(ingredient)
+            ingredientTable.reloadData()
+        }
+    }
     
-    var selectedMealTypeRow: Int = 0
-    var selectedDiffRow: Int = 0
-    var selectedUnitRow: Int = 0
-    var selectedIngUnitRow: Int = 0
     
-    @IBOutlet weak var tvTitle: UITextField!
-    @IBOutlet weak var tvTag: UITextField!
-    @IBOutlet weak var tvTime: UITextField!
-    @IBOutlet weak var tvDifficulty: UITextField!
-    @IBOutlet weak var tvServes: UITextField!
-    @IBOutlet weak var tvUnit: UITextField!
-    @IBOutlet weak var tvIngredient: UITextField!
-    @IBOutlet weak var tvMethods: UITextField!
-    @IBOutlet weak var tvQuantity: UITextField!
-    @IBOutlet weak var tvIngUnit: UITextField!
+    @IBAction func addMethodButton(_ sender: Any) {
+        if let method = tvMethods.text {
+            methodList.append(method)
+            methodTable.reloadData()
+        }
+    }
     
     var tabbar: TabBarViewController!
     
     @IBAction func btnAdd(_ sender: UIButton) {
         
-        if let tvTitle = tvTitle.text, let _ = tvTag.text, let tvTime = Int(tvTime.text!), let _ = tvUnit.text, let _ = tvDifficulty.text, let tvServes = Int(tvServes.text!), let tvIngredient = tvIngredient.text, let tvQuantity = Float(tvQuantity.text!), let _ = tvIngUnit.text, let tvMethods = tvMethods.text{
+        if let tvTitle = tvTitle.text, let _ = tvTag.text, let tvTime = Int(tvTime.text!), let _ = tvUnit.text, let _ = tvDifficulty.text, let tvServes = Int(tvServes.text!), let _ = tvIngUnit.text {
             
             let createTime = Time(time: tvTime, unit: unit[selectedUnitRow])
-            
-            let createIngredient = Ingredient(qty: tvQuantity, unit: Unit.allCases[selectedIngUnitRow], name: tvIngredient)
-            
+
             let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: [createIngredient], method: [tvMethods], image: "imagePlaceholder", nutrients: Nut)
             
             viewModel.addRecipe(recipe: recipe)
@@ -188,6 +248,12 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = "New Recipe"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        ingredientTable.dataSource = self
+        methodTable.dataSource = self
+        
         createPickerView()
         tvTime.delegate = self
         tvQuantity.delegate = self
