@@ -81,7 +81,7 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
     
     /** Round the corners for all the UI Elements **/
     func roundCorners(){
-        //round the edges of the labels
+        //round the edges of the labels 
         recipeNameLabel.layer.masksToBounds = true
         recipeNameLabel.layer.cornerRadius = 7
         recipeNameLabel.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]

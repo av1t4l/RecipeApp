@@ -11,8 +11,8 @@ import UIKit
 class IngredientsTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView! //connection to UI table
-    // private let viewModel = RecipeCollectionViewModel() //connection to model
     var ingredients:[String] = [""] //default array of ingredients
+   
     
     
     

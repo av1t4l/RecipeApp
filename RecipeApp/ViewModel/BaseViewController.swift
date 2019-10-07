@@ -18,11 +18,9 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     func bindViewModel(viewModel: RecipeCollectionViewModel) {
         self.viewModel = viewModel
     }
-    
 }

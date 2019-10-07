@@ -190,7 +190,18 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @objc func donePicker() {
         view.endEditing(true)
     }
+  
+    var viewModel: RecipeCollectionViewModel!
     
+    var pickerView1: UIPickerView!
+    var pickerView2: UIPickerView!
+    var pickerView3: UIPickerView!
+    var pickerView4: UIPickerView!
+    
+    var selectedMealType: String?
+    var selectedDiff: String?
+    var selectedUnit: String?
+    var selectedIngUnit: String?
     
     @IBAction func addIngButton(_ sender: Any) {
         
@@ -211,15 +222,15 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         }
     }
     
+    var tabbar: TabBarViewController!
+    
     @IBAction func btnAdd(_ sender: UIButton) {
         
         if let tvTitle = tvTitle.text, let _ = tvTag.text, let tvTime = Int(tvTime.text!), let _ = tvUnit.text, let _ = tvDifficulty.text, let tvServes = Int(tvServes.text!), let _ = tvIngUnit.text {
             
             let createTime = Time(time: tvTime, unit: unit[selectedUnitRow])
-            
-            
-            
-            let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "", nutrients: Nut)
+
+            let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: [createIngredient], method: [tvMethods], image: "imagePlaceholder", nutrients: Nut)
             
             viewModel.addRecipe(recipe: recipe)
             let alertController = UIAlertController(title: "Add Recipe", message: "Successfully added \(tvTitle)", preferredStyle: .alert)

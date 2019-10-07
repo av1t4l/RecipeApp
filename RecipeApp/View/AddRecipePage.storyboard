@@ -315,7 +315,7 @@
                         <outlet property="methodTable" destination="cYT-6h-axE" id="oe7-Sm-uP4"/>
                         <outlet property="tvDifficulty" destination="hQj-L8-Uiu" id="J9D-2d-7xc"/>
                         <outlet property="tvIngUnit" destination="wRf-yo-sYA" id="V4W-Vb-Ujc"/>
-                        <outlet property="tvIngredient" destination="RIK-Tf-2iJ" id="b3B-J1-2jg"/>
+                        <outlet property="tvIngredient" destination="RIK-Tf-2iJ" id="vqT-BH-sc6"/>
                         <outlet property="tvMethods" destination="4v5-oR-DUl" id="mF8-33-UpO"/>
                         <outlet property="tvQuantity" destination="qrI-23-HQa" id="Z2W-HU-jfz"/>
                         <outlet property="tvServes" destination="yDa-Ga-VNr" id="ne3-O4-UcM"/>
