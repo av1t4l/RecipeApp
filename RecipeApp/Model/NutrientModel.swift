@@ -21,7 +21,7 @@ enum Unit:String, CaseIterable {
 }
 
 //Class conatining properties of a nutrient
-class Nutrient{
+public class Nutrient: NSObject{
 
     private var name:String
     private var nickname:String = ""
@@ -79,5 +79,3 @@ class Nutrient{
         amount = amount * Float(factor)
     }
 }
-
-

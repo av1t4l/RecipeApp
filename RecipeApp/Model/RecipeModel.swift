@@ -30,9 +30,9 @@ enum DietaryReq:String{
 /** Struct for creating a cooking time **/
 struct Time{
     var cookingTime:Int
-    var cookTimeUnit:Character
+    var cookTimeUnit:String
 
-    init(time:Int, unit:Character){
+    init(time:Int, unit:String){
         self.cookingTime = time
         self.cookTimeUnit = unit
     }
@@ -67,32 +67,32 @@ struct Ingredient{
         return ingString
     }
 }
-
-/** Struct to describe parts of a recipe **/
-struct Recipe {
-     var title:String
-     var mealTypes = [MealType]()
-     var dietaryReqs = [DietaryReq]()
-     var time:Time
-     var difficulty:Diff
-     var serves:Int
-     var ingredients = [Ingredient]()
-     var method = [String]()
-     var image:String
-     var nutrients = [Nutrient]()
-    
-    init(title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[String], image:String, nutrients:[Nutrient]){
-        self.title = title
-        self.mealTypes = mealTypes
-        self.dietaryReqs = dietaryReqs
-        self.time = time
-        self.difficulty = diff
-        self.serves = serves
-        self.ingredients = ingredients
-        self.method = method
-        self.image = image
-        self.nutrients = nutrients
-        
-    }
-
-}
+//
+///** Struct to describe parts of a recipe **/
+//struct Recipe {
+//     var title:String
+//     var mealTypes = [MealType]()
+//     var dietaryReqs = [DietaryReq]()
+//     var time:Time
+//     var difficulty:Diff
+//     var serves:Int
+//     var ingredients = [Ingredient]()
+//     var method = [String]()
+//     var image:String
+//     var nutrients = [Nutrient]()
+//    
+//    init(title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[String], image:String, nutrients:[Nutrient]){
+//        self.title = title
+//        self.mealTypes = mealTypes
+//        self.dietaryReqs = dietaryReqs
+//        self.time = time
+//        self.difficulty = diff
+//        self.serves = serves
+//        self.ingredients = ingredients
+//        self.method = method
+//        self.image = image
+//        self.nutrients = nutrients
+//        
+//    }
+//
+//}

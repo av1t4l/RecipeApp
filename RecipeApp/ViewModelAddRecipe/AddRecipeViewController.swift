@@ -10,7 +10,7 @@ import UIKit
 
 class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var viewModel = RecipeCollectionViewModel()
+    var viewModel = AddRecipeViewModel()
     var ingredientList: [Ingredient] = []
     var methodList: [String] = []
     
@@ -30,7 +30,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     var mealType: [String] = MealType.allCases.map{$0.rawValue}
     var diff: [String] = Diff.allCases.map{$0.rawValue}
     var ingUnit: [String] = Unit.allCases.map{$0.rawValue}
-    var unit:[Character] = ["m", "h"]
+    var unit:[String] = ["m", "h"]
     
     var selectedMealTypeRow: Int = 0
     var selectedDiffRow: Int = 0
@@ -210,17 +210,14 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         }
     }
     
-    var tabbar: TabBarViewController!
-    
     @IBAction func btnAdd(_ sender: UIButton) {
         
         if let tvTitle = tvTitle.text, let _ = tvTag.text, let tvTime = Int(tvTime.text!), let _ = tvUnit.text, let _ = tvDifficulty.text, let tvServes = Int(tvServes.text!), let _ = tvIngUnit.text {
             
             let createTime = Time(time: tvTime, unit: unit[selectedUnitRow])
 
-            let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "imagePlaceholder", nutrients: Nut)
+            viewModel.addRecipe(title: tvTitle, mealType: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, difficulty: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "imagePlaceholder", nutrients: Nut)
             
-            viewModel.addRecipe(recipe: recipe)
             let alertController = UIAlertController(title: "Add Recipe", message: "Successfully added \(tvTitle)", preferredStyle: .alert)
             let doneButton = UIAlertAction(title: "Done", style: .default, handler: {(action) -> Void in print("Done")})
             
@@ -228,7 +225,6 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
             
             self.navigationController!.present(alertController, animated: true, completion: nil)
             print("Got here")
-            print(viewModel.count())
         }
         
     }
@@ -247,17 +243,12 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         tvQuantity.delegate = self
         tvServes.delegate = self
         
-        let tabbar = tabBarController as! TabBarViewController
-        viewModel = tabbar.viewModel
+//        let tabbar = tabBarController as! TabBarViewController
+//        viewModel = tabbar.viewModel
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.clearAllTexts()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        let tabbar = tabBarController as! TabBarViewController
-        tabbar.viewModel = viewModel
     }
     
     let Nut = [Nutrient(name:"Energy", amount:30, unitName:Unit.g), Nutrient(name:"Protien", amount:4, unitName:Unit.g), Nutrient(name:"Fat", amount:3, unitName:Unit.g), Nutrient(name:"Fibre", amount:20, unitName:Unit.g), Nutrient(name:"Sodium", amount:300, unitName:Unit.mg) ]

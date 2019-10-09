@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		1E232AA8232E6916007BBEBE /* AddRecipePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */; };
 		1E753D9A232F6820006B4481 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E753D99232F6820006B4481 /* AddRecipeViewController.swift */; };
+		1E94C0D9234CE2FD00C82BF9 /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94C0D8234CE2FD00C82BF9 /* AddRecipeViewModel.swift */; };
 		1ECEA3C9234B1B3B0066834A /* RecipeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEA3C7234B1B3B0066834A /* RecipeApp.xcdatamodeld */; };
-		1ECEA3CE234B1EFB0066834A /* Nutrient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEA3CA234B1EFB0066834A /* Nutrient+CoreDataClass.swift */; };
-		1ECEA3CF234B1EFB0066834A /* Nutrient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEA3CB234B1EFB0066834A /* Nutrient+CoreDataProperties.swift */; };
 		1ECEA3D0234B1EFB0066834A /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEA3CC234B1EFB0066834A /* Recipe+CoreDataClass.swift */; };
 		1ECEA3D1234B1EFB0066834A /* Recipe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEA3CD234B1EFB0066834A /* Recipe+CoreDataProperties.swift */; };
-		1EEB5B6B23375BE700C8F326 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */; };
 		281BED3F23374A71005E71F3 /* RecipeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BED3E23374A71005E71F3 /* RecipeAppUITests.swift */; };
 		2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99B232F4F680092C324 /* BaseViewController.swift */; };
 		2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99F233075700092C324 /* ServesPopContentController.swift */; };
@@ -45,14 +43,11 @@
 
 /* Begin PBXFileReference section */
 		1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddRecipePage.storyboard; sourceTree = "<group>"; };
-		1E753D99232F6820006B4481 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddRecipeViewController.swift; path = ../View/AddRecipeViewController.swift; sourceTree = "<group>"; };
-		1E987305233C357D003E172E /* FormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
+		1E753D99232F6820006B4481 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
+		1E94C0D8234CE2FD00C82BF9 /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
 		1ECEA3C8234B1B3B0066834A /* RecipeApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipeApp.xcdatamodel; sourceTree = "<group>"; };
-		1ECEA3CA234B1EFB0066834A /* Nutrient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nutrient+CoreDataClass.swift"; sourceTree = "<group>"; };
-		1ECEA3CB234B1EFB0066834A /* Nutrient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nutrient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1ECEA3CC234B1EFB0066834A /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1ECEA3CD234B1EFB0066834A /* Recipe+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		281BED3C23374A71005E71F3 /* RecipeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		281BED3E23374A71005E71F3 /* RecipeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAppUITests.swift; sourceTree = "<group>"; };
 		281BED4023374A71005E71F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E94C0D7234CE2B800C82BF9 /* ViewModelAddRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				1E753D99232F6820006B4481 /* AddRecipeViewController.swift */,
+				1E94C0D8234CE2FD00C82BF9 /* AddRecipeViewModel.swift */,
+			);
+			path = ViewModelAddRecipe;
+			sourceTree = "<group>";
+		};
 		281BED3D23374A71005E71F3 /* RecipeAppUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +127,7 @@
 		28F6DCC12310D44A00C4A6AC /* RecipeApp */ = {
 			isa = PBXGroup;
 			children = (
+				1E94C0D7234CE2B800C82BF9 /* ViewModelAddRecipe */,
 				28F6DCD62310D47A00C4A6AC /* ViewModel */,
 				28F6DCD52310D45A00C4A6AC /* View */,
 				28F6DCD42310D45200C4A6AC /* Model */,
@@ -136,8 +141,6 @@
 		28F6DCD42310D45200C4A6AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1ECEA3CA234B1EFB0066834A /* Nutrient+CoreDataClass.swift */,
-				1ECEA3CB234B1EFB0066834A /* Nutrient+CoreDataProperties.swift */,
 				1ECEA3CC234B1EFB0066834A /* Recipe+CoreDataClass.swift */,
 				1ECEA3CD234B1EFB0066834A /* Recipe+CoreDataProperties.swift */,
 				28E4B0CE2318999F00459557 /* NutrientModel.swift */,
@@ -160,7 +163,6 @@
 		28F6DCD62310D47A00C4A6AC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1E753D99232F6820006B4481 /* AddRecipeViewController.swift */,
 				28F6DCC42310D44A00C4A6AC /* RecipeDetailViewController.swift */,
 				28E4B0D22318C1B900459557 /* RecipeCollectionViewController.swift */,
 				28E4B0D42318C31700459557 /* RecipeCollectionViewModel.swift */,
@@ -170,8 +172,6 @@
 				287833B0232E6E0B00D7975C /* MethodTableViewController.swift */,
 				2846E99B232F4F680092C324 /* BaseViewController.swift */,
 				2846E99F233075700092C324 /* ServesPopContentController.swift */,
-				1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */,
-				1E987305233C357D003E172E /* FormTableViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -289,7 +289,6 @@
 				2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */,
 				1ECEA3D0234B1EFB0066834A /* Recipe+CoreDataClass.swift in Sources */,
 				287833A7232E05DD00D7975C /* SwipeController.swift in Sources */,
-				1ECEA3CE234B1EFB0066834A /* Nutrient+CoreDataClass.swift in Sources */,
 				1ECEA3D1234B1EFB0066834A /* Recipe+CoreDataProperties.swift in Sources */,
 				28E4B0CF2318999F00459557 /* NutrientModel.swift in Sources */,
 				28E4B0D72318C4D200459557 /* RecipeManager.swift in Sources */,
@@ -297,13 +296,12 @@
 				28E4B0D32318C1B900459557 /* RecipeCollectionViewController.swift in Sources */,
 				1ECEA3C9234B1B3B0066834A /* RecipeApp.xcdatamodeld in Sources */,
 				28E4B0D123189B7900459557 /* RecipeModel.swift in Sources */,
-				1ECEA3CF234B1EFB0066834A /* Nutrient+CoreDataProperties.swift in Sources */,
 				28F6DCC52310D44A00C4A6AC /* RecipeDetailViewController.swift in Sources */,
+				1E94C0D9234CE2FD00C82BF9 /* AddRecipeViewModel.swift in Sources */,
 				287833AF232E6DD500D7975C /* IngredientsTableViewController.swift in Sources */,
 				28E4B0D52318C31700459557 /* RecipeCollectionViewModel.swift in Sources */,
 				28F6DCC32310D44A00C4A6AC /* AppDelegate.swift in Sources */,
 				287833B1232E6E0B00D7975C /* MethodTableViewController.swift in Sources */,
-				1EEB5B6B23375BE700C8F326 /* TabBarViewController.swift in Sources */,
 				2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
