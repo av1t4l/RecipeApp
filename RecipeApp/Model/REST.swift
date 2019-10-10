@@ -10,58 +10,78 @@ import Foundation
 import Alamofire
 
 protocol REST_Delegate: class {
-    func didGetNutrients()
+    func didGetNutrients(nutrients: [Nutrient], recipe: Recipe)
+}
+
+//Had to use extension to AlamoFire because by default it sends cached data that was messing with the API interaction (Etag)
+/** Credit: https://stackoverflow.com/questions/32199494/how-to-disable-caching-in-alamofire **/
+extension Alamofire.SessionManager{
+    @discardableResult
+    open func requestWithoutCache(
+        _ url: URLConvertible,
+        method: HTTPMethod = .get,
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = URLEncoding.default,
+        headers: HTTPHeaders? = nil)// also you can add URLRequest.CachePolicy here as parameter
+        -> DataRequest
+    {
+        do {
+            var urlRequest = try URLRequest(url: url, method: method, headers: headers)
+            urlRequest.cachePolicy = .reloadIgnoringCacheData // <<== Cache disabled
+            let encodedURLRequest = try encoding.encode(urlRequest, with: parameters)
+            return request(encodedURLRequest)
+        } catch {
+            // TODO: find a better way to handle error
+            print(error)
+            return request(URLRequest(url: URL(string: "http://example.com/wrong_request")!))
+        }
+    }
 }
 
 class REST_Request{
     weak var delegate: REST_Delegate?
     private var nutrients:[Nutrient] = []
-    private let session = URLSession.shared
+    private var recipe:Recipe? = nil
     private let baseURL:String = "https://api.edamam.com/api/nutrition-details?app_id=0a4f449e&app_key=114c5eaa049af50df15413d088e2168e"
-    private let param_ingr:String = "ingr="
-    
-    func getNutrients(ings:[String], yield:String) -> [Nutrient]{
-        //let url = baseURL + param_ingr + ingrStr
+
+    /** Make POST request to 'edamam' API with recipe info passed in.
+        Will call delegate to return processed response data **/
+    func getNutrients(recipe: Recipe) -> [Nutrient]{
+        self.recipe = recipe
         let url = baseURL
         guard let escapedURL = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
             return []
         }
         
+        //create string array to post to API
+        var strIngs: [String] = []
+        for i in recipe.ingredients{
+            strIngs.append(i.ingString())
+        }
         
+        //set yield (Servings) and ingredients for API call
         if let url = URL(string: escapedURL){
-//            var request = URLRequest(url:url)
-//            request.httpMethod = "POST"
             let parameters: [String: Any] = [
-                "yield": yield,
-                "ingr": ings//[
-//                    "1 fresh ham, about 18 pounds, prepared by your butcher (See Step 1)",
-//                    "7 cloves garlic, minced",
-//                    "1 tablespoon caraway seeds, crushed",
-//                    "4 teaspoons salt",
-//                    "Freshly ground pepper to taste",
-//                    "1 teaspoon olive oil",
-//                    "1 medium onion, peeled and chopped",
-//                    "3 cups sourdough rye bread, cut into 1/2-inch cubes",
-//                    "1 1/4 cups coarsely chopped pitted prunes",
-//                    "1 1/4 cups coarsely chopped dried apricots",
-//                    "1 large tart apple, peeled, cored and cut into 1/2-inch cubes",
-//                    "2 teaspoons chopped fresh rosemary",
-//                    "1 egg, lightly beaten",
-//                    "1 cup chicken broth, homemade or low-sodium canned"
-                //]
+                "yield": recipe.serves,
+                "ingr": strIngs
             ]
-        
-            Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            
+            //make API request using AlamoFire and the declared parts of the request
+            Alamofire.SessionManager.default.requestWithoutCache(url,
+                              method: .post,
+                              parameters: parameters,
+                              encoding: JSONEncoding.default,
+                              headers: nil)
+                .validate(statusCode: 200..<300) //check valid response
                 .responseJSON { response in
-                    print(response)
-                    
+                    //capture JSON response
                     if let result = response.result.value {
                         let JSON = result as! NSDictionary
-                        print(JSON)
                         
+                        //only care about the nutrients part of the response
                         let totalNutr = JSON["totalNutrients"] as! NSDictionary
                         var newNutrients = [Nutrient]()
-//
+                        
                         //iterate over wanted nutrients and keys base on API to create nutrient objects based on data
                         for n in nutrientsKey {
                             var nutr = totalNutr[n.key] as! [String:Any]
@@ -77,59 +97,19 @@ class REST_Request{
                                 self.nutrients = newNutrients
                             }
                         }
+                        self.connectBack()
                     }
                   
                 }
-            //getData(request: request, element: "totalNutrients")
-        }
+            }
         return nutrients
     }
     
-    private func getData(request: URLRequest, element:String){
-        
-        let task = session.dataTask(with: request,
-            completionHandler: {
-                data, response, downloadError in
-                
-                if let error = downloadError {
-                    //if error print to console
-                    print(error)
-                }else{
-                    //will get back dataobject that will contain response
-                    //deserialise the JSON
-                    var parsedResult: Any! = nil
-                    do {
-                        parsedResult = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    }catch{print()}
-                    
-                    let result = parsedResult as! [String:Any]
-                    
-                    //all nutrients returned from the API
-                    let allNutrients = result[element] as! [String:Any]
-                   
-                    //to hold created Nutrients object from API data
-                    var newNutrients = [Nutrient]()
-                    
-                    //iterate over wanted nutrients and keys base on API to create nutrient objects based on data
-                    for n in nutrientsKey {
-                        var nutr = allNutrients[n.key] as! [String:Any]
-                        let name = nutr["label"] as! String
-                        let rawUnit = nutr["unit"] as! String
-                        
-                        //using NS number becuase value set by JSON decoder
-                        if let amt = nutr["quantity"] as? NSNumber {
-                            let amount = amt.floatValue
-                            let newNutrient = Nutrient(name: name, amount: amount, unitName: Unit(rawValue: rawUnit)!)
-                            newNutrients.append(newNutrient)
-                            print(newNutrient.presentationForm())
-                            self.nutrients = newNutrients
-                        }
-                    }
-                   
-                }
-        })
-        task.resume()
+    func connectBack(){
+        //will call the function in Recipe manager to send back the data
+        delegate?.didGetNutrients(nutrients: nutrients, recipe: recipe!)
     }
+    
 }
 
 
@@ -144,24 +124,3 @@ var nutrientsKey:[String:String] = [
     "PROCNT": "Protien",
     "NA": "Sodium"
 ]
-
-struct APIObject : Codable {
-    let label : String?
-    let quantity : Double?
-    let unit : String?
-    
-    enum CodingKeys: String, CodingKey {
-        
-        case label = "label"
-        case quantity = "quantity"
-        case unit = "unit"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        label = try values.decodeIfPresent(String.self, forKey: .label)
-        quantity = try values.decodeIfPresent(Double.self, forKey: .quantity)
-        unit = try values.decodeIfPresent(String.self, forKey: .unit)
-    }
-    
-}

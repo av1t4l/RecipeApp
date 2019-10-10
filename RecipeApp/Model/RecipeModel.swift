@@ -61,6 +61,9 @@ struct Ingredient{
     
     func ingString() -> String{
         let qty = String(self.qty)
+        //need to convert from abrv to full word for API to work, will look good on screen too
+        let unitVal = self.unit.rawValue //gets the abrv
+        let unitStr = UnitString(rawValue: unitVal) //uses second enum to look up abbrv to get full word
         
         let ingString = "\(qty) \(self.unit.rawValue) \(self.name)"
         return ingString

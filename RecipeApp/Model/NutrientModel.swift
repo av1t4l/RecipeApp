@@ -20,6 +20,17 @@ enum Unit:String, CaseIterable {
     case kcal
     case other
 }
+enum UnitString:String, CaseIterable {
+    case g = "grams"
+    case mg = "milligrams"
+    case L = "litres"
+    case ml = "millilitres"
+    case ts = "teaspoons"
+    case tbs = "tablespoons"
+    case cups = "cups"
+    case kcal = "calories"
+    case other = "other"
+}
 
 //Class conatining properties of a nutrient
 class Nutrient{
