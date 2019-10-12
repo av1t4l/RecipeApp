@@ -227,8 +227,6 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
             alertController.addAction(doneButton)
             
             self.navigationController!.present(alertController, animated: true, completion: nil)
-            print("Got here")
-            print(viewModel.count())
         }
         
     }
