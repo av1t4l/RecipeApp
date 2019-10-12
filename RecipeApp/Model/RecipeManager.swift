@@ -69,8 +69,6 @@ class RecipeManager{
         recipes.append(defRecipe2)
         recipes.append(defRecipe3)
         
-    }
-    
     func addRecipe(recipe: Recipe) {
         print("in add recipe")
         //will call API to get nutrient info the the delegator will pass to didGetNutrients and add to the recipe array

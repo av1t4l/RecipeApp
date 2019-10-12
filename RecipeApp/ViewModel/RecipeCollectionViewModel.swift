@@ -22,7 +22,7 @@ struct RecipeCollectionViewModel{
     
     /** Returns recipe formatted fro View **/
     func getRecipe(byIndex index: Int) -> (title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient]){
-    
+
         let recipe = manager.recipes[index]
         let image = UIImage(named: recipe.image)
         var ingredients = [String]()
@@ -65,7 +65,7 @@ struct RecipeCollectionViewModel{
         }
         return nutrients
     }
-     /** Format nutrients for the View but with the new values based on users serving input **/
+    /** Format nutrients for the View but with the new values based on users serving input **/
     func getUpdatedNutrientsForRecipe(index: Int, factor:Int) -> [Nutrient]{
         let recipe = manager.recipes[index]
         var nutrients = [Nutrient]()

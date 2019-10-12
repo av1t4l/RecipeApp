@@ -44,6 +44,7 @@
 		0A50B7617A683B73FB203DC0 /* Pods-RecipeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.release.xcconfig"; path = "Target Support Files/Pods-RecipeApp/Pods-RecipeApp.release.xcconfig"; sourceTree = "<group>"; };
 		1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddRecipePage.storyboard; sourceTree = "<group>"; };
 		1E753D99232F6820006B4481 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddRecipeViewController.swift; path = ../View/AddRecipeViewController.swift; sourceTree = "<group>"; };
+		1E987305233C357D003E172E /* FormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		221F3854E7914BE57520C890 /* Pods_RecipeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		281BED3C23374A71005E71F3 /* RecipeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +166,7 @@
 				2846E99B232F4F680092C324 /* BaseViewController.swift */,
 				2846E99F233075700092C324 /* ServesPopContentController.swift */,
 				1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */,
+				1E987305233C357D003E172E /* FormTableViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -343,6 +345,7 @@
 				1E753D9A232F6820006B4481 /* AddRecipeViewController.swift in Sources */,
 				2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */,
 				287833A7232E05DD00D7975C /* SwipeController.swift in Sources */,
+				1E987306233C357D003E172E /* FormTableViewController.swift in Sources */,
 				28E4B0CF2318999F00459557 /* NutrientModel.swift in Sources */,
 				28E4B0D72318C4D200459557 /* RecipeManager.swift in Sources */,
 				28EFB92323436DDE00C9EC81 /* REST.swift in Sources */,

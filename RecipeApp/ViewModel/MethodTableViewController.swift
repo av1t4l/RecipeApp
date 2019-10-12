@@ -9,8 +9,7 @@
 import UIKit
 
 class MethodTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
-   
-   
+
     @IBOutlet weak var tableView: UITableView! //connection to view
     //private var viewModel: RecipeCollectionViewModel! //connection to model
     var method:[String] = [""] //default method array

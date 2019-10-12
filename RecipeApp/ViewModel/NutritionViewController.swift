@@ -33,7 +33,7 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         popController?.modalPresentationStyle = .popover
         
         popController?.delegate = self //set delegate
-       
+        
         //configure the popover and size it
         if let popoverPresentationController = popController?.popoverPresentationController {
             popoverPresentationController.permittedArrowDirections = .up
@@ -61,7 +61,7 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         
     }
-    //built in function 
+    //built in function
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return true
     }
@@ -70,7 +70,7 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         let recipe = viewModel.getRecipe(byIndex: recipeIndex) //get the current recipe
         
-       
+        
         //Set the values in the UI from the values in the model
         imageView.image = recipe.image
         titleLabel.text = recipe.title
@@ -106,13 +106,13 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     /** Inbuilt TableView Method.
-        Decided how many rows to create in table **/
+     Decided how many rows to create in table **/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nutrients.count
     }
     
     /** Inbuilt TableView Method.
-        Format cells in table **/
+     Format cells in table **/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //decide if cell should be Nutrient or SubNutrient type
         let cell:UITableViewCell
@@ -132,17 +132,17 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         return cell
     }
-
-
+    
+    
 }
 
-//Allows this class to get data from the popup 
+//Allows this class to get data from the popup
 extension NutritionViewController:ServesPopDelegate {
-   func servesContent(controller: ServesPopContentController, didselectItem val: String) {
-      servesButton.setTitle(val, for: .normal)
+    func servesContent(controller: ServesPopContentController, didselectItem val: String) {
+        servesButton.setTitle(val, for: .normal)
         //update the amount here
         nutrients = viewModel.getUpdatedNutrientsForRecipe(index: recipeIndex, factor: Int(val) ?? 0)
         tableView.reloadData()
-    
+        
     }
 }
