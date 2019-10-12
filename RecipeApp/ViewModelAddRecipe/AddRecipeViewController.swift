@@ -11,7 +11,7 @@ import UIKit
 class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     var viewModel = AddRecipeViewModel()
-    var ingredientList: [Ingredient] = []
+    var ingredientList: [IngredientMO] = []
     var methodList: [String] = []
     
     var pickerView1: UIPickerView!
@@ -195,7 +195,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
         if let name = tvIngredient.text, let quantity = Float(tvQuantity.text!) {
             
-            let ingredient = Ingredient(qty: quantity, unit: Unit.allCases[selectedIngUnitRow], name: name)
+            let ingredient = IngredientMO(qty: quantity, unit: Unit.allCases[selectedIngUnitRow], name: name)
             
             ingredientList.append(ingredient)
             ingredientTable.reloadData()

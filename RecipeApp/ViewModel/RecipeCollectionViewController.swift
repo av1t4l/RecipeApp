@@ -19,7 +19,10 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel = RecipeCollectionViewModel()
     }
+    
     
     /** Inbuilt CollectionView Method.
      How many sections in collection **/

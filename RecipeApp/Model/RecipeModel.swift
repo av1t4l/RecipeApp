@@ -48,7 +48,7 @@ enum Diff:String,  CaseIterable{
 }
 
 /** Struct for describe parts of an ingredient **/
-struct Ingredient{
+struct IngredientMO{
     var qty:Float
     var unit:Unit
     var name:String

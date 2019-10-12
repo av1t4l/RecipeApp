@@ -45,7 +45,7 @@ struct RecipeCollectionViewModel{
         
         let nutrients = self.getNutrientsForRecipe(byIndex: index)
         
-        return(title: recipe.title!, mealTypes:types, dietaryReqs: dietReqs, time:time , diff: recipe.diff.rawValue, serves:serves ,ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
+        return(title: recipe.title!, mealTypes:types, dietaryReqs: dietReqs, time:time , diff: recipe.difficulty!/*recipe.diff.rawValue*/, serves:serves ,ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
     }
     
     /** Convert [Nutrient] to array of tupe of strings to use in the view controller **/

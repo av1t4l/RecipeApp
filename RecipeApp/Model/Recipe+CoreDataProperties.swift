@@ -18,7 +18,7 @@ extension Recipe {
     }
 
     @NSManaged public var title: String?
-    @NSManaged public var mealTypes: NSObject?
+    @NSManaged public var mealTypes: NSArray?   
     @NSManaged public var dietaryReqs: NSObject?
     @NSManaged public var cookTime: Int64
     @NSManaged public var cookTimeUnit: String?
@@ -38,9 +38,9 @@ extension Recipe {
         }
     }
     
-    var ingredient: [Ingredient] {
+    var ingredient: [IngredientMO] {
         get{
-            return ingredients as? Array<Ingredient> ?? []
+            return ingredients as? Array<IngredientMO> ?? []
         }
         set{
             ingredients = newValue as NSArray
@@ -75,18 +75,18 @@ extension Recipe {
         }
     }
     
-    var diff: Diff {
-        get{
-            self.willAccessValue(forKey: "difficulty")
-            let result = self.primitiveValue(forKey: "difficulty") as! String
-            self.didAccessValue(forKey: "difficulty")
-            return Diff(rawValue: result) ?? Diff.Easy
-        }
-        set{
-            let primitiveValue = newValue.rawValue
-            self.willChangeValue(forKey: "difficulty")
-            self.setPrimitiveValue(primitiveValue, forKey: "difficulty")
-            self.didChangeValue(forKey: "difficulty")
-        }
-    }
+//    var diff: Diff {
+//        get{
+//            self.willAccessValue(forKey: "difficulty")
+//            let result = self.primitiveValue(forKey: "difficulty") as! String
+//            self.didAccessValue(forKey: "difficulty")
+//            return Diff(rawValue: result) ?? Diff.Easy
+//        }
+//        set{
+//            let primitiveValue = newValue.rawValue
+//            self.willChangeValue(forKey: "difficulty")
+//            self.setPrimitiveValue(primitiveValue, forKey: "difficulty")
+//            self.didChangeValue(forKey: "difficulty")
+//        }
+//    }
 }
