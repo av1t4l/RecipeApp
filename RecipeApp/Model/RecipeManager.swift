@@ -10,153 +10,50 @@ import Foundation
 import CoreData
 import UIKit
 
-class RecipeManager{
+struct RecipeManager{
     var recipes = [Recipe]()
-    private let apiCall = REST_Request()
+    //private let apiCall = REST_Request()
     
-    var title:String
-    var mealTypes:[MealType] = []
-    var dietaryReqs:[DietaryReq] = []
-    var time:Time = Time(time: 10, unit: "m")
-    var diff:Diff = Diff.Easy
-    var serves:Int = 0
-    var Ings:[Ingredient] = []
-    var Method:[String] = []
+//    var title:String
+//    var mealTypes:[MealType] = []
+//    var dietaryReqs:[DietaryReq] = []
+//    var time:Time = Time(time: 10, unit: "m")
+//    var diff:Diff = Diff.Easy
+//    var serves:Int = 0
+//    var Ings:[Ingredient] = []
+//    var Method:[String] = []
     
     static let shared = RecipeManager()
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    let managedContext: NSManagedObjectContext
-    var recipes: [Recipe] = []
+    //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//
+//    let managedContext: NSManagedObjectContext
+//    //var recipes: [Recipe] = []
+    var CD = CoreDataFunctions()
     
     init(){
         print("making defaults")
-        managedContext = appDelegate.persistentContainer.viewContext
-        print(managedContext)
-        self.deleteAllData("Recipe")
-        makeDefaults()
-        loadRecipes()
-    }
-    private func createIngredEntity(name:String, qty:Float, unit:String ) -> Ingredient{
-        let ingredientEntity = NSEntityDescription.entity(forEntityName: "Ingredient", in: managedContext)!
-        let nsIngredient = NSManagedObject(entity: ingredientEntity, insertInto:managedContext) as! Ingredient
+        //managedContext = appDelegate.persistentContainer.viewContext
+        //self.deleteAllData("Recipe")
+        CD.deleteAllData("Recipe")
+//        makeDefaults()
+//        loadRecipes()
         
-        nsIngredient.setValue(qty, forKeyPath:"qty")
-        nsIngredient.setValue(unit, forKeyPath:"unit")
-        nsIngredient.setValue(name, forKeyPath:"name")
+    }
     
-        return nsIngredient
-    }
-    private func createNutrientEntity(nutrient:NutrientMO) -> Nutrient{
     
-        let nutrientEntity = NSEntityDescription.entity(forEntityName: "Nutrient", in: managedContext)!
-        let nsNutrient = NSManagedObject(entity: nutrientEntity, insertInto:managedContext) as! Nutrient
-        
-        
-        nsNutrient.setValue(nutrient.getName(), forKeyPath:"name")
-        nsNutrient.setValue(nutrient.getNickame(), forKeyPath:"nickname")
-        nsNutrient.setValue(nutrient.getAmount(), forKeyPath:"amount")
-        nsNutrient.setValue(nutrient.getStaticAmount(), forKeyPath:"staticAmount")
-        nsNutrient.setValue(nutrient.getUnitName().rawValue, forKeyPath:"unitName")
-        nsNutrient.setValue(nutrient.getisSubNutrient(), forKeyPath:"subNutrient") //set is a subnutrient
-        
-//        var subNutrs = nutrient.getSubNutrients()
-//        for sn in subNutrs{
-//
-//        }
-        //nsNutrient.setValue(, forKeyPath:"subNutrients") //set subnutrients array
-        
-        return nsNutrient
-    }
-    private func createRecipe(title: String, mealType: [MealType], dietaryReqs: [DietaryReq], time: Time, difficulty1: String, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [NutrientMO]) -> Recipe{
-        
-        let recipeEntity = NSEntityDescription.entity(forEntityName: "Recipe", in: managedContext)!
-       
-        let nsRecipe = NSManagedObject(entity: recipeEntity, insertInto: managedContext) as! Recipe
-       
-        //iterate over ingredients, create NSobjects
-        for i in ingredients {
-            let temp = createIngredEntity(name: i.name, qty:i.qty, unit:i.unit.rawValue)
-            let addIng = nsRecipe.mutableSetValue(forKey: "ingredients")
-            addIng.add(temp)
-        }
-        
-        for n in nutrients{
-            let temp = createNutrientEntity(nutrient: n)
-            let addNutr = nsRecipe.mutableSetValue(forKey: "nutrients")
-            addNutr.add(temp)
-        }
-        
-        nsRecipe.setValue(title, forKeyPath: "title")
-        //nsRecipe.setValue(mealType, forKeyPath: "mealTypes")
-//        nsRecipe.setValue(dietaryReqs, forKeyPath: "dietaryReqs")
-        nsRecipe.setValue(time.cookingTime, forKeyPath: "cookTime")
-        nsRecipe.setValue(time.cookTimeUnit, forKeyPath: "cookTimeUnit")
-        nsRecipe.setValue(difficulty1, forKeyPath: "difficulty")
-        nsRecipe.setValue(serves, forKeyPath: "serves")
-        nsRecipe.setValue(method, forKeyPath: "method")
-        nsRecipe.setValue(image, forKeyPath: "image")
-//        nsRecipe.setValue(nutrients, forKeyPath: "nutrients")
-        
-        return nsRecipe
-    func addRecipe(recipe: Recipe) {
-        print("in add recipe")
-        //will call API to get nutrient info the the delegator will pass to didGetNutrients and add to the recipe array
-        apiCall.getNutrients(recipe:recipe)
-    }
-        
-
-
-}
+    
+  
     
     mutating func addRecipe(title: String, mealType: [MealType], dietaryReqs: [DietaryReq], time: Time, difficulty: Diff, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [NutrientMO]){
         
-        let nsRecipe = createRecipe(title: title, mealType: mealType, dietaryReqs: dietaryReqs, time: time, difficulty1: difficulty.rawValue, serves: serves, ingredients: ingredients, method: method, image: image, nutrients: nutrients)
+        let nsRecipe = CD.createRecipe(title: title, mealType: mealType, dietaryReqs: dietaryReqs, time: time, difficulty1: difficulty.rawValue, serves: serves, ingredients: ingredients, method: method, image: image, nutrients: nutrients)
         
         recipes.append(nsRecipe)
         
-        do{
-            try managedContext.save()
-        }catch  {
-            fatalError("Could not save: \(error)")
-        }
-
-
-extension RecipeManager: REST_Delegate{
-    func didGetNutrients(nutrients: [Nutrient], recipe: Recipe) {
-        var tempRecipe = recipe
-        tempRecipe.nutrients = nutrients //updating the nutrients to be value API call returned
-        print("adding recipe \(tempRecipe)")
-        recipes.append(tempRecipe)
+       
     }
+
     
-    private mutating func loadRecipes(){
-        do{
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Recipe")
-            let result = try managedContext.fetch(fetchRequest)
-            
-            recipes = result as! [Recipe]
-//            var ingArray = [IngredientMO]()
-//            for r in result{
-//                let recipe = r as! Recipe
-//                for i in recipe.ingredients! {
-//                    let ing = i as! Ingredient
-//                    let temp =  IngredientMO(qty: ing.qty, unit: Unit(rawValue: ing.unit!)!, name: ing.name! )
-//                    ingArray.append(temp)
-//                }
-//
-//            }
-//            for r in recipes{
-//                let ings = r.value(forKey: "ingredients") as! [Ingredient]
-//                for i in ings{
-//                    let temp =  IngredientMO(qty: i.qty, unit: Unit(rawValue: i.unit!)!, name: i.name! )
-//                }
-//            }
-            
-        }catch let error as NSError{
-            print("Could not load: \(error), \(error.userInfo)")
-        }
-    }
     
     private mutating func makeDefaults(){
         //test nutrient value
@@ -184,18 +81,20 @@ extension RecipeManager: REST_Delegate{
         self.addRecipe(title:"Rock Cakes", mealType: [MealType.snack], dietaryReqs:[DietaryReq.vegan], time:Time(time:40, unit:"m"), difficulty: Diff.Medium, serves:5, ingredients: Ings3, method:Method3, image: "rock-cakes", nutrients: Nut2)
     }
     
-    func deleteAllData(_ entity:String) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-        fetchRequest.returnsObjectsAsFaults = false
-        do {
-            let results = try managedContext.fetch(fetchRequest)
-            for object in results {
-                guard let objectData = object as? NSManagedObject else {continue}
-                managedContext.delete(objectData)
-            }
-        } catch let error {
-            print("Detele all data in \(entity) error :", error)
-        }
-    }
 
-}
+    
+//    func addRecipe(recipe: Recipe) {
+//        print("in add recipe")
+//        //will call API to get nutrient info the the delegator will pass to didGetNutrients and add to the recipe array
+//        apiCall.getNutrients(recipe:recipe)
+//    }
+
+}//close recipe manager class
+//extension RecipeManager: REST_Delegate{
+//    func didGetNutrients(nutrients: [NutrientMO], recipe: RecipeMO) {
+//        var tempRecipe = recipe
+//        tempRecipe.nutrients = nutrients //updating the nutrients to be value API call returned
+//        print("adding recipe \(tempRecipe)")
+//        recipes.append(tempRecipe)
+//    }
+//}

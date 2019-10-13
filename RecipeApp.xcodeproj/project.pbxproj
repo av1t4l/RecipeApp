@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		281BED3F23374A71005E71F3 /* RecipeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BED3E23374A71005E71F3 /* RecipeAppUITests.swift */; };
 		2839770B2352DF99002DA0BC /* Nutrient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283977092352DF99002DA0BC /* Nutrient+CoreDataClass.swift */; };
 		2839770C2352DF99002DA0BC /* Nutrient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839770A2352DF99002DA0BC /* Nutrient+CoreDataProperties.swift */; };
+		2839770E2353265E002DA0BC /* CoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839770D2353265E002DA0BC /* CoreDataFunctions.swift */; };
 		2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99B232F4F680092C324 /* BaseViewController.swift */; };
 		2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99F233075700092C324 /* ServesPopContentController.swift */; };
 		287833A7232E05DD00D7975C /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833A6232E05DD00D7975C /* SwipeController.swift */; };
@@ -50,17 +51,18 @@
 /* Begin PBXFileReference section */
 		0A50B7617A683B73FB203DC0 /* Pods-RecipeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.release.xcconfig"; path = "Target Support Files/Pods-RecipeApp/Pods-RecipeApp.release.xcconfig"; sourceTree = "<group>"; };
 		1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddRecipePage.storyboard; sourceTree = "<group>"; };
-		221F3854E7914BE57520C890 /* Pods_RecipeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E753D99232F6820006B4481 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		1E94C0D8234CE2FD00C82BF9 /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
 		1ECEA3C8234B1B3B0066834A /* RecipeApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipeApp.xcdatamodel; sourceTree = "<group>"; };
 		1ECEA3CC234B1EFB0066834A /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1ECEA3CD234B1EFB0066834A /* Recipe+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		221F3854E7914BE57520C890 /* Pods_RecipeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		281BED3C23374A71005E71F3 /* RecipeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		281BED3E23374A71005E71F3 /* RecipeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAppUITests.swift; sourceTree = "<group>"; };
 		281BED4023374A71005E71F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		283977092352DF99002DA0BC /* Nutrient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nutrient+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2839770A2352DF99002DA0BC /* Nutrient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nutrient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2839770D2353265E002DA0BC /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
 		2846E99B232F4F680092C324 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2846E99F233075700092C324 /* ServesPopContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesPopContentController.swift; sourceTree = "<group>"; };
 		287833A6232E05DD00D7975C /* SwipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				28E4B0D62318C4D200459557 /* RecipeManager.swift */,
 				1ECEA3C7234B1B3B0066834A /* RecipeApp.xcdatamodeld */,
 				28EFB92223436DDE00C9EC81 /* REST.swift */,
+				2839770D2353265E002DA0BC /* CoreDataFunctions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,7 +215,6 @@
 				3B744F162F3AE6D08F488D9C /* Pods-RecipeApp.debug.xcconfig */,
 				0A50B7617A683B73FB203DC0 /* Pods-RecipeApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -375,6 +377,7 @@
 				2839770B2352DF99002DA0BC /* Nutrient+CoreDataClass.swift in Sources */,
 				287833A7232E05DD00D7975C /* SwipeController.swift in Sources */,
 				1ECEA3D1234B1EFB0066834A /* Recipe+CoreDataProperties.swift in Sources */,
+				2839770E2353265E002DA0BC /* CoreDataFunctions.swift in Sources */,
 				28E4B0CF2318999F00459557 /* NutrientMOModel.swift in Sources */,
 				28E4B0D72318C4D200459557 /* RecipeManager.swift in Sources */,
 				2839770C2352DF99002DA0BC /* Nutrient+CoreDataProperties.swift in Sources */,

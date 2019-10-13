@@ -63,7 +63,7 @@ public class NutrientMO: NSObject{
         subNutrients.append(temp)
     }
     // add subnutrient by already created object
-    func addSubNutrientObject(nutrient:Nutrient){
+    func addSubNutrientObject(nutrient:NutrientMO){
         subNutrients.append(nutrient)
     }
     
@@ -109,8 +109,5 @@ public class NutrientMO: NSObject{
     }
     func getUnitName() -> Unit {
         return unitName
-    }
-    func getisSubNutrient() -> Bool {
-        return subNutrient
     }
 }
