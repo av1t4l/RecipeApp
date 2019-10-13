@@ -10,8 +10,18 @@ import Foundation
 import CoreData
 import UIKit
 
-struct RecipeManager{
-//    var recipes = [Recipe]()
+class RecipeManager{
+    var recipes = [Recipe]()
+    private let apiCall = REST_Request()
+    
+    var title:String
+    var mealTypes:[MealType] = []
+    var dietaryReqs:[DietaryReq] = []
+    var time:Time = Time(time: 10, unit: "m")
+    var diff:Diff = Diff.Easy
+    var serves:Int = 0
+    var Ings:[Ingredient] = []
+    var Method:[String] = []
     
     static let shared = RecipeManager()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -89,7 +99,15 @@ struct RecipeManager{
 //        nsRecipe.setValue(nutrients, forKeyPath: "nutrients")
         
         return nsRecipe
+    func addRecipe(recipe: Recipe) {
+        print("in add recipe")
+        //will call API to get nutrient info the the delegator will pass to didGetNutrients and add to the recipe array
+        apiCall.getNutrients(recipe:recipe)
     }
+        
+
+
+}
     
     mutating func addRecipe(title: String, mealType: [MealType], dietaryReqs: [DietaryReq], time: Time, difficulty: Diff, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [NutrientMO]){
         
@@ -102,6 +120,14 @@ struct RecipeManager{
         }catch  {
             fatalError("Could not save: \(error)")
         }
+
+
+extension RecipeManager: REST_Delegate{
+    func didGetNutrients(nutrients: [Nutrient], recipe: Recipe) {
+        var tempRecipe = recipe
+        tempRecipe.nutrients = nutrients //updating the nutrients to be value API call returned
+        print("adding recipe \(tempRecipe)")
+        recipes.append(tempRecipe)
     }
     
     private mutating func loadRecipes(){

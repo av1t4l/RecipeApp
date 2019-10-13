@@ -10,14 +10,26 @@ import Foundation
 
 //Types of units of food
 enum Unit:String, CaseIterable {
-    case g = "Grams"
-    case mg = "Miligrams"
-    case L = "Litres"
-    case ml = "Mililitres"
-    case ts = "Teaspoon"
-    case tbs = "Tablespoon"
-    case cups = "Cups"
-    case other = "Unit"
+    case g
+    case mg
+    case L
+    case ml
+    case ts
+    case tbs
+    case cups
+    case kcal
+    case other
+}
+enum UnitString:String, CaseIterable {
+    case g = "grams"
+    case mg = "milligrams"
+    case L = "litres"
+    case ml = "millilitres"
+    case ts = "teaspoons"
+    case tbs = "tablespoons"
+    case cups = "cups"
+    case kcal = "calories"
+    case other = "other"
 }
 
 //Class conatining properties of a nutrient
@@ -43,11 +55,16 @@ public class NutrientMO: NSObject{
         let unit = "\(self.amount)\(self.unitName)"
         return (name:name, nickname:self.nickname , unit:unit)
     }
-
+    
+    //add subnutrient by values
     func addSubNutrient(name:String, amount:Float, unitName:Unit){
         let temp = NutrientMO(name:name, amount:amount, unitName:unitName)
         temp.subNutrient = true
         subNutrients.append(temp)
+    }
+    // add subnutrient by already created object
+    func addSubNutrientObject(nutrient:Nutrient){
+        subNutrients.append(nutrient)
     }
     
     func addNickname(name:String){

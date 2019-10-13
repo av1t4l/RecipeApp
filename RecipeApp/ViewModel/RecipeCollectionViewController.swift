@@ -43,7 +43,7 @@ class RecipeCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         let imageView = cell.viewWithTag(1000) as? UIImageView
         let title = cell.viewWithTag(1001) as? UILabel
-        
+   
         if let imageView = imageView, let title = title {
             //safely access these variables here
             let currentRecipe = viewModel.getRecipe(byIndex: indexPath.item)
