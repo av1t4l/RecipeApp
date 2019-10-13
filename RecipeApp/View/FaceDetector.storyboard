@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="p90-IS-UzG">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Face Detector View Controller-->
+        <scene sceneID="RV7-ot-fZn">
+            <objects>
+                <viewController id="p90-IS-UzG" customClass="FaceDetectorViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bLq-OH-pYe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KpQ-OU-O6n">
+                                <rect key="frame" x="20" y="44" width="374" height="780"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvl-CQ-QB7">
+                                <rect key="frame" x="182" y="832" width="50" height="30"/>
+                                <state key="normal" title="Access"/>
+                                <connections>
+                                    <action selector="accessAppBtn:" destination="p90-IS-UzG" eventType="touchUpInside" id="6cG-JC-Lbk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="svU-ab-Dxl" firstAttribute="trailing" secondItem="KpQ-OU-O6n" secondAttribute="trailing" constant="20" id="XSh-ED-tXz"/>
+                            <constraint firstItem="KpQ-OU-O6n" firstAttribute="leading" secondItem="svU-ab-Dxl" secondAttribute="leading" constant="20" id="YLE-DY-dsP"/>
+                            <constraint firstItem="KpQ-OU-O6n" firstAttribute="top" secondItem="svU-ab-Dxl" secondAttribute="top" id="a3O-A7-FEM"/>
+                            <constraint firstItem="svU-ab-Dxl" firstAttribute="bottom" secondItem="Xvl-CQ-QB7" secondAttribute="bottom" id="eoJ-oF-H6f"/>
+                            <constraint firstItem="Xvl-CQ-QB7" firstAttribute="centerX" secondItem="svU-ab-Dxl" secondAttribute="centerX" id="mJK-ZG-u5s"/>
+                            <constraint firstItem="Xvl-CQ-QB7" firstAttribute="top" secondItem="KpQ-OU-O6n" secondAttribute="bottom" constant="8" id="t9s-cD-DB0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="svU-ab-Dxl"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="KpQ-OU-O6n" id="tMA-Qa-mCk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ony-2T-WNS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="73.913043478260875" y="64.955357142857139"/>
+        </scene>
+    </scenes>
+</document>

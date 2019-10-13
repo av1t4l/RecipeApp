@@ -68,6 +68,7 @@ class RecipeManager{
 
         recipes.append(defRecipe2)
         recipes.append(defRecipe3)
+    }
         
     func addRecipe(recipe: Recipe) {
         print("in add recipe")

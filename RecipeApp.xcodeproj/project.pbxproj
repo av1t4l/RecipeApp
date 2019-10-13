@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1E232AA8232E6916007BBEBE /* AddRecipePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */; };
 		1E753D9A232F6820006B4481 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E753D99232F6820006B4481 /* AddRecipeViewController.swift */; };
+		1E9F3EF8235350EF000EBBCC /* FaceDetector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F3EF7235350EF000EBBCC /* FaceDetector.storyboard */; };
+		1E9F3EFC23535453000EBBCC /* FaceDetectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9F3EFB23535453000EBBCC /* FaceDetectorViewController.swift */; };
 		1EEB5B6B23375BE700C8F326 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */; };
 		281BED3F23374A71005E71F3 /* RecipeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BED3E23374A71005E71F3 /* RecipeAppUITests.swift */; };
 		2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99B232F4F680092C324 /* BaseViewController.swift */; };
@@ -45,6 +47,8 @@
 		1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddRecipePage.storyboard; sourceTree = "<group>"; };
 		1E753D99232F6820006B4481 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddRecipeViewController.swift; path = ../View/AddRecipeViewController.swift; sourceTree = "<group>"; };
 		1E987305233C357D003E172E /* FormTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
+		1E9F3EF7235350EF000EBBCC /* FaceDetector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FaceDetector.storyboard; sourceTree = "<group>"; };
+		1E9F3EFB23535453000EBBCC /* FaceDetectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectorViewController.swift; sourceTree = "<group>"; };
 		1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		221F3854E7914BE57520C890 /* Pods_RecipeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		281BED3C23374A71005E71F3 /* RecipeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +152,7 @@
 			children = (
 				1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */,
 				28F6DCC62310D44A00C4A6AC /* Main.storyboard */,
+				1E9F3EF7235350EF000EBBCC /* FaceDetector.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				2846E99F233075700092C324 /* ServesPopContentController.swift */,
 				1EEB5B6A23375BE700C8F326 /* TabBarViewController.swift */,
 				1E987305233C357D003E172E /* FormTableViewController.swift */,
+				1E9F3EFB23535453000EBBCC /* FaceDetectorViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -185,7 +191,6 @@
 				3B744F162F3AE6D08F488D9C /* Pods-RecipeApp.debug.xcconfig */,
 				0A50B7617A683B73FB203DC0 /* Pods-RecipeApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -280,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28F6DCCA2310D44C00C4A6AC /* Assets.xcassets in Resources */,
+				1E9F3EF8235350EF000EBBCC /* FaceDetector.storyboard in Resources */,
 				28F6DCC82310D44A00C4A6AC /* Main.storyboard in Resources */,
 				1E232AA8232E6916007BBEBE /* AddRecipePage.storyboard in Resources */,
 			);
@@ -345,7 +351,6 @@
 				1E753D9A232F6820006B4481 /* AddRecipeViewController.swift in Sources */,
 				2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */,
 				287833A7232E05DD00D7975C /* SwipeController.swift in Sources */,
-				1E987306233C357D003E172E /* FormTableViewController.swift in Sources */,
 				28E4B0CF2318999F00459557 /* NutrientModel.swift in Sources */,
 				28E4B0D72318C4D200459557 /* RecipeManager.swift in Sources */,
 				28EFB92323436DDE00C9EC81 /* REST.swift in Sources */,
@@ -353,6 +358,7 @@
 				28E4B0D32318C1B900459557 /* RecipeCollectionViewController.swift in Sources */,
 				28E4B0D123189B7900459557 /* RecipeModel.swift in Sources */,
 				28F6DCC52310D44A00C4A6AC /* RecipeDetailViewController.swift in Sources */,
+				1E9F3EFC23535453000EBBCC /* FaceDetectorViewController.swift in Sources */,
 				287833AF232E6DD500D7975C /* IngredientsTableViewController.swift in Sources */,
 				28E4B0D52318C31700459557 /* RecipeCollectionViewModel.swift in Sources */,
 				28F6DCC32310D44A00C4A6AC /* AppDelegate.swift in Sources */,
