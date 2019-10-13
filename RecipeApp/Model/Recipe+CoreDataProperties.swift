@@ -24,10 +24,10 @@ extension Recipe {
     @NSManaged public var cookTimeUnit: String?
     @NSManaged public var difficulty: String?
     @NSManaged public var serves: Int64
-    @NSManaged public var ingredients: NSObject?
+    @NSManaged public var ingredients: NSArray?
     @NSManaged public var method: NSObject?
     @NSManaged public var image: String?
-    @NSManaged public var nutrients: NSObject?
+    @NSManaged public var nutrients: NSArray?
 
     var mealType: [MealType] {
         get{
@@ -37,10 +37,16 @@ extension Recipe {
             mealTypes = newValue as NSArray
         }
     }
-    
+    /** Converting from NSArray -> IngredientMO to be used by rest of system **/
     var ingredient: [IngredientMO] {
         get{
-            return ingredients as? Array<IngredientMO> ?? []
+            var ingArray = [IngredientMO]()
+            for i in ingredients!{
+                let ing = i as! Ingredient
+                let temp =  IngredientMO(qty: ing.qty, unit: Unit(rawValue: ing.unit!)!, name: ing.name! )
+                ingArray.append(temp)
+            }
+            return ingArray
         }
         set{
             ingredients = newValue as NSArray
@@ -55,10 +61,17 @@ extension Recipe {
             dietaryReqs = newValue as NSArray
         }
     }
-    
-    var nutrient: [Nutrient] {
+    /** Converting from NSArray -> NutrientMO to be used by rest of system **/
+    var nutrient: [NutrientMO] {
         get{
-            return nutrients as? Array<Nutrient> ?? []
+            var nutrArray = [NutrientMO]()
+            for n in nutrients!{
+                let nutr = n as! Nutrient
+                let temp = NutrientMO(name: nutr.name!, amount: nutr.amount, unitName: Unit(rawValue: nutr.unitName!)!)
+                nutrArray.append(temp)
+            }
+            return nutrArray
+            //return nutrients as? Array<NutrientMO> ?? []
         }
         set{
             nutrients = newValue as NSArray

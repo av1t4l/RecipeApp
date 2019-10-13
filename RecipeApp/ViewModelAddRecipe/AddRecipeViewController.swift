@@ -251,7 +251,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         self.clearAllTexts()
     }
     
-    let Nut = [Nutrient(name:"Energy", amount:30, unitName:Unit.g), Nutrient(name:"Protien", amount:4, unitName:Unit.g), Nutrient(name:"Fat", amount:3, unitName:Unit.g), Nutrient(name:"Fibre", amount:20, unitName:Unit.g), Nutrient(name:"Sodium", amount:300, unitName:Unit.mg) ]
+    let Nut = [NutrientMO(name:"Energy", amount:30, unitName:Unit.g), NutrientMO(name:"Protien", amount:4, unitName:Unit.g), NutrientMO(name:"Fat", amount:3, unitName:Unit.g), NutrientMO(name:"Fibre", amount:20, unitName:Unit.g), NutrientMO(name:"Sodium", amount:300, unitName:Unit.mg) ]
     
     public func clearAllTexts(){
         for view in self.view.subviews{

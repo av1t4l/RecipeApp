@@ -2,7 +2,7 @@
 //  Nutrient+CoreDataClass.swift
 //  RecipeApp
 //
-//  Created by Sarah Nurwidhiafitri Sukamto on 07/10/19.
+//  Created by Avital Miskella on 13/10/19.
 //  Copyright © 2019 Avital Miskella. All rights reserved.
 //
 //

@@ -34,16 +34,47 @@ struct RecipeManager{
         nsIngredient.setValue(qty, forKeyPath:"qty")
         nsIngredient.setValue(unit, forKeyPath:"unit")
         nsIngredient.setValue(name, forKeyPath:"name")
+    
         return nsIngredient
     }
-    private func createRecipe(title: String, mealType: [MealType], dietaryReqs: [DietaryReq], time: Time, difficulty1: String, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [Nutrient]) -> Recipe{
+    private func createNutrientEntity(nutrient:NutrientMO) -> Nutrient{
+    
+        let nutrientEntity = NSEntityDescription.entity(forEntityName: "Nutrient", in: managedContext)!
+        let nsNutrient = NSManagedObject(entity: nutrientEntity, insertInto:managedContext) as! Nutrient
+        
+        
+        nsNutrient.setValue(nutrient.getName(), forKeyPath:"name")
+        nsNutrient.setValue(nutrient.getNickame(), forKeyPath:"nickname")
+        nsNutrient.setValue(nutrient.getAmount(), forKeyPath:"amount")
+        nsNutrient.setValue(nutrient.getStaticAmount(), forKeyPath:"staticAmount")
+        nsNutrient.setValue(nutrient.getUnitName().rawValue, forKeyPath:"unitName")
+        nsNutrient.setValue(nutrient.getisSubNutrient(), forKeyPath:"subNutrient") //set is a subnutrient
+        
+//        var subNutrs = nutrient.getSubNutrients()
+//        for sn in subNutrs{
+//
+//        }
+        //nsNutrient.setValue(, forKeyPath:"subNutrients") //set subnutrients array
+        
+        return nsNutrient
+    }
+    private func createRecipe(title: String, mealType: [MealType], dietaryReqs: [DietaryReq], time: Time, difficulty1: String, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [NutrientMO]) -> Recipe{
         
         let recipeEntity = NSEntityDescription.entity(forEntityName: "Recipe", in: managedContext)!
        
         let nsRecipe = NSManagedObject(entity: recipeEntity, insertInto: managedContext) as! Recipe
-        
+       
+        //iterate over ingredients, create NSobjects
         for i in ingredients {
-            createIngredEntity(name: i.name, qty:i.qty, unit:i.unit.rawValue)
+            let temp = createIngredEntity(name: i.name, qty:i.qty, unit:i.unit.rawValue)
+            let addIng = nsRecipe.mutableSetValue(forKey: "ingredients")
+            addIng.add(temp)
+        }
+        
+        for n in nutrients{
+            let temp = createNutrientEntity(nutrient: n)
+            let addNutr = nsRecipe.mutableSetValue(forKey: "nutrients")
+            addNutr.add(temp)
         }
         
         nsRecipe.setValue(title, forKeyPath: "title")
@@ -53,7 +84,6 @@ struct RecipeManager{
         nsRecipe.setValue(time.cookTimeUnit, forKeyPath: "cookTimeUnit")
         nsRecipe.setValue(difficulty1, forKeyPath: "difficulty")
         nsRecipe.setValue(serves, forKeyPath: "serves")
-        //nsRecipe.setValue(ingredients, forKeyPath: "ingredients")
         nsRecipe.setValue(method, forKeyPath: "method")
         nsRecipe.setValue(image, forKeyPath: "image")
 //        nsRecipe.setValue(nutrients, forKeyPath: "nutrients")
@@ -61,7 +91,7 @@ struct RecipeManager{
         return nsRecipe
     }
     
-    mutating func addRecipe(title: String, mealType: [MealType], dietaryReqs: [DietaryReq], time: Time, difficulty: Diff, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [Nutrient]){
+    mutating func addRecipe(title: String, mealType: [MealType], dietaryReqs: [DietaryReq], time: Time, difficulty: Diff, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [NutrientMO]){
         
         let nsRecipe = createRecipe(title: title, mealType: mealType, dietaryReqs: dietaryReqs, time: time, difficulty1: difficulty.rawValue, serves: serves, ingredients: ingredients, method: method, image: image, nutrients: nutrients)
         
@@ -80,6 +110,23 @@ struct RecipeManager{
             let result = try managedContext.fetch(fetchRequest)
             
             recipes = result as! [Recipe]
+//            var ingArray = [IngredientMO]()
+//            for r in result{
+//                let recipe = r as! Recipe
+//                for i in recipe.ingredients! {
+//                    let ing = i as! Ingredient
+//                    let temp =  IngredientMO(qty: ing.qty, unit: Unit(rawValue: ing.unit!)!, name: ing.name! )
+//                    ingArray.append(temp)
+//                }
+//
+//            }
+//            for r in recipes{
+//                let ings = r.value(forKey: "ingredients") as! [Ingredient]
+//                for i in ings{
+//                    let temp =  IngredientMO(qty: i.qty, unit: Unit(rawValue: i.unit!)!, name: i.name! )
+//                }
+//            }
+            
         }catch let error as NSError{
             print("Could not load: \(error), \(error.userInfo)")
         }
@@ -87,14 +134,14 @@ struct RecipeManager{
     
     private mutating func makeDefaults(){
         //test nutrient value
-        let carbs = Nutrient(name:"Carbohydrates", amount:30, unitName:Unit.g)
+        let carbs = NutrientMO(name:"Carbohydrates", amount:30, unitName:Unit.g)
         carbs.addNickname(name: "Carbs")
         carbs.addSubNutrient(name: "Sugar", amount: 100, unitName: Unit.g)
-        let Nut = [Nutrient(name:"Energy", amount:30, unitName:Unit.g), carbs , Nutrient(name:"Protien", amount:4, unitName:Unit.g), Nutrient(name:"Fat", amount:3, unitName:Unit.g), Nutrient(name:"Fibre", amount:20, unitName:Unit.g), Nutrient(name:"Sodium", amount:300, unitName:Unit.mg) ]
+        let Nut = [NutrientMO(name:"Energy", amount:30, unitName:Unit.g), carbs , NutrientMO(name:"Protien", amount:4, unitName:Unit.g), NutrientMO(name:"Fat", amount:3, unitName:Unit.g), NutrientMO(name:"Fibre", amount:20, unitName:Unit.g), NutrientMO(name:"Sodium", amount:300, unitName:Unit.mg) ]
 
-        let fats = Nutrient(name: "Fat", amount:3.9, unitName: Unit.g)
+        let fats = NutrientMO(name: "Fat", amount:3.9, unitName: Unit.g)
         fats.addSubNutrient(name: "Saturated", amount: 1.9, unitName: Unit.g)
-        let Nut2 = [Nutrient(name:"Energy", amount:30, unitName:Unit.g), carbs , Nutrient(name:"Protien", amount:4, unitName:Unit.g), fats, Nutrient(name:"Fibre", amount:20, unitName:Unit.g), Nutrient(name:"Sodium", amount:300, unitName:Unit.mg) ]
+        let Nut2 = [NutrientMO(name:"Energy", amount:30, unitName:Unit.g), carbs , NutrientMO(name:"Protien", amount:4, unitName:Unit.g), fats, NutrientMO(name:"Fibre", amount:20, unitName:Unit.g), NutrientMO(name:"Sodium", amount:300, unitName:Unit.mg) ]
 
         let Ings = [IngredientMO(qty:2, unit:Unit.cups, name:"Plain Flour"), IngredientMO(qty:70, unit:Unit.ml, name:"Milk"), IngredientMO(qty:1, unit:Unit.cups, name:"Butter"), IngredientMO(qty:0.5, unit:Unit.cups, name:"Sugar")]
         let Method = ["In a large bowl sift flour","Add milk, sugar and melted butter.", "Stir till combined.","Cook in frying pan until golden brown."]

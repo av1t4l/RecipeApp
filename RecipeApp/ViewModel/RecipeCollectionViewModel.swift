@@ -21,11 +21,12 @@ struct RecipeCollectionViewModel{
     }
     
     /** Returns recipe formatted fro View **/
-    func getRecipe(byIndex index: Int) -> (title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient]){
+    func getRecipe(byIndex index: Int) -> (title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[NutrientMO]){
         
         let recipe = recipeManager.recipes[index]
         let image = UIImage(named: recipe.image ?? "imagePlaceholder")
         var ingredients = [String]()
+
         
         for ing in recipe.ingredient{
             ingredients.append(ing.ingString())
@@ -45,13 +46,13 @@ struct RecipeCollectionViewModel{
         
         let nutrients = self.getNutrientsForRecipe(byIndex: index)
         
-        return(title: recipe.title!, mealTypes:types, dietaryReqs: dietReqs, time:time , diff: recipe.difficulty!/*recipe.diff.rawValue*/, serves:serves ,ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
+        return(title: recipe.title!, mealTypes:types, dietaryReqs: dietReqs, time:time , diff: recipe.difficulty!, serves:serves ,ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
     }
     
     /** Convert [Nutrient] to array of tupe of strings to use in the view controller **/
-    func getNutrientsForRecipe(byIndex index:Int) -> [Nutrient]{
+    func getNutrientsForRecipe(byIndex index:Int) -> [NutrientMO]{
         let recipe = recipeManager.recipes[index]
-        var nutrients = [Nutrient]()
+        var nutrients = [NutrientMO]()
         
         //iterate over the nutrients and create an array adding sub nutrients too
         for nut in recipe.nutrient{
@@ -67,9 +68,9 @@ struct RecipeCollectionViewModel{
         return nutrients
     }
     /** Format nutrients for the View but with the new values based on users serving input **/
-    func getUpdatedNutrientsForRecipe(index: Int, factor:Int) -> [Nutrient]{
+    func getUpdatedNutrientsForRecipe(index: Int, factor:Int) -> [NutrientMO]{
         let recipe = recipeManager.recipes[index]
-        var nutrients = [Nutrient]()
+        var nutrients = [NutrientMO]()
         
         //iterate over the nutrients and create an array with the sub nutrients too
         for nut in recipe.nutrient{
