@@ -228,10 +228,10 @@
             </objects>
             <point key="canvasLocation" x="4640.625" y="-745.77464788732391"/>
         </scene>
-        <!--Tab Bar View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="3mV-XE-paU">
             <objects>
-                <tabBarController id="Qz4-vM-Niy" customClass="TabBarViewController" customModule="RecipeApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Qz4-vM-Niy" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TX3-sG-fDq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
