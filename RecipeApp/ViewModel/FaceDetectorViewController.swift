@@ -9,9 +9,13 @@
 import UIKit
 import Vision
 
-class FaceDetectorViewController: UIViewController {
+class FaceDetectorViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     var faceDetected = false
+    var imagePicker = UIImagePickerController()
+    var image: UIImage?
+    var scaledHeight: CGFloat = 0
+    var redBox = UIView()
     
     @IBOutlet var imageView: UIImageView!
     
@@ -37,6 +41,29 @@ class FaceDetectorViewController: UIViewController {
         }
     }
     
+    //The button will redirect the app to the gallery.
+    @IBAction func chooseImgBtn(_ sender: Any) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            print("Button capture")
+
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = true
+
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+
+    //Upon choosing an image, the photo on the screen will change to the selected image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        imageView.image = chosenImage
+        self.redBox.isHidden = true
+        detectFace()
+        dismiss(animated:true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,13 +71,16 @@ class FaceDetectorViewController: UIViewController {
         guard let image = UIImage(named: "sample") else {return}
         imageView.image = image
         
+        imagePicker.delegate = self
+        
         //Get the height of the image
-        let scaledHeight = view.frame.width / image.size.width * image.size.height
+        scaledHeight = view.frame.width / image.size.width * image.size.height
         
         //Create a request to detect faces in the photo
         let request = VNDetectFaceRectanglesRequest { (req, err) in
             
             if let err = err {
+                self.redBox.isHidden = true
                 print("Failed to detect faces: \(err)")
                 return
             }
@@ -61,17 +91,17 @@ class FaceDetectorViewController: UIViewController {
                 
                 //Set the box coordinates and size
                 let x = self.view.frame.width * faceObservation.boundingBox.origin.x
-                let height = scaledHeight * faceObservation.boundingBox.height
+                let height = self.scaledHeight * faceObservation.boundingBox.height
                 let y = self.view.frame.height * (1-faceObservation.boundingBox.origin.y)-height
                 let width = self.view.frame.width * faceObservation.boundingBox.width
                 
                 //Create the box
-                let redBox = UIView()
-                redBox.backgroundColor = .red
-                redBox.alpha = 0.4
-                redBox.frame = CGRect(x: x, y: y, width: width, height: height)
+                self.redBox.isHidden = false
+                self.redBox.backgroundColor = .red
+                self.redBox.alpha = 0.4
+                self.redBox.frame = CGRect(x: x, y: y, width: width, height: height)
                 
-                self.view.addSubview(redBox)
+                self.view.addSubview(self.redBox)
                 
                 print(faceObservation.boundingBox)
                 
@@ -88,6 +118,13 @@ class FaceDetectorViewController: UIViewController {
         } catch let errReq{
             print("Failed to perform request: \(errReq)")
         }
+        
+        self.detectFace()
     }
 
+    func detectFace(){
+        
+        
+        
+    }
 }
