@@ -216,7 +216,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
             
             let createTime = Time(time: tvTime, unit: unit[selectedUnitRow])
 
-            viewModel.addRecipe(title: tvTitle, mealType: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, difficulty: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "imagePlaceholder", nutrients: Nut)
+            viewModel.addRecipe(title: tvTitle, mealType: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, difficulty: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "imagePlaceholder")
             
             let alertController = UIAlertController(title: "Add Recipe", message: "Successfully added \(tvTitle)", preferredStyle: .alert)
             let doneButton = UIAlertAction(title: "Done", style: .default, handler: {(action) -> Void in print("Done")})

@@ -19,8 +19,9 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.contentInset = UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 20)
         viewModel = RecipeCollectionViewModel()
+        viewModel.recipeManager.delegate = self
     }
     
     
@@ -46,9 +47,11 @@ class RecipeCollectionViewController: UICollectionViewController {
    
         if let imageView = imageView, let title = title {
             //safely access these variables here
+        
             let currentRecipe = viewModel.getRecipe(byIndex: indexPath.item)
             imageView.image = currentRecipe.image
             title.text = currentRecipe.title
+            
         }
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 7
@@ -80,4 +83,9 @@ class RecipeCollectionViewController: UICollectionViewController {
     
     
     
+}
+extension RecipeCollectionViewController: recipeManagerDelegate{
+    func didUpdateRecipes() {
+        self.collectionView.reloadData()
+    }
 }

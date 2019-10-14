@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 
 
-struct RecipeCollectionViewModel{
+
+class RecipeCollectionViewModel{
     //reference to the Recipe Manager (Data Source)
-    private var recipeManager = RecipeManager.shared
+    var recipeManager = RecipeManager.shared
     
     /** Count: returns the amount of recipes **/
     func count() -> Int{
@@ -92,4 +93,5 @@ struct RecipeCollectionViewModel{
         return pickerData
     }
 }
+
 

@@ -10,7 +10,12 @@ import Foundation
 import CoreData
 import UIKit
 
+protocol recipeManagerDelegate: class{
+    func didUpdateRecipes()
+}
+
 class RecipeManager{
+    weak var delegate: recipeManagerDelegate?
     var recipes = [Recipe]()
     //private let apiCall = REST_Request()
     
@@ -34,6 +39,7 @@ class RecipeManager{
         print("making defaults")
         managedContext = appDelegate.persistentContainer.viewContext
         self.deleteAllData("Recipe")
+        apiCall.delegate = self
         makeDefaults()
         loadRecipes()
         
@@ -44,6 +50,10 @@ class RecipeManager{
         
         apiCall.addNutrients(recipe: test)
         
+    }
+    
+    public func getNutrientsAndSave(recipe:RecipeMO){
+        apiCall.addNutrients(recipe: recipe)
     }
     
     public func addRecipe(title: String, mealType: [MealType], dietaryReqs: [DietaryReq], time: Time, difficulty: Diff, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [NutrientMO]){
@@ -189,6 +199,9 @@ class RecipeManager{
 //        //will call API to get nutrient info the the delegator will pass to didGetNutrients and add to the recipe array
 //        apiCall.getNutrients(recipe:recipe)
 //    }
+    private func updatedRecipes(){
+        delegate?.didUpdateRecipes()
+    }
 
 }//close recipe manager class
 extension RecipeManager: REST_Delegate{
@@ -197,8 +210,9 @@ extension RecipeManager: REST_Delegate{
         //tempRecipe.nutrients = nutrients //updating the nutrients to be value API call returned
 //        print("adding recipe \(tempRecipe)")
 //        recipes.append(tempRecipe)
-          self.addRecipe(title: recipe.title, mealType: recipe.mealTypes, dietaryReqs: recipe.dietaryReqs, time: recipe.time, difficulty: recipe.difficulty, serves: recipe.serves, ingredients: recipe.ingredients, method:recipe.method, image: recipe.image, nutrients: recipe.nutrients)
+        self.addRecipe(title: recipe.title, mealType: recipe.mealTypes, dietaryReqs: recipe.dietaryReqs, time: recipe.time, difficulty: recipe.difficulty, serves: recipe.serves, ingredients: recipe.ingredients, method:recipe.method, image: recipe.image, nutrients: recipe.nutrients)
         loadRecipes()
+        updatedRecipes()
      
     }
 }
