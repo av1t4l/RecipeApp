@@ -14,7 +14,7 @@ class FaceDetectorViewController: UIViewController, UINavigationControllerDelega
     var faceDetected = false
     var imagePicker = UIImagePickerController()
     //var image: UIImage?
-    var scaledHeight: CGFloat = 0
+    //var scaledHeight: CGFloat = 0
     var redBox = UIView()
     
     @IBOutlet var imageView: UIImageView!
@@ -57,13 +57,18 @@ class FaceDetectorViewController: UIViewController, UINavigationControllerDelega
 
     //Upon choosing an image, the photo on the screen will change to the selected image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+//        imageView.frame = CGRect(x: imageView.frame.origin.x, y: imageView.frame.origin.y, width: image.size.width, height: image.size.height);
+        
         imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        
         self.redBox.isHidden = true
         self.faceDetected = false
         
         //Get the height of the image
-        scaledHeight = view.frame.width / image.size.width * image.size.height
+        let scaledHeight = view.frame.width / image.size.width * image.size.height
         
         //Create a request to detect faces in the photo
         let request = VNDetectFaceRectanglesRequest { (req, err) in
@@ -80,7 +85,7 @@ class FaceDetectorViewController: UIViewController, UINavigationControllerDelega
                 
                 //Set the box coordinates and size
                 let x = self.view.frame.width * faceObservation.boundingBox.origin.x
-                let height = self.scaledHeight * faceObservation.boundingBox.height
+                let height = scaledHeight * faceObservation.boundingBox.height
                 let y = self.view.frame.height * (1-faceObservation.boundingBox.origin.y)-height
                 let width = self.view.frame.width * faceObservation.boundingBox.width
                 
@@ -118,10 +123,14 @@ class FaceDetectorViewController: UIViewController, UINavigationControllerDelega
         guard let image = UIImage(named: "sample") else {return}
         imageView.image = image
         
+        
+        
         imagePicker.delegate = self
         
         //Get the height of the image
-        scaledHeight = view.frame.width / image.size.width * image.size.height
+        let scaledHeight = view.frame.width / image.size.width * image.size.height
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: scaledHeight)
         
         //Create a request to detect faces in the photo
         let request = VNDetectFaceRectanglesRequest { (req, err) in
@@ -138,7 +147,7 @@ class FaceDetectorViewController: UIViewController, UINavigationControllerDelega
                 
                 //Set the box coordinates and size
                 let x = self.view.frame.width * faceObservation.boundingBox.origin.x
-                let height = self.scaledHeight * faceObservation.boundingBox.height
+                let height = scaledHeight * faceObservation.boundingBox.height
                 let y = self.view.frame.height * (1-faceObservation.boundingBox.origin.y)-height
                 let width = self.view.frame.width * faceObservation.boundingBox.width
                 
