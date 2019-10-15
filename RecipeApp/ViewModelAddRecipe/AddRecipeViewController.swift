@@ -215,8 +215,9 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         if let tvTitle = tvTitle.text, let _ = tvTag.text, let tvTime = Int(tvTime.text!), let _ = tvUnit.text, let _ = tvDifficulty.text, let tvServes = Int(tvServes.text!), let _ = tvIngUnit.text {
             
             let createTime = Time(time: tvTime, unit: unit[selectedUnitRow])
-
-            viewModel.addRecipe(title: tvTitle, mealType: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, difficulty: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "imagePlaceholder")
+            
+            // @Sarah: please make meal type and dietary requrements get data from the View, not just default values like I put here 
+            viewModel.addRecipe(title: tvTitle, mealType: MealType.snack, dietaryReqs: DietaryReq.gf, time: createTime, difficulty: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "imagePlaceholder")
             
             let alertController = UIAlertController(title: "Add Recipe", message: "Successfully added \(tvTitle)", preferredStyle: .alert)
             let doneButton = UIAlertAction(title: "Done", style: .default, handler: {(action) -> Void in print("Done")})

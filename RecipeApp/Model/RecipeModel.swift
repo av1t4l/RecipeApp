@@ -63,7 +63,7 @@ struct IngredientMO{
         let qty = String(self.qty)
         //need to convert from abrv to full word for API to work, will look good on screen too
         let unitVal = self.unit.rawValue //gets the abrv
-        let unitStr = UnitString(rawValue: unitVal) //uses second enum to look up abbrv to get full word
+        //_ = UnitString(rawValue: unitVal) //uses second enum to look up abbrv to get full word
         
         let ingString = "\(qty) \(self.unit.rawValue) \(self.name)"
         return ingString
@@ -73,8 +73,8 @@ struct IngredientMO{
 ///** Struct to describe parts of a recipe **/
 struct RecipeMO {
      var title:String
-     var mealTypes = [MealType]()
-     var dietaryReqs = [DietaryReq]()
+    var mealTypes:MealType
+    var dietaryReqs:DietaryReq
      var time:Time
      var difficulty:Diff
      var serves:Int
@@ -83,7 +83,7 @@ struct RecipeMO {
      var image:String
      var nutrients = [NutrientMO]()
     
-    init(title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[IngredientMO], method:[String], image:String){
+    init(title:String, mealTypes:MealType, dietaryReqs:DietaryReq, time:Time, diff:Diff, serves:Int, ingredients:[IngredientMO], method:[String], image:String){
         self.title = title
         self.mealTypes = mealTypes
         self.dietaryReqs = dietaryReqs

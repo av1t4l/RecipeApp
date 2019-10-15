@@ -18,8 +18,8 @@ extension Recipe {
     }
 
     @NSManaged public var title: String?
-    @NSManaged public var mealTypes: NSArray?   
-    @NSManaged public var dietaryReqs: NSObject?
+    @NSManaged public var mealTypes: String?
+    @NSManaged public var dietaryReqs: String?
     @NSManaged public var cookTime: Int64
     @NSManaged public var cookTimeUnit: String?
     @NSManaged public var difficulty: String?
@@ -29,22 +29,25 @@ extension Recipe {
     @NSManaged public var image: String?
     @NSManaged public var nutrients: NSArray?
 
-    var mealType: [MealType] {
-        get{
-            return mealTypes as? Array<MealType> ?? []
-        }
-        set{
-            mealTypes = newValue as NSArray
-        }
-    }
+//    var mealType: [MealType] {
+//        get{
+//            return mealTypes as? Array<MealType> ?? []
+//        }
+//        set{
+//            mealTypes = newValue as NSArray
+//        }
+//    }
     /** Converting from NSArray -> IngredientMO to be used by rest of system **/
     var ingredient: [IngredientMO] {
         get{
             var ingArray = [IngredientMO]()
             for i in ingredients!{
                 let ing = i as! Ingredient
-                let temp =  IngredientMO(qty: ing.qty, unit: Unit(rawValue: ing.unit!)!, name: ing.name! )
-                ingArray.append(temp)
+                if let un = Unit(rawValue: ing.unit!), let name = ing.name {
+                    let temp =  IngredientMO(qty: ing.qty, unit: un, name: name )
+                    ingArray.append(temp)
+                }
+                
             }
             return ingArray
         }
@@ -52,23 +55,26 @@ extension Recipe {
             ingredients = newValue as NSArray
         }
     }
-    
-    var dietaryReq: [DietaryReq] {
-        get{
-            return dietaryReqs as? Array<DietaryReq> ?? []
-        }
-        set{
-            dietaryReqs = newValue as NSArray
-        }
-    }
+//    
+//    var dietaryReq: [DietaryReq] {
+//        get{
+//            return dietaryReqs as? Array<DietaryReq> ?? []
+//        }
+//        set{
+//            dietaryReqs = newValue as NSArray
+//        }
+//    }
     /** Converting from NSArray -> NutrientMO to be used by rest of system **/
     var nutrient: [NutrientMO] {
         get{
             var nutrArray = [NutrientMO]()
             for n in nutrients!{
                 let nutr = n as! Nutrient
-                let temp = NutrientMO(name: nutr.name!, amount: nutr.amount, unitName: Unit(rawValue: nutr.unitName!)!)
-                nutrArray.append(temp)
+                if let un = Unit(rawValue: nutr.unitName!){
+                    let temp = NutrientMO(name: nutr.name!, amount: nutr.amount, unitName: un)
+                    nutrArray.append(temp)
+                }
+                
             }
             return nutrArray
             //return nutrients as? Array<NutrientMO> ?? []

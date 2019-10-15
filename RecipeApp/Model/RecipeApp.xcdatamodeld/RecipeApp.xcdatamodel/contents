@@ -19,10 +19,10 @@
     <entity name="Recipe" representedClassName="Recipe" syncable="YES">
         <attribute name="cookTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" customClassName="Time" syncable="YES"/>
         <attribute name="cookTimeUnit" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dietaryReqs" optional="YES" attributeType="Transformable" customClassName="NSArray" syncable="YES"/>
+        <attribute name="dietaryReqs" optional="YES" attributeType="String" customClassName="NSArray" syncable="YES"/>
         <attribute name="difficulty" optional="YES" attributeType="String" customClassName="[Diff]" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="mealTypes" optional="YES" attributeType="Transformable" customClassName="[MealType]" syncable="YES"/>
+        <attribute name="mealTypes" optional="YES" attributeType="String" customClassName="[MealType]" syncable="YES"/>
         <attribute name="method" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
         <attribute name="serves" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>

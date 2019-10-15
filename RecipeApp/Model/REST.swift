@@ -90,7 +90,8 @@ class REST_Request{
 
                             //using NS number becuase value set by JSON decoder
                             if let amt = nutr["quantity"] as? NSNumber {
-                                let amount = amt.floatValue
+                                var amount = amt.floatValue
+                                amount =  (amount * 10).rounded()/10
                                 let newNutrient = NutrientMO(name: name, amount: amount, unitName: Unit(rawValue: rawUnit)!)
                                 newNutrients.append(newNutrient)
                                 print(newNutrient.presentationForm())
@@ -116,9 +117,9 @@ var nutrientsKey:[String:String] = [
     "CHOCDF": "Carbs",
     "ENERC_KCAL": "Energy",
     "FAT": "Fat",
-    "FASAT": "Saturated Fat",
-    "FAMS": "Monounsaturated Fat",
-    "FAPU": "Polyunsaturated Fat",
+//    "FASAT": "Saturated Fat",
+//    "FAMS": "Monounsaturated Fat",
+//    "FAPU": "Polyunsaturated Fat",
     "SUGAR": "Sugar",
     "PROCNT": "Protien",
     "NA": "Sodium"

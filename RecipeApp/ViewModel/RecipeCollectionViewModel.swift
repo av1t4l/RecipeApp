@@ -21,8 +21,8 @@ class RecipeCollectionViewModel{
         return temp
     }
     
-    /** Returns recipe formatted fro View **/
-    func getRecipe(byIndex index: Int) -> (title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[NutrientMO]){
+    /** Returns recipe formatted for View **/
+    func getRecipe(byIndex index: Int) -> (title:String, mealTypes:String, dietaryReqs:String, time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[NutrientMO]){
         
         let recipe = recipeManager.recipes[index]
         let image = UIImage(named: recipe.image ?? "imagePlaceholder")
@@ -32,22 +32,18 @@ class RecipeCollectionViewModel{
         for ing in recipe.ingredient{
             ingredients.append(ing.ingString())
         }
-        
-        var types = [String]()
-        for type in recipe.mealType{
-            types.append(type.rawValue)
-        }
-        
-        var dietReqs = [String]()
-        for type in recipe.dietaryReq{
-            dietReqs.append(type.rawValue)
-        }
         let time = recipe.time.timeString()
         let serves = "\(recipe.serves)"
         
         let nutrients = self.getNutrientsForRecipe(byIndex: index)
         
-        return(title: recipe.title!, mealTypes:types, dietaryReqs: dietReqs, time:time , diff: recipe.difficulty!, serves:serves ,ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
+        if let type = recipe.mealTypes, let req = recipe.dietaryReqs, let title = recipe.title, let diff = recipe.difficulty {
+        
+            return(title: title, mealTypes:type, dietaryReqs: req, time:time , diff: diff, serves:serves, ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
+            
+        }else{
+             return(title: "nil", mealTypes: "nil", dietaryReqs: "nil", time:time , diff: "nil", serves:serves, ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
+        }
     }
     
     /** Convert [Nutrient] to array of tupe of strings to use in the view controller **/

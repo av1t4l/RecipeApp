@@ -19,7 +19,7 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.contentInset = UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 20)
+        //collectionView.contentInset = UIEdgeInsets(top: 0.5, left: 2, bottom: 0.5, right: 2)
         viewModel = RecipeCollectionViewModel()
         viewModel.recipeManager.delegate = self
     }
