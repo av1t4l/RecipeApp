@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol REST_Delegate: class {
-    func didGetNutrients(recipe:RecipeMO)
+    func didGetNutrients(nutrients: [Nutrient], recipe: Recipe)
 }
 
 //Had to use extension to AlamoFire because by default it sends cached data that was messing with the API interaction (Etag)
@@ -40,17 +40,17 @@ extension Alamofire.SessionManager{
 
 class REST_Request{
     weak var delegate: REST_Delegate?
-    private var nutrients:[NutrientMO] = []
-    private var recipe:RecipeMO? = nil
+    private var nutrients:[Nutrient] = []
+    private var recipe:Recipe? = nil
     private let baseURL:String = "https://api.edamam.com/api/nutrition-details?app_id=0a4f449e&app_key=114c5eaa049af50df15413d088e2168e"
 
     /** Make POST request to 'edamam' API with recipe info passed in.
         Will call delegate to return processed response data **/
-    func addNutrients(recipe:RecipeMO) {
+    func getNutrients(recipe: Recipe) -> [Nutrient]{
         self.recipe = recipe
         let url = baseURL
         guard let escapedURL = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
-            return
+            return []
         }
         
         //create string array to post to API
@@ -80,7 +80,7 @@ class REST_Request{
                         
                         //only care about the nutrients part of the response
                         let totalNutr = JSON["totalNutrients"] as! NSDictionary
-                        var newNutrients = [NutrientMO]()
+                        var newNutrients = [Nutrient]()
                         
                         //iterate over wanted nutrients and keys base on API to create nutrient objects based on data
                         for n in nutrientsKey {
@@ -90,12 +90,11 @@ class REST_Request{
 
                             //using NS number becuase value set by JSON decoder
                             if let amt = nutr["quantity"] as? NSNumber {
-                                var amount = amt.floatValue
-                                amount =  (amount * 10).rounded()/10
-                                let newNutrient = NutrientMO(name: name, amount: amount, unitName: Unit(rawValue: rawUnit)!)
+                                let amount = amt.floatValue
+                                let newNutrient = Nutrient(name: name, amount: amount, unitName: Unit(rawValue: rawUnit)!)
                                 newNutrients.append(newNutrient)
                                 print(newNutrient.presentationForm())
-                                self.recipe?.setNutrients(nutrients: newNutrients)
+                                self.nutrients = newNutrients
                             }
                         }
                         self.connectBack()
@@ -103,11 +102,12 @@ class REST_Request{
                   
                 }
             }
+        return nutrients
     }
     
     func connectBack(){
         //will call the function in Recipe manager to send back the data
-        delegate?.didGetNutrients(recipe: self.recipe!)
+        delegate?.didGetNutrients(nutrients: nutrients, recipe: recipe!)
     }
     
 }
@@ -117,9 +117,9 @@ var nutrientsKey:[String:String] = [
     "CHOCDF": "Carbs",
     "ENERC_KCAL": "Energy",
     "FAT": "Fat",
-//    "FASAT": "Saturated Fat",
-//    "FAMS": "Monounsaturated Fat",
-//    "FAPU": "Polyunsaturated Fat",
+    "FASAT": "Saturated Fat",
+    "FAMS": "Monounsaturated Fat",
+    "FAPU": "Polyunsaturated Fat",
     "SUGAR": "Sugar",
     "PROCNT": "Protien",
     "NA": "Sodium"

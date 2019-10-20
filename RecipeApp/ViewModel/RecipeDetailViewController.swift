@@ -11,9 +11,9 @@ import UIKit
 class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     //Recipe object the view needs from the previous view
-    var recipe:(title:String, mealTypes:String, dietaryReqs:String, time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[NutrientMO])?
+    var recipe:(title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient])?
     var recipeIndex:Int = 0 //the current recipe being displayed
-    var nutrients = [NutrientMO]() //the nutrients array from that recipe
+    var nutrients = [Nutrient]() //the nutrients array from that recipe
     
     var viewModel: RecipeCollectionViewModel!
     
@@ -33,7 +33,6 @@ class RecipeDetailViewController: UIViewController, UICollectionViewDelegate, UI
         //make the nav bar transparent
         self.navigationController?.navigationBar.isOpaque = false
         self.navigationController?.navigationBar.alpha = 1.0
-    
         
         //set the values of the UI Elements on screen
         if let recipe = recipe{
