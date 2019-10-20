@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		1E232AA8232E6916007BBEBE /* AddRecipePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */; };
 		1E753D9A232F6820006B4481 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E753D99232F6820006B4481 /* AddRecipeViewController.swift */; };
-		1E9F3EF8235350EF000EBBCC /* FaceDetector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F3EF7235350EF000EBBCC /* FaceDetector.storyboard */; };
-		1E9F3EFC23535453000EBBCC /* FaceDetectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9F3EFB23535453000EBBCC /* FaceDetectorViewController.swift */; };
 		1E94C0D9234CE2FD00C82BF9 /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E94C0D8234CE2FD00C82BF9 /* AddRecipeViewModel.swift */; };
 		1ECEA3C9234B1B3B0066834A /* RecipeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEA3C7234B1B3B0066834A /* RecipeApp.xcdatamodeld */; };
 		1ECEA3D0234B1EFB0066834A /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECEA3CC234B1EFB0066834A /* Recipe+CoreDataClass.swift */; };
@@ -52,9 +50,7 @@
 
 /* Begin PBXFileReference section */
 		0A50B7617A683B73FB203DC0 /* Pods-RecipeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeApp.release.xcconfig"; path = "Target Support Files/Pods-RecipeApp/Pods-RecipeApp.release.xcconfig"; sourceTree = "<group>"; };
-		1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddRecipePage.storyboard; sourceTree = "<grou
-		1E9F3EF7235350EF000EBBCC /* FaceDetector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FaceDetector.storyboard; sourceTree = "<group>"; };
-		1E9F3EFB23535453000EBBCC /* FaceDetectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectorViewController.swift; sourceTree = "<group>"; };
+		1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddRecipePage.storyboard; sourceTree = "<group>"; };
 		1E753D99232F6820006B4481 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		1E94C0D8234CE2FD00C82BF9 /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
 		1ECEA3C8234B1B3B0066834A /* RecipeApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipeApp.xcdatamodel; sourceTree = "<group>"; };
@@ -185,7 +181,6 @@
 			children = (
 				1E232AA7232E6916007BBEBE /* AddRecipePage.storyboard */,
 				28F6DCC62310D44A00C4A6AC /* Main.storyboard */,
-				1E9F3EF7235350EF000EBBCC /* FaceDetector.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,7 +197,6 @@
 				287833B0232E6E0B00D7975C /* MethodTableViewController.swift */,
 				2846E99B232F4F680092C324 /* BaseViewController.swift */,
 				2846E99F233075700092C324 /* ServesPopContentController.swift */,
-				1E9F3EFB23535453000EBBCC /* FaceDetectorViewController.swift */
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -315,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28F6DCCA2310D44C00C4A6AC /* Assets.xcassets in Resources */,
-				1E9F3EF8235350EF000EBBCC /* FaceDetector.storyboard in Resources */,
 				28F6DCC82310D44A00C4A6AC /* Main.storyboard in Resources */,
 				1E232AA8232E6916007BBEBE /* AddRecipePage.storyboard in Resources */,
 			);
@@ -383,7 +376,6 @@
 				1ECEA3D0234B1EFB0066834A /* Recipe+CoreDataClass.swift in Sources */,
 				2839770B2352DF99002DA0BC /* Nutrient+CoreDataClass.swift in Sources */,
 				287833A7232E05DD00D7975C /* SwipeController.swift in Sources */,
-				28E4B0CF2318999F00459557 /* NutrientModel.swift in Sources */,
 				1ECEA3D1234B1EFB0066834A /* Recipe+CoreDataProperties.swift in Sources */,
 				2839770E2353265E002DA0BC /* CoreDataFunctions.swift in Sources */,
 				28E4B0CF2318999F00459557 /* NutrientMOModel.swift in Sources */,
@@ -395,7 +387,6 @@
 				1ECEA3C9234B1B3B0066834A /* RecipeApp.xcdatamodeld in Sources */,
 				28E4B0D123189B7900459557 /* RecipeModel.swift in Sources */,
 				28F6DCC52310D44A00C4A6AC /* RecipeDetailViewController.swift in Sources */,
-				1E9F3EFC23535453000EBBCC /* FaceDetectorViewController.swift in Sources */,
 				1E94C0D9234CE2FD00C82BF9 /* AddRecipeViewModel.swift in Sources */,
 				287833AF232E6DD500D7975C /* IngredientsTableViewController.swift in Sources */,
 				288AD6472351F8A200ECA6F3 /* Ingredient+CoreDataProperties.swift in Sources */,
