@@ -19,11 +19,10 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //collectionView.contentInset = UIEdgeInsets(top: 0.5, left: 2, bottom: 0.5, right: 2)
-        viewModel = RecipeCollectionViewModel()
-        viewModel.recipeManager.delegate = self
+        
+        let tabbar = tabBarController as! TabBarViewController
+        viewModel = tabbar.viewModel
     }
-    
     
     /** Inbuilt CollectionView Method.
      How many sections in collection **/
@@ -47,11 +46,9 @@ class RecipeCollectionViewController: UICollectionViewController {
    
         if let imageView = imageView, let title = title {
             //safely access these variables here
-        
             let currentRecipe = viewModel.getRecipe(byIndex: indexPath.item)
             imageView.image = currentRecipe.image
             title.text = currentRecipe.title
-            
         }
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 7
@@ -78,14 +75,11 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        let tabbar = tabBarController as! TabBarViewController
+        viewModel = tabbar.viewModel
         collectionView.reloadData()
     }
     
     
     
-}
-extension RecipeCollectionViewController: recipeManagerDelegate{
-    func didUpdateRecipes() {
-        self.collectionView.reloadData()
-    }
 }

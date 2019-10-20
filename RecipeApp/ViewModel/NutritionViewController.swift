@@ -12,7 +12,7 @@ class NutritionViewController: UIViewController, UITableViewDelegate, UITableVie
     
     private var viewModel: RecipeCollectionViewModel! //refernece to the model
     var recipeIndex:Int = 0 //indicating the ccurrent recipe
-    var nutrients = [NutrientMO]() //the nutrients array for that recipe
+    var nutrients = [Nutrient]() //the nutrients array for that recipe
     
     //declaring the UI Elements
     @IBOutlet weak var difficultyLabel: UILabel!

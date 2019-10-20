@@ -10,8 +10,8 @@ import UIKit
 
 class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var viewModel = AddRecipeViewModel()
-    var ingredientList: [IngredientMO] = []
+    var viewModel = RecipeCollectionViewModel()
+    var ingredientList: [Ingredient] = []
     var methodList: [String] = []
     
     var pickerView1: UIPickerView!
@@ -30,7 +30,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
     var mealType: [String] = MealType.allCases.map{$0.rawValue}
     var diff: [String] = Diff.allCases.map{$0.rawValue}
     var ingUnit: [String] = Unit.allCases.map{$0.rawValue}
-    var unit:[String] = ["m", "h"]
+    var unit:[Character] = ["m", "h"]
     
     var selectedMealTypeRow: Int = 0
     var selectedDiffRow: Int = 0
@@ -195,7 +195,7 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
         if let name = tvIngredient.text, let quantity = Float(tvQuantity.text!) {
             
-            let ingredient = IngredientMO(qty: quantity, unit: Unit.allCases[selectedIngUnitRow], name: name)
+            let ingredient = Ingredient(qty: quantity, unit: Unit.allCases[selectedIngUnitRow], name: name)
             
             ingredientList.append(ingredient)
             ingredientTable.reloadData()
@@ -210,15 +210,17 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         }
     }
     
+    var tabbar: TabBarViewController!
+    
     @IBAction func btnAdd(_ sender: UIButton) {
         
         if let tvTitle = tvTitle.text, let _ = tvTag.text, let tvTime = Int(tvTime.text!), let _ = tvUnit.text, let _ = tvDifficulty.text, let tvServes = Int(tvServes.text!), let _ = tvIngUnit.text {
             
             let createTime = Time(time: tvTime, unit: unit[selectedUnitRow])
+
+            let recipe = Recipe(title: tvTitle, mealTypes: [MealType.allCases[selectedMealTypeRow]], dietaryReqs: [], time: createTime, diff: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "imagePlaceholder", nutrients: Nut)
             
-            // @Sarah: please make meal type and dietary requrements get data from the View, not just default values like I put here 
-            viewModel.addRecipe(title: tvTitle, mealType: MealType.snack, dietaryReqs: DietaryReq.gf, time: createTime, difficulty: Diff.allCases[selectedDiffRow], serves: tvServes, ingredients: ingredientList, method: methodList, image: "imagePlaceholder")
-            
+            viewModel.addRecipe(recipe: recipe)
             let alertController = UIAlertController(title: "Add Recipe", message: "Successfully added \(tvTitle)", preferredStyle: .alert)
             let doneButton = UIAlertAction(title: "Done", style: .default, handler: {(action) -> Void in print("Done")})
             
@@ -243,15 +245,20 @@ class AddRecipeViewController: UIViewController, UIPickerViewDataSource, UIPicke
         tvQuantity.delegate = self
         tvServes.delegate = self
         
-//        let tabbar = tabBarController as! TabBarViewController
-//        viewModel = tabbar.viewModel
+        let tabbar = tabBarController as! TabBarViewController
+        viewModel = tabbar.viewModel
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.clearAllTexts()
     }
     
-    let Nut = [NutrientMO(name:"Energy", amount:30, unitName:Unit.g), NutrientMO(name:"Protien", amount:4, unitName:Unit.g), NutrientMO(name:"Fat", amount:3, unitName:Unit.g), NutrientMO(name:"Fibre", amount:20, unitName:Unit.g), NutrientMO(name:"Sodium", amount:300, unitName:Unit.mg) ]
+    override func viewWillDisappear(_ animated: Bool) {
+        let tabbar = tabBarController as! TabBarViewController
+        tabbar.viewModel = viewModel
+    }
+    
+    let Nut = [Nutrient(name:"Energy", amount:30, unitName:Unit.g), Nutrient(name:"Protien", amount:4, unitName:Unit.g), Nutrient(name:"Fat", amount:3, unitName:Unit.g), Nutrient(name:"Fibre", amount:20, unitName:Unit.g), Nutrient(name:"Sodium", amount:300, unitName:Unit.mg) ]
     
     public func clearAllTexts(){
         for view in self.view.subviews{

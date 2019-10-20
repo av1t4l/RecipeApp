@@ -30,9 +30,9 @@ enum DietaryReq:String{
 /** Struct for creating a cooking time **/
 struct Time{
     var cookingTime:Int
-    var cookTimeUnit:String
+    var cookTimeUnit:Character
 
-    init(time:Int, unit:String){
+    init(time:Int, unit:Character){
         self.cookingTime = time
         self.cookTimeUnit = unit
     }
@@ -48,7 +48,7 @@ enum Diff:String,  CaseIterable{
 }
 
 /** Struct for describe parts of an ingredient **/
-struct IngredientMO{
+struct Ingredient{
     var qty:Float
     var unit:Unit
     var name:String
@@ -63,27 +63,27 @@ struct IngredientMO{
         let qty = String(self.qty)
         //need to convert from abrv to full word for API to work, will look good on screen too
         let unitVal = self.unit.rawValue //gets the abrv
-        //_ = UnitString(rawValue: unitVal) //uses second enum to look up abbrv to get full word
+        let unitStr = UnitString(rawValue: unitVal) //uses second enum to look up abbrv to get full word
         
         let ingString = "\(qty) \(self.unit.rawValue) \(self.name)"
         return ingString
     }
 }
-//
-///** Struct to describe parts of a recipe **/
-struct RecipeMO {
+
+/** Struct to describe parts of a recipe **/
+struct Recipe {
      var title:String
-    var mealTypes:MealType
-    var dietaryReqs:DietaryReq
+     var mealTypes = [MealType]()
+     var dietaryReqs = [DietaryReq]()
      var time:Time
      var difficulty:Diff
      var serves:Int
-     var ingredients = [IngredientMO]()
+     var ingredients = [Ingredient]()
      var method = [String]()
      var image:String
-     var nutrients = [NutrientMO]()
+     var nutrients = [Nutrient]()
     
-    init(title:String, mealTypes:MealType, dietaryReqs:DietaryReq, time:Time, diff:Diff, serves:Int, ingredients:[IngredientMO], method:[String], image:String){
+    init(title:String, mealTypes:[MealType], dietaryReqs:[DietaryReq], time:Time, diff:Diff, serves:Int, ingredients:[Ingredient], method:[String], image:String, nutrients:[Nutrient]){
         self.title = title
         self.mealTypes = mealTypes
         self.dietaryReqs = dietaryReqs
@@ -93,14 +93,8 @@ struct RecipeMO {
         self.ingredients = ingredients
         self.method = method
         self.image = image
-       // self.nutrients = nutrients
-        
-    }
-    mutating func addNutrient(nutrient:NutrientMO) {
-        nutrients.append(nutrient)
-    }
-    mutating func setNutrients(nutrients:[NutrientMO]) {
         self.nutrients = nutrients
+        
     }
 
 }
