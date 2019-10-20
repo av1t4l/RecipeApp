@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RecipeApp/Model/RecipeManager.swift"
-            timestampString = "592819288.46578"
+            timestampString = "593259736.222095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RecipeApp/Model/Recipe+CoreDataProperties.swift"
-            timestampString = "592819288.466141"
+            timestampString = "593259736.222169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "time"
             landmarkType = "24">
          </BreakpointContent>

@@ -16,7 +16,6 @@
 		281BED3F23374A71005E71F3 /* RecipeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281BED3E23374A71005E71F3 /* RecipeAppUITests.swift */; };
 		2839770B2352DF99002DA0BC /* Nutrient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283977092352DF99002DA0BC /* Nutrient+CoreDataClass.swift */; };
 		2839770C2352DF99002DA0BC /* Nutrient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839770A2352DF99002DA0BC /* Nutrient+CoreDataProperties.swift */; };
-		2839770E2353265E002DA0BC /* CoreDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2839770D2353265E002DA0BC /* CoreDataFunctions.swift */; };
 		2846E99C232F4F680092C324 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99B232F4F680092C324 /* BaseViewController.swift */; };
 		2846E9A0233075700092C324 /* ServesPopContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846E99F233075700092C324 /* ServesPopContentController.swift */; };
 		287833A7232E05DD00D7975C /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287833A6232E05DD00D7975C /* SwipeController.swift */; };
@@ -62,7 +61,6 @@
 		281BED4023374A71005E71F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		283977092352DF99002DA0BC /* Nutrient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nutrient+CoreDataClass.swift"; sourceTree = "<group>"; };
 		2839770A2352DF99002DA0BC /* Nutrient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nutrient+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2839770D2353265E002DA0BC /* CoreDataFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFunctions.swift; sourceTree = "<group>"; };
 		2846E99B232F4F680092C324 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		2846E99F233075700092C324 /* ServesPopContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServesPopContentController.swift; sourceTree = "<group>"; };
 		287833A6232E05DD00D7975C /* SwipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
@@ -171,7 +169,6 @@
 				28E4B0D62318C4D200459557 /* RecipeManager.swift */,
 				1ECEA3C7234B1B3B0066834A /* RecipeApp.xcdatamodeld */,
 				28EFB92223436DDE00C9EC81 /* REST.swift */,
-				2839770D2353265E002DA0BC /* CoreDataFunctions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -377,7 +374,6 @@
 				2839770B2352DF99002DA0BC /* Nutrient+CoreDataClass.swift in Sources */,
 				287833A7232E05DD00D7975C /* SwipeController.swift in Sources */,
 				1ECEA3D1234B1EFB0066834A /* Recipe+CoreDataProperties.swift in Sources */,
-				2839770E2353265E002DA0BC /* CoreDataFunctions.swift in Sources */,
 				28E4B0CF2318999F00459557 /* NutrientMOModel.swift in Sources */,
 				28E4B0D72318C4D200459557 /* RecipeManager.swift in Sources */,
 				2839770C2352DF99002DA0BC /* Nutrient+CoreDataProperties.swift in Sources */,

@@ -29,14 +29,6 @@ extension Recipe {
     @NSManaged public var image: String?
     @NSManaged public var nutrients: NSArray?
 
-//    var mealType: [MealType] {
-//        get{
-//            return mealTypes as? Array<MealType> ?? []
-//        }
-//        set{
-//            mealTypes = newValue as NSArray
-//        }
-//    }
     /** Converting from NSArray -> IngredientMO to be used by rest of system **/
     var ingredient: [IngredientMO] {
         get{
@@ -55,15 +47,7 @@ extension Recipe {
             ingredients = newValue as NSArray
         }
     }
-//    
-//    var dietaryReq: [DietaryReq] {
-//        get{
-//            return dietaryReqs as? Array<DietaryReq> ?? []
-//        }
-//        set{
-//            dietaryReqs = newValue as NSArray
-//        }
-//    }
+
     /** Converting from NSArray -> NutrientMO to be used by rest of system **/
     var nutrient: [NutrientMO] {
         get{
@@ -77,7 +61,6 @@ extension Recipe {
                 
             }
             return nutrArray
-            //return nutrients as? Array<NutrientMO> ?? []
         }
         set{
             nutrients = newValue as NSArray
@@ -94,18 +77,4 @@ extension Recipe {
         }
     }
     
-//    var diff: Diff {
-//        get{
-//            self.willAccessValue(forKey: "difficulty")
-//            let result = self.primitiveValue(forKey: "difficulty") as! String
-//            self.didAccessValue(forKey: "difficulty")
-//            return Diff(rawValue: result) ?? Diff.Easy
-//        }
-//        set{
-//            let primitiveValue = newValue.rawValue
-//            self.willChangeValue(forKey: "difficulty")
-//            self.setPrimitiveValue(primitiveValue, forKey: "difficulty")
-//            self.didChangeValue(forKey: "difficulty")
-//        }
-//    }
 }

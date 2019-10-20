@@ -32,14 +32,6 @@ class RecipeManager{
         apiCall.delegate = self
         loadRecipes()
         
-//        let Ings = [IngredientMO(qty:2, unit:Unit.cups, name:"Plain Flour"), IngredientMO(qty:70, unit:Unit.ml, name:"Milk"), IngredientMO(qty:1, unit:Unit.cups, name:"Butter"), IngredientMO(qty:0.5, unit:Unit.cups, name:"Sugar")]
-//        let Ings = [IngredientMO(qty:2, unit:Unit.g, name:"Plain Flour"), IngredientMO(qty:70, unit:Unit.ml, name:"Milk"), IngredientMO(qty:1, unit:Unit.g, name:"Butter"), IngredientMO(qty:0.5, unit:Unit.g, name:"Sugar")]
-//        let Method = ["In a large bowl sift flour","Add milk, sugar and melted butter.", "Stir till combined.","Cook in frying pan until golden brown."]
-//
-//        let test = RecipeMO(title:"Pancakes", mealTypes: [MealType.breakfast], dietaryReqs:[DietaryReq.lf], time:Time(time:30, unit:"m"), diff: Diff.Easy, serves:2, ingredients: Ings, method:Method, image: "pancakes")
-//
-//        apiCall.addNutrients(recipe: test)
-        
     }
     
     /** Create and save new recipes**/
@@ -57,7 +49,7 @@ class RecipeManager{
         
        
     }
-
+    /** Create recipe to input into core data */
     public func createRecipe(title: String, mealType: MealType, dietaryReqs: DietaryReq, time: Time, difficulty1: String, serves: Int, ingredients: [IngredientMO], method: [String], image: String, nutrients: [NutrientMO]) -> Recipe{
         
         let recipeEntity = NSEntityDescription.entity(forEntityName: "Recipe", in: managedContext)!
@@ -91,7 +83,7 @@ class RecipeManager{
         
     }
     
-    
+    /** Create ingredients to connect to recipe in core data */
     public func createIngredEntity(name:String, qty:Float, unit:String ) -> Ingredient{
         let ingredientEntity = NSEntityDescription.entity(forEntityName: "Ingredient", in: managedContext)!
         let nsIngredient = NSManagedObject(entity: ingredientEntity, insertInto:managedContext) as! Ingredient
@@ -103,6 +95,7 @@ class RecipeManager{
         return nsIngredient
     }
     
+    /** Create nutrient entity for recipe in core data */
     public func createNutrientEntity(nutrient:NutrientMO) -> Nutrient{
         
         let nutrientEntity = NSEntityDescription.entity(forEntityName: "Nutrient", in: managedContext)!
