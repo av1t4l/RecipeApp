@@ -21,26 +21,26 @@ enum Unit:String, CaseIterable {
     case other
 }
 enum UnitString:String, CaseIterable {
-    case g = "grams"
-    case mg = "milligrams"
-    case L = "litres"
-    case ml = "millilitres"
-    case ts = "teaspoons"
-    case tbs = "tablespoons"
-    case cups = "cups"
-    case kcal = "calories"
-    case other = "other"
+    case g = "Grams"
+    case mg = "Milligrams"
+    case L = "Litres"
+    case ml = "Millilitres"
+    case ts = "Teaspoons"
+    case tbs = "Tablespoons"
+    case cups = "Cups"
+    case kcal = "Calories"
+    case other = "Other"
 }
 
 //Class conatining properties of a nutrient
-class Nutrient{
+public class NutrientMO: NSObject{
 
     private var name:String
     private var nickname:String = ""
     private var amount:Float
     private var staticAmount:Float
     private var unitName:Unit
-    private var subNutrients = [Nutrient]()
+    private var subNutrients = [NutrientMO]()
     private var subNutrient:Bool = false
 
     init(name:String, amount:Float, unitName:Unit){
@@ -58,12 +58,12 @@ class Nutrient{
     
     //add subnutrient by values
     func addSubNutrient(name:String, amount:Float, unitName:Unit){
-        let temp = Nutrient(name:name, amount:amount, unitName:unitName)
+        let temp = NutrientMO(name:name, amount:amount, unitName:unitName)
         temp.subNutrient = true
         subNutrients.append(temp)
     }
     // add subnutrient by already created object
-    func addSubNutrientObject(nutrient:Nutrient){
+    func addSubNutrientObject(nutrient:NutrientMO){
         subNutrients.append(nutrient)
     }
     
@@ -80,7 +80,7 @@ class Nutrient{
         }
     }
     
-    func getSubNutrients() -> [Nutrient]{
+    func getSubNutrients() -> [NutrientMO]{
         return self.subNutrients
     }
     
@@ -95,6 +95,19 @@ class Nutrient{
         //multipy one serving's amount by the factor from user
         amount = amount * Float(factor)
     }
+    func getName() -> String {
+        return name
+    }
+    func getNickame() -> String {
+        return nickname
+    }
+    func getAmount() -> Float {
+        return amount
+    }
+    func getStaticAmount() -> Float {
+        return staticAmount
+    }
+    func getUnitName() -> Unit {
+        return unitName
+    }
 }
-
-

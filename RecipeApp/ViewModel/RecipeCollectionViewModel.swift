@@ -10,50 +10,49 @@ import Foundation
 import UIKit
 
 
-struct RecipeCollectionViewModel{
+
+class RecipeCollectionViewModel{
     //reference to the Recipe Manager (Data Source)
-    private var manager = RecipeManager()
+    var recipeManager = RecipeManager.shared
     
     /** Count: returns the amount of recipes **/
     func count() -> Int{
-        let temp = manager.recipes.count
+        let temp = recipeManager.recipes.count
         return temp
     }
     
-    /** Returns recipe formatted fro View **/
-    func getRecipe(byIndex index: Int) -> (title:String, mealTypes:[String], dietaryReqs:[String], time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[Nutrient]){
-
-        let recipe = manager.recipes[index]
-        let image = UIImage(named: recipe.image)
+    /** Returns recipe formatted for View **/
+    func getRecipe(byIndex index: Int) -> (title:String, mealTypes:String, dietaryReqs:String, time:String, diff: String, serves:String, ingredients:[String], method:[String], image:UIImage?, nutrients:[NutrientMO]){
+        
+        let recipe = recipeManager.recipes[index]
+        let image = UIImage(named: recipe.image ?? "imagePlaceholder")
         var ingredients = [String]()
-        for ing in recipe.ingredients{
+
+        
+        for ing in recipe.ingredient{
             ingredients.append(ing.ingString())
-        }
-        
-        var types = [String]()
-        for type in recipe.mealTypes{
-            types.append(type.rawValue)
-        }
-        
-        var dietReqs = [String]()
-        for type in recipe.dietaryReqs{
-            dietReqs.append(type.rawValue)
         }
         let time = recipe.time.timeString()
         let serves = "\(recipe.serves)"
         
         let nutrients = self.getNutrientsForRecipe(byIndex: index)
         
-        return(title: recipe.title, mealTypes:types, dietaryReqs: dietReqs, time:time , diff: recipe.difficulty.rawValue, serves:serves ,ingredients:ingredients, method: recipe.method, image: image, nutrients:nutrients)
+        if let type = recipe.mealTypes, let req = recipe.dietaryReqs, let title = recipe.title, let diff = recipe.difficulty {
+        
+            return(title: title, mealTypes:type, dietaryReqs: req, time:time , diff: diff, serves:serves, ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
+            
+        }else{
+             return(title: "nil", mealTypes: "nil", dietaryReqs: "nil", time:time , diff: "nil", serves:serves, ingredients:ingredients, method: recipe.method as! [String], image: image, nutrients:nutrients)
+        }
     }
     
     /** Convert [Nutrient] to array of tupe of strings to use in the view controller **/
-    func getNutrientsForRecipe(byIndex index:Int) -> [Nutrient]{
-        let recipe = manager.recipes[index]
-        var nutrients = [Nutrient]()
+    func getNutrientsForRecipe(byIndex index:Int) -> [NutrientMO]{
+        let recipe = recipeManager.recipes[index]
+        var nutrients = [NutrientMO]()
         
         //iterate over the nutrients and create an array adding sub nutrients too
-        for nut in recipe.nutrients{
+        for nut in recipe.nutrient{
             nutrients.append(nut)
             //if nutrient has sub nutrients array, iterate over them and add them too
             if nut.hasSubNutrients(){
@@ -66,14 +65,14 @@ struct RecipeCollectionViewModel{
         return nutrients
     }
     /** Format nutrients for the View but with the new values based on users serving input **/
-    func getUpdatedNutrientsForRecipe(index: Int, factor:Int) -> [Nutrient]{
-        let recipe = manager.recipes[index]
-        var nutrients = [Nutrient]()
+    func getUpdatedNutrientsForRecipe(index: Int, factor:Int) -> [NutrientMO]{
+        let recipe = recipeManager.recipes[index]
+        var nutrients = [NutrientMO]()
         
         //iterate over the nutrients and create an array with the sub nutrients too
-        for nut in recipe.nutrients{
+        for nut in recipe.nutrient{
             //pass in teh servingsixe of recipe and factpr to change by to update the amount value
-            nut.updateAmount(factor: factor, recipeServeSize: recipe.serves)
+            nut.updateAmount(factor: factor, recipeServeSize: Int(recipe.serves))
             nutrients.append(nut)
             if nut.hasSubNutrients(){
                 let subNutrients = nut.getSubNutrients()
@@ -89,9 +88,6 @@ struct RecipeCollectionViewModel{
         let pickerData = ["1","2","3","4","5","6","7","8","9","10"]
         return pickerData
     }
-    
-    mutating func addRecipe(recipe: Recipe) {
-        manager.addRecipe(recipe: recipe)
-    }
 }
+
 
