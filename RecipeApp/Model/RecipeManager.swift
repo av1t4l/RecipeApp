@@ -28,6 +28,14 @@ class RecipeManager{
     
     init(){
         print("making defaults")
+        /* UNCOMMENT THIS TO ADD AN INITAL RECIPE
+        let Ings = [IngredientMO(qty:2, unit:Unit.cups, name:"Plain Flour"), IngredientMO(qty:70, unit:Unit.ml, name:"Milk"), IngredientMO(qty:1, unit:Unit.cups, name:"Butter"), IngredientMO(qty:0.5, unit:Unit.cups, name:"Sugar")]
+        let Method = ["In a large bowl sift flour","Add milk, sugar and melted butter.", "Stir till combined.","Cook in frying pan until golden brown."]
+
+        let test = RecipeMO(title:"Pancakes", mealTypes: MealType.breakfast, dietaryReqs: DietaryReq.lf, time:Time(time:30, unit:"m"), diff: Diff.Easy, serves:2, ingredients: Ings, method:Method, image: "pancakes")
+
+        apiCall.addNutrients(recipe: test)
+        */
         managedContext = appDelegate.persistentContainer.viewContext
         apiCall.delegate = self
         loadRecipes()

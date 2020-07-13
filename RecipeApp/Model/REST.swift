@@ -42,7 +42,9 @@ class REST_Request{
     weak var delegate: REST_Delegate?
     private var nutrients:[NutrientMO] = []
     private var recipe:RecipeMO? = nil
-    private let baseURL:String = "https://api.edamam.com/api/nutrition-details?app_id=0a4f449e&app_key=114c5eaa049af50df15413d088e2168e"
+    
+    //create the URL string using the API keys stored in the environment variables
+    private let baseURL:String = "https://api.edamam.com/api/nutrition-details?app_id=\(String(describing: ProcessInfo.processInfo.environment["API_ID"]))&app_key=\(String(describing: ProcessInfo.processInfo.environment["APP_KEY"] ?? nil))"
 
     /** Make POST request to 'edamam' API with recipe info passed in.
         Will call delegate to return processed response data **/
